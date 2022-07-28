@@ -1,0 +1,17 @@
+@import "shared/styles/mixins";
+
+.container {
+  padding: 10px 20px;
+}
+
+.links {
+  @include normalizeList;
+
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+}
+
+.image {
+  border-radius: 50%;
+}

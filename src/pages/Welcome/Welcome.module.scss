@@ -1,0 +1,19 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  padding: 50px 20px;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg")
+    no-repeat 200px center / 400px auto;
+}
+
+.introduction {
+  width: 500px;
+  margin-left: 650px;
+}
