@@ -11,6 +11,13 @@
   "rules": {
     "prettier/prettier": [2, { "semi": true }],
     "no-param-reassign": ["error", { "props": false }],
+    "react/jsx-key": 2,
+    "react/jsx-no-bind": [
+      2,
+      {
+        "allowFunctions": true
+      }
+    ],
     "import/prefer-default-export": "off"
   },
   "parserOptions": {

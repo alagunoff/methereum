@@ -11,10 +11,6 @@
   margin-left: auto;
 }
 
-.links {
-  @include list(row, start, stretch, 10px);
-}
-
 .link {
   @include link;
 }

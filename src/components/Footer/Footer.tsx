@@ -1,29 +1,32 @@
+import { List } from 'components/dataDisplay';
+
 import { LINKS } from './constants';
 import styles from './Footer.module.scss';
 
 function Footer() {
   return (
     <footer className={styles.container}>
-      <ul className={styles.links}>
-        {LINKS.map(({ href, imageSrc, imageAlt }) => (
-          <li className={styles.linkWrapper}>
-            <a
-              className={styles.link}
-              href={href}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <img
-                className={styles.image}
-                src={imageSrc}
-                alt={imageAlt}
-                width={30}
-                height={30}
-              />
-            </a>
-          </li>
+      <List
+        items={LINKS.map(({ href, imageSrc, imageAlt }) => (
+          <a
+            key={`${href}-${imageSrc}`}
+            href={href}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <img
+              className={styles.image}
+              src={imageSrc}
+              alt={imageAlt}
+              width={30}
+              height={30}
+            />
+          </a>
         ))}
-      </ul>
+        justify='center'
+        columnGap={10}
+        itemLineHeight={0}
+      />
     </footer>
   );
 }

@@ -18,25 +18,6 @@
   text-decoration: none;
 }
 
-@mixin list(
-  $direction: row,
-  $justify-content: start,
-  $align-items: stretch,
-  $column-gap: 0
-) {
-  @include reset-list;
-
-  display: flex;
-  flex-direction: $direction;
-  column-gap: $column-gap;
-  align-items: $align-items;
-  justify-content: $justify-content;
-}
-
-@mixin reset-list {
-  list-style-type: none;
-}
-
 @mixin h1 {
   font-size: 27px;
   font-weight: 400;

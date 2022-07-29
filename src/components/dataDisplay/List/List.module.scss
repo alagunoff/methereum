@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+
+  list-style-type: none;
+
+  &_justify {
+    &_center {
+      justify-content: center;
+    }
+  }
+
+  &_columnGap {
+    &_10 {
+      column-gap: 10px;
+    }
+  }
+}
+
+.item {
+  &_lineHeight {
+    &_0 {
+      line-height: 0;
+    }
+  }
+}

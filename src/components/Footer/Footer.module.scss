@@ -1,15 +1,5 @@
-@import 'shared/mixins';
-
 .container {
   padding: 10px 20px;
-}
-
-.links {
-  @include list(row, center, stretch, 10px);
-}
-
-.linkWrapper {
-  line-height: 0;
 }
 
 .image {
