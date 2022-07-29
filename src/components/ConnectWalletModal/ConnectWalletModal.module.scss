@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
 
-  background-color: $primary-70;
+  background-color: $black-70;
 }
 
 .container {
@@ -28,7 +28,6 @@
 }
 
 .buttons {
-  @include reset-list;
 }
 
 .buttonWrapper {

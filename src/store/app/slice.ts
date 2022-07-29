@@ -8,8 +8,14 @@ const slice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    setAppInitialized: (state, action: PayloadAction<true>) => {
+      state.appInitialized = action.payload;
+    },
     setActiveChain: (state, action: PayloadAction<IChain>) => {
       state.activeChain = action.payload;
+    },
+    setActiveWallet: (state, action: PayloadAction<string>) => {
+      state.activeWallet = action.payload;
     },
   },
 });

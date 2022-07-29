@@ -34,6 +34,8 @@ function ConnectWalletModal({ onClose }: IProps) {
             Metamask
           </button>,
         ]}
+        direction='column'
+        itemTextAlign='center'
       />
     </Modal>
   );

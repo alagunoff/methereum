@@ -5,13 +5,21 @@ import { checkIfValueNumber } from 'shared/typeGuards';
 import { IProps } from './types';
 import styles from './List.module.scss';
 
-function List({ items, justify, columnGap, itemLineHeight }: IProps) {
+function List({
+  items,
+  direction,
+  justify,
+  columnGap,
+  itemLineHeight,
+  itemTextAlign,
+}: IProps) {
   return (
     <ul
       className={cn(styles.container, {
+        [styles[`container_direction_${direction}`]]: direction,
+        [styles[`container_justify_${justify}`]]: justify,
         [styles[`container_columnGap_${columnGap}`]]:
           checkIfValueNumber(columnGap),
-        [styles[`container_justify_${justify}`]]: justify,
       })}
     >
       {items.map((item) => (
@@ -20,6 +28,7 @@ function List({ items, justify, columnGap, itemLineHeight }: IProps) {
           className={cn(styles.item, {
             [styles[`item_lineHeight_${itemLineHeight}`]]:
               checkIfValueNumber(itemLineHeight),
+            [styles[`item_textAlign_${itemTextAlign}`]]: itemTextAlign,
           })}
         >
           {item}

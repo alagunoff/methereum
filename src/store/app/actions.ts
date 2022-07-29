@@ -1,3 +1,4 @@
 import slice from './slice';
 
-export const { setActiveChain } = slice.actions;
+export const { setAppInitialized, setActiveChain, setActiveWallet } =
+  slice.actions;
