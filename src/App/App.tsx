@@ -8,7 +8,7 @@ import {
   setActiveChain,
   setActiveWallet,
 } from 'store/app';
-import { METAMASK_PROVIDER, ETHERS_PROVIDER } from 'shared/constants';
+import { PROVIDER, ETHERS_PROVIDER } from 'shared/constants';
 import { checkIfChainRinkeby } from 'shared/utils';
 import { Welcome } from 'pages';
 import { Loader } from 'components';
@@ -20,11 +20,6 @@ function App() {
   const activeWallet = useSelector(selectActiveWallet);
 
   useEffect(() => {
-    METAMASK_PROVIDER.on('chainChanged', () => window.location.reload());
-    METAMASK_PROVIDER.on('accountsChanged', ([wallet]: string[]) =>
-      dispatch(setActiveWallet(wallet)),
-    );
-
     async function initializeApp() {
       const { name, chainId } = await ETHERS_PROVIDER.getNetwork();
       dispatch(
@@ -44,12 +39,23 @@ function App() {
       dispatch(setAppInitialized(true));
     }
 
-    initializeApp();
+    if (PROVIDER) {
+      PROVIDER.on('chainChanged', () => window.location.reload());
+      PROVIDER.on('accountsChanged', ([wallet]: string[]) =>
+        dispatch(setActiveWallet(wallet)),
+      );
+
+      initializeApp();
+    }
   }, [dispatch]);
 
   function renderPage() {
     if (appInitialized) {
-      return activeWallet ? <div>your wallet is connected</div> : <Welcome />;
+      return activeWallet ? (
+        <div>your wallet {activeWallet} is connected</div>
+      ) : (
+        <Welcome />
+      );
     }
 
     return <Loader />;
