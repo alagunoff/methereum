@@ -10,8 +10,8 @@ function Header() {
         <List
           items={LINKS.map(({ text, href }) => (
             <a
-              key={`${text}-${href}`}
               className={styles.link}
+              key={`${text}-${href}`}
               href={href}
               target='_blank'
               rel='noopener noreferrer'

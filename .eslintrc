@@ -11,6 +11,7 @@
   "rules": {
     "prettier/prettier": [2, { "semi": true }],
     "no-param-reassign": ["error", { "props": false }],
+    "react/no-array-index-key": 0,
     "react/jsx-key": 2,
     "react/jsx-no-bind": [
       2,

@@ -7,25 +7,20 @@ function Footer() {
   return (
     <footer className={styles.container}>
       <List
-        items={LINKS.map(({ href, imageSrc, imageAlt }) => (
+        items={LINKS.map(({ href }, id) => (
           <a
-            key={`${href}-${imageSrc}`}
+            className={styles.link}
+            key={`${href}-${id}`}
             href={href}
             target='_blank'
             rel='noopener noreferrer'
           >
-            <img
-              className={styles.image}
-              src={imageSrc}
-              alt={imageAlt}
-              width={30}
-              height={30}
-            />
+            Логотип «Metalamp»
           </a>
         ))}
         justify='center'
         columnGap={10}
-        itemLineHeight={0}
+        itemFontSize={0}
       />
     </footer>
   );

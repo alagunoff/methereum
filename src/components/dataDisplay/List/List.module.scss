@@ -23,6 +23,12 @@
 }
 
 .item {
+  &_fontSize {
+    &_0 {
+      font-size: 0;
+    }
+  }
+
   &_lineHeight {
     &_0 {
       line-height: 0;
