@@ -1,13 +1,18 @@
-import { LINKS } from "./constants";
-import styles from "./Footer.module.scss";
+import { LINKS } from './constants';
+import styles from './Footer.module.scss';
 
 function Footer() {
   return (
     <footer className={styles.container}>
       <ul className={styles.links}>
         {LINKS.map(({ href, imageSrc, imageAlt }) => (
-          <li>
-            <a href={href} target="_blank" rel="noopener noreferrer">
+          <li className={styles.linkWrapper}>
+            <a
+              className={styles.link}
+              href={href}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
               <img
                 className={styles.image}
                 src={imageSrc}

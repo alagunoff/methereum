@@ -1,0 +1,30 @@
+@import 'shared/mixins';
+
+.content {
+  width: 600px;
+  padding: 30px;
+}
+
+.title {
+  @include h2;
+
+  margin-bottom: 20px;
+
+  text-align: center;
+}
+
+.buttons {
+  @include reset-list;
+}
+
+.buttonWrapper {
+  text-align: center;
+
+  & + .buttonWrapper {
+    margin-top: 5px;
+  }
+}
+
+.button {
+  @include button;
+}

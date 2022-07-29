@@ -1,7 +1,5 @@
-import Link from "@mui/material/Link";
-
-import { LINKS } from "./constants";
-import styles from "./Header.module.scss";
+import { LINKS } from './constants';
+import styles from './Header.module.scss';
 
 function Header() {
   return (
@@ -9,15 +7,15 @@ function Header() {
       <nav className={styles.navigation}>
         <ul className={styles.links}>
           {LINKS.map(({ text, href }) => (
-            <li>
-              <Link
+            <li className={styles.linkWrapper}>
+              <a
+                className={styles.link}
                 href={href}
-                underline="none"
-                target="_blank"
-                rel="noopener noreferrer"
+                target='_blank'
+                rel='noopener noreferrer'
               >
                 {text}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>

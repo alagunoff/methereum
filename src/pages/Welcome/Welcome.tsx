@@ -1,28 +1,44 @@
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { useState } from 'react';
 
-import { Header, Footer } from "components";
+import { Header, Footer, ConnectWalletModal } from 'components';
 
-import styles from "./Welcome.module.scss";
+import styles from './Welcome.module.scss';
 
 function Welcome() {
+  const [connectWalletModalShown, setConnectWalletModalShown] = useState(false);
+
+  function handleConnectWalletModalShow() {
+    setConnectWalletModalShown(true);
+  }
+
+  function handleConnectWalletModalClose() {
+    setConnectWalletModalShown(false);
+  }
+
   return (
     <main className={styles.container}>
       <Header />
       <div className={styles.content}>
         <div className={styles.introduction}>
-          <Typography variant="h1" gutterBottom fontSize={27}>
-            Metalamp NFT Project
-          </Typography>
-          <Typography variant="body1" marginBottom={2}>
+          <h1 className={styles.title}>Metalamp NFT Project</h1>
+          <p className={styles.text}>
             Connect your wallet, verify your balance, select the number of NFTs
             you would like to purchase, and click Mint. Questions? Issues? Get
             the Mint Guide.
-          </Typography>
-          <Button variant="contained">Connect my wallet</Button>
+          </p>
+          <button
+            className={styles.button}
+            type='button'
+            onClick={handleConnectWalletModalShow}
+          >
+            Connect my wallet
+          </button>
         </div>
       </div>
       <Footer />
+      {connectWalletModalShown && (
+        <ConnectWalletModal onClose={handleConnectWalletModalClose} />
+      )}
     </main>
   );
 }

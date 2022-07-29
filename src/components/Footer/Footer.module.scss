@@ -1,15 +1,15 @@
-@import "shared/styles/mixins";
+@import 'shared/mixins';
 
 .container {
   padding: 10px 20px;
 }
 
 .links {
-  @include normalizeList;
+  @include list(row, center, stretch, 10px);
+}
 
-  display: flex;
-  justify-content: center;
-  column-gap: 10px;
+.linkWrapper {
+  line-height: 0;
 }
 
 .image {
