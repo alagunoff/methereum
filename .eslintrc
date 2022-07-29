@@ -1,7 +1,19 @@
 {
-  "extends": ["react-app", "react-app/jest"],
+  "extends": [
+    "react-app",
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "prettier",
+    "plugin:react/jsx-runtime"
+  ],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": [2, { "semi": true }]
+    "prettier/prettier": [2, { "semi": true }],
+    "no-param-reassign": ["error", { "props": false }],
+    "import/prefer-default-export": "off"
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
   }
 }

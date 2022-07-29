@@ -1,8 +1,22 @@
 @import 'shared/mixins';
+@import 'shared/colors';
 
-.content {
-  width: 600px;
-  padding: 30px;
+.containerWrapper {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $primary-70;
+}
+
+.container {
+  width: 500px;
+  padding: 40px;
+
+  background-color: $white;
 }
 
 .title {
