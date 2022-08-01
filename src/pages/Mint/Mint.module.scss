@@ -1,0 +1,19 @@
+@import 'shared/mixins';
+
+.container {
+  padding: 10px 20px;
+}
+
+.title {
+  @include visually-hidden;
+}
+
+.nftWrapper {
+  text-align: center;
+}
+
+.nft {
+}
+
+.subtitle {
+}
