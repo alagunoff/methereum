@@ -8,7 +8,7 @@ function Page({ children }: PropsWithChildren) {
   return (
     <main className={styles.container}>
       <Header />
-      <div className={styles.content}>{children}</div>
+      {children}
       <Footer />
     </main>
   );

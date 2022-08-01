@@ -1,34 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import detectEthereumProvider from '@metamask/detect-provider';
-import { ethers } from 'ethers';
 
 const fetchNetwork = createAsyncThunk('user/fetchNetwork', async () => {
-  const etheriumProvider = await detectEthereumProvider();
-  const ethersProvider = new ethers.providers.Web3Provider(
-    etheriumProvider as any,
-  );
-  const network = await ethersProvider.getNetwork();
+  const network = await window.ethers.getNetwork();
 
   return network;
 });
 
 const fetchWallet = createAsyncThunk('user/fetchWallet', async () => {
-  const etheriumProvider = await detectEthereumProvider();
-  const ethersProvider = new ethers.providers.Web3Provider(
-    etheriumProvider as any,
-  );
-  const [wallet] = await ethersProvider.listAccounts();
+  const [wallet] = await window.ethers.listAccounts();
 
   return wallet;
 });
 
 const logIn = createAsyncThunk('user/logIn', async () => {
-  const etheriumProvider = await detectEthereumProvider();
-  const ethersProvider = new ethers.providers.Web3Provider(
-    etheriumProvider as any,
-  );
-
-  const [wallet] = await ethersProvider.send('eth_requestAccounts', []);
+  const [wallet] = await window.ethers.send('eth_requestAccounts', []);
 
   return wallet;
 });
