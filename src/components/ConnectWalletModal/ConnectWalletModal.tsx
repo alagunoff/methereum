@@ -1,37 +1,30 @@
-import Modal from 'react-modal';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 
-import { selectIsActiveChainRinkeby, setActiveWallet } from 'store/app';
-import { ETHERS_PROVIDER } from 'shared/constants';
-import { List } from 'components/dataDisplay';
+// import { selectIsActiveChainRinkeby, setActiveWallet } from 'store/user';
+import { Modal, List, Error } from 'components/uiKit';
 
 import { IProps } from './types';
 import styles from './ConnectWalletModal.module.scss';
 
 function ConnectWalletModal({ onClose }: IProps) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const isActiveChainRinkeby = useSelector(selectIsActiveChainRinkeby);
+  // const isActiveChainRinkeby = useSelector(selectIsActiveChainRinkeby);
 
   async function handleMetaMaskWalletConnect() {
-    const [wallet] = await ETHERS_PROVIDER.send('eth_requestAccounts', []);
-    dispatch(setActiveWallet(wallet));
+    // const [wallet] = await ETHERS_PROVIDER.send('eth_requestAccounts', []);
+    // dispatch(setActiveWallet('asd'));
   }
 
   return (
-    <Modal
-      overlayClassName={styles.containerWrapper}
-      className={styles.container}
-      isOpen
-      onRequestClose={onClose}
-    >
-      {isActiveChainRinkeby ? (
+    <Modal onClose={onClose}>
+      {true ? (
         <>
           <h2 className={styles.title}>Choose your wallet</h2>
           <List
             items={[
               <button
-                key='metamask'
+                key='metaMask'
                 className={styles.button}
                 type='button'
                 onClick={handleMetaMaskWalletConnect}
@@ -39,15 +32,14 @@ function ConnectWalletModal({ onClose }: IProps) {
                 Metamask
               </button>,
             ]}
-            direction='column'
             itemTextAlign='center'
           />
         </>
       ) : (
-        <div className={styles.error}>
+        <Error>
           Your wallet is not connected to the right chain. Please connect to
           Rinkeby test network.
-        </div>
+        </Error>
       )}
     </Modal>
   );

@@ -1,5 +1,5 @@
 import slice from './slice';
 
 export default slice.reducer;
-export * from './actions';
+export * from './requests';
 export * from './selectors';

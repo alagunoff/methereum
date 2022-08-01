@@ -1,7 +1,11 @@
 import { RINKEBY_CHAIN_ID } from './constants';
 
-function checkIfChainRinkeby(chainId: number) {
+function checkIfRequestFulfilled(requestStatus: 'fulfilled' | 'rejected') {
+  return requestStatus === 'fulfilled';
+}
+
+function checkIfNetworkRinkeby(chainId: number) {
   return chainId === RINKEBY_CHAIN_ID;
 }
 
-export { checkIfChainRinkeby };
+export { checkIfRequestFulfilled, checkIfNetworkRinkeby };

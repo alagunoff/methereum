@@ -1,5 +1,6 @@
 interface IProps {
   items: JSX.Element[];
+  display?: 'flex';
   direction?: 'column';
   justify?: 'center';
   columnGap?: number;

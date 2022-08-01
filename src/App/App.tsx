@@ -1,67 +1,50 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
+import { fetchProvider, selectFetchProviderRequestState } from 'store/provider';
 import {
-  selectIsAppInitialized,
-  selectActiveWallet,
-  setAppInitialized,
-  setActiveChain,
-  setActiveWallet,
-} from 'store/app';
-import { PROVIDER, ETHERS_PROVIDER } from 'shared/constants';
-import { checkIfChainRinkeby } from 'shared/utils';
+  fetchNetwork,
+  fetchWallet,
+  selectFetchNetworkRequestState,
+  selectFetchWalletRequestState,
+} from 'store/user';
+import { useAppDispatch } from 'shared/hooks';
+import { checkIfRequestFulfilled } from 'shared/utils';
 import { Welcome } from 'pages';
-import { Loader } from 'components';
+import { Loader } from 'components/uiKit';
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const appInitialized = useSelector(selectIsAppInitialized);
-  const activeWallet = useSelector(selectActiveWallet);
+  const fetchProviderRequestState = useSelector(
+    selectFetchProviderRequestState,
+  );
+
+  const fetchNetworkRequestState = useSelector(selectFetchNetworkRequestState);
+  const fetchWalletRequestState = useSelector(selectFetchWalletRequestState);
 
   useEffect(() => {
     async function initializeApp() {
-      const { name, chainId } = await ETHERS_PROVIDER.getNetwork();
-      dispatch(
-        setActiveChain({
-          id: chainId,
-          name,
-          isRinkeby: checkIfChainRinkeby(chainId),
-        }),
-      );
+      const {
+        meta: { requestStatus },
+      } = await dispatch(fetchProvider());
 
-      const [wallet] = await ETHERS_PROVIDER.listAccounts();
-
-      if (wallet) {
-        dispatch(setActiveWallet(wallet));
+      if (checkIfRequestFulfilled(requestStatus)) {
+        await dispatch(fetchNetwork());
+        await dispatch(fetchWallet());
       }
-
-      dispatch(setAppInitialized(true));
     }
 
-    if (PROVIDER) {
-      PROVIDER.on('chainChanged', () => window.location.reload());
-      PROVIDER.on('accountsChanged', ([wallet]: string[]) =>
-        dispatch(setActiveWallet(wallet)),
-      );
-
-      initializeApp();
-    }
+    initializeApp();
   }, [dispatch]);
 
-  function renderPage() {
-    if (appInitialized) {
-      return activeWallet ? (
-        <div>your wallet {activeWallet} is connected</div>
-      ) : (
-        <Welcome />
-      );
-    }
-
-    return <Loader />;
-  }
-
-  return renderPage();
+  return fetchProviderRequestState.loading ||
+    fetchNetworkRequestState.loading ||
+    fetchWalletRequestState.loading ? (
+    <Loader />
+  ) : (
+    <Welcome />
+  );
 }
 
 export default App;

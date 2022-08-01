@@ -7,6 +7,7 @@ import styles from './List.module.scss';
 
 function List({
   items,
+  display,
   direction,
   justify,
   columnGap,
@@ -17,6 +18,7 @@ function List({
   return (
     <ul
       className={cn(styles.container, {
+        [styles[`container_display_${display}`]]: display,
         [styles[`container_direction_${direction}`]]: direction,
         [styles[`container_justify_${justify}`]]: justify,
         [styles[`container_columnGap_${columnGap}`]]:

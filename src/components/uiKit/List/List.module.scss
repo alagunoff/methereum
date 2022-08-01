@@ -1,7 +1,13 @@
 .container {
-  display: flex;
+  display: block;
 
   list-style-type: none;
+
+  &_display {
+    &_flex {
+      display: flex;
+    }
+  }
 
   &_direction {
     &_column {

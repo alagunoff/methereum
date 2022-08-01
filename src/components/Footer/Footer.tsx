@@ -1,4 +1,4 @@
-import { List } from 'components/dataDisplay';
+import { List } from 'components/uiKit';
 
 import { LINKS } from './constants';
 import styles from './Footer.module.scss';
@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer className={styles.container}>
       <List
-        items={LINKS.map(({ href }, id) => (
+        items={LINKS.map(({ href, text }, id) => (
           <a
             className={styles.link}
             key={`${href}-${id}`}
@@ -15,9 +15,10 @@ function Footer() {
             target='_blank'
             rel='noopener noreferrer'
           >
-            Логотип «Metalamp»
+            {text}
           </a>
         ))}
+        display='flex'
         justify='center'
         columnGap={10}
         itemFontSize={0}

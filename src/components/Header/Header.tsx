@@ -1,4 +1,4 @@
-import { List } from 'components/dataDisplay';
+import { List } from 'components/uiKit';
 
 import { LINKS } from './constants';
 import styles from './Header.module.scss';
@@ -19,6 +19,7 @@ function Header() {
               {text}
             </a>
           ))}
+          display='flex'
           columnGap={10}
         />
       </nav>

@@ -1,11 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import appSlice from './app';
+import providerSlice from './provider';
+import userSlice from './user';
 
 const store = configureStore({
   reducer: {
-    app: appSlice,
+    provider: providerSlice,
+    user: userSlice,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 type RootState = ReturnType<typeof store.getState>;
