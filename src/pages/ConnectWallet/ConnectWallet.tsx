@@ -5,9 +5,9 @@ import { selectFetchProviderRequestState } from 'store/provider';
 import { Header, Footer, ConnectWalletModal } from 'components';
 import { Error } from 'components/uiKit';
 
-import styles from './Welcome.module.scss';
+import styles from './ConnectWallet.module.scss';
 
-function Welcome() {
+function ConnectWallet() {
   const fetchProviderRequestState = useSelector(
     selectFetchProviderRequestState,
   );
@@ -54,4 +54,4 @@ function Welcome() {
   );
 }
 
-export default Welcome;
+export default ConnectWallet;

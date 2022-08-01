@@ -10,6 +10,7 @@ function Modal({ children, onClose }: PropsWithChildren<IProps>) {
       overlayClassName={styles.containerWrapper}
       className={styles.container}
       isOpen
+      ariaHideApp={false}
       onRequestClose={onClose}
     >
       {children}

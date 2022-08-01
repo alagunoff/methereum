@@ -4,6 +4,7 @@ const initialState: IState = {
   api: {
     fetchNetwork: { loading: false, loaded: false },
     fetchWallet: { loading: false, loaded: false },
+    logIn: { loading: false, loaded: false },
   },
   data: {},
 };

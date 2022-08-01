@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { checkIfNetworkRinkeby } from 'shared/utils';
 
-import { fetchNetwork, fetchWallet } from './requests';
+import { fetchNetwork, fetchWallet, logIn } from './requests';
 import initialState from './initialState';
 
 const slice = createSlice({
@@ -44,6 +44,21 @@ const slice = createSlice({
       .addCase(fetchWallet.rejected, (state) => {
         state.api.fetchWallet.loading = false;
         state.api.fetchWallet.error = 'Не удалось получить кошелек';
+      });
+
+    builder
+      .addCase(logIn.pending, (state) => {
+        state.api.logIn.loading = true;
+        state.api.logIn.loaded = false;
+        delete state.api.logIn.error;
+      })
+      .addCase(logIn.fulfilled, (state) => {
+        state.api.logIn.loading = false;
+        state.api.logIn.loaded = true;
+      })
+      .addCase(logIn.rejected, (state) => {
+        state.api.logIn.loading = false;
+        state.api.logIn.error = 'Не удалось войти';
       });
   },
 });

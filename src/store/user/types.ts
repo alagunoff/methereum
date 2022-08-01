@@ -10,6 +10,11 @@ interface IState {
       loaded: boolean;
       error?: string;
     };
+    logIn: {
+      loading: boolean;
+      loaded: boolean;
+      error?: string;
+    };
   };
   data: {
     network?: {

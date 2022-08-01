@@ -1,24 +1,24 @@
-// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-// import { selectIsActiveChainRinkeby, setActiveWallet } from 'store/user';
+import { logIn, selectIsUserNetworkRinkeby } from 'store/user';
 import { Modal, List, Error } from 'components/uiKit';
+import { useAppDispatch } from 'shared/hooks';
 
 import { IProps } from './types';
 import styles from './ConnectWalletModal.module.scss';
 
 function ConnectWalletModal({ onClose }: IProps) {
-  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // const isActiveChainRinkeby = useSelector(selectIsActiveChainRinkeby);
+  const isUserNetworkRinkeby = useSelector(selectIsUserNetworkRinkeby);
 
-  async function handleMetaMaskWalletConnect() {
-    // const [wallet] = await ETHERS_PROVIDER.send('eth_requestAccounts', []);
-    // dispatch(setActiveWallet('asd'));
+  function handleMetaMaskWalletConnect() {
+    dispatch(logIn());
   }
 
   return (
     <Modal onClose={onClose}>
-      {true ? (
+      {isUserNetworkRinkeby ? (
         <>
           <h2 className={styles.title}>Choose your wallet</h2>
           <List

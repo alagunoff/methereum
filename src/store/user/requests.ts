@@ -7,9 +7,9 @@ const fetchNetwork = createAsyncThunk('user/fetchNetwork', async () => {
   const ethersProvider = new ethers.providers.Web3Provider(
     etheriumProvider as any,
   );
-  const chain = await ethersProvider.getNetwork();
+  const network = await ethersProvider.getNetwork();
 
-  return chain;
+  return network;
 });
 
 const fetchWallet = createAsyncThunk('user/fetchWallet', async () => {
@@ -22,4 +22,15 @@ const fetchWallet = createAsyncThunk('user/fetchWallet', async () => {
   return wallet;
 });
 
-export { fetchNetwork, fetchWallet };
+const logIn = createAsyncThunk('user/logIn', async () => {
+  const etheriumProvider = await detectEthereumProvider();
+  const ethersProvider = new ethers.providers.Web3Provider(
+    etheriumProvider as any,
+  );
+
+  const [wallet] = await ethersProvider.send('eth_requestAccounts', []);
+
+  return wallet;
+});
+
+export { fetchNetwork, fetchWallet, logIn };
