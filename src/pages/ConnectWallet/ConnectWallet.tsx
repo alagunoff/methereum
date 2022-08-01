@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectFetchProviderRequestState } from 'store/provider';
-import { Header, Footer, ConnectWalletModal } from 'components';
+import { Page, ConnectWalletModal } from 'components';
 import { Error } from 'components/uiKit';
 
 import styles from './ConnectWallet.module.scss';
@@ -23,9 +23,8 @@ function ConnectWallet() {
   }
 
   return (
-    <main className={styles.container}>
-      <Header />
-      <div className={styles.content}>
+    <Page>
+      <div className={styles.container}>
         <div className={styles.introduction}>
           <h1 className={styles.title}>Metalamp NFT Project</h1>
           <p className={styles.text}>
@@ -46,11 +45,10 @@ function ConnectWallet() {
           )}
         </div>
       </div>
-      <Footer />
       {connectWalletModalShown && (
         <ConnectWalletModal onClose={handleConnectWalletModalClose} />
       )}
-    </main>
+    </Page>
   );
 }
 
