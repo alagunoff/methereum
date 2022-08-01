@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { selectFetchProviderRequestState } from 'store/provider';
 import { Page, ConnectWalletModal } from 'components';
-import { Error } from 'components/uiKit';
+import { Button, Error } from 'components/uiKit';
 
 import styles from './ConnectWallet.module.scss';
 
@@ -12,14 +12,15 @@ function ConnectWallet() {
     selectFetchProviderRequestState,
   );
 
-  const [connectWalletModalShown, setConnectWalletModalShown] = useState(false);
+  const [connectWalletModalOpened, setConnectWalletModalOpened] =
+    useState(false);
 
-  function handleConnectWalletModalShow() {
-    setConnectWalletModalShown(true);
+  function handleConnectWalletModalOpen() {
+    setConnectWalletModalOpened(true);
   }
 
   function handleConnectWalletModalClose() {
-    setConnectWalletModalShown(false);
+    setConnectWalletModalOpened(false);
   }
 
   return (
@@ -35,17 +36,13 @@ function ConnectWallet() {
           {fetchProviderRequestState.error ? (
             <Error>{fetchProviderRequestState.error}</Error>
           ) : (
-            <button
-              className={styles.button}
-              type='button'
-              onClick={handleConnectWalletModalShow}
-            >
+            <Button onClick={handleConnectWalletModalOpen}>
               Connect my wallet
-            </button>
+            </Button>
           )}
         </div>
       </div>
-      {connectWalletModalShown && (
+      {connectWalletModalOpened && (
         <ConnectWalletModal onClose={handleConnectWalletModalClose} />
       )}
     </Page>

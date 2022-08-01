@@ -1,17 +1,7 @@
-@import 'shared/colors';
-
 .title {
   margin-bottom: 20px;
 
   font-size: 23px;
   font-weight: 400;
   text-align: center;
-}
-
-.buttonWrapper {
-  text-align: center;
-
-  & + .buttonWrapper {
-    margin-top: 5px;
-  }
 }

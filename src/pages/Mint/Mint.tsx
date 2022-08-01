@@ -1,5 +1,7 @@
+import { Page } from 'components';
+
 function Mint() {
-  return <div>Mint</div>;
+  return <Page>mint</Page>;
 }
 
 export default Mint;

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import { logIn, selectIsUserNetworkRinkeby } from 'store/user';
-import { Modal, List, Error } from 'components/uiKit';
+import { Modal, List, Button, Error } from 'components/uiKit';
 import { useAppDispatch } from 'shared/hooks';
 
 import { IProps } from './types';
@@ -23,14 +23,9 @@ function ConnectWalletModal({ onClose }: IProps) {
           <h2 className={styles.title}>Choose your wallet</h2>
           <List
             items={[
-              <button
-                key='metaMask'
-                className={styles.button}
-                type='button'
-                onClick={handleMetaMaskWalletConnect}
-              >
+              <Button key='metaMask' onClick={handleMetaMaskWalletConnect}>
                 Metamask
-              </button>,
+              </Button>,
             ]}
             itemTextAlign='center'
           />

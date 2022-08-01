@@ -9,17 +9,18 @@
   ],
   "plugins": ["prettier"],
   "rules": {
+    "react/no-array-index-key": 0,
+    "react/button-has-type": 0,
+    "import/prefer-default-export": "off",
     "prettier/prettier": [2, { "semi": true }],
     "no-param-reassign": ["error", { "props": false }],
-    "react/no-array-index-key": 0,
-    "react/jsx-key": 2,
     "react/jsx-no-bind": [
       2,
       {
         "allowFunctions": true
       }
     ],
-    "import/prefer-default-export": "off"
+    "react/jsx-key": 2
   },
   "parserOptions": {
     "project": "./tsconfig.json"
