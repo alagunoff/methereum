@@ -11,8 +11,11 @@ function selectIsUserNetworkRinkeby(state: RootState) {
   return state.user.data?.network?.isRinkeby;
 }
 
-function selectUserWallet(state: RootState) {
-  return state.user.data?.wallet;
+function selectUserFullWallet(state: RootState) {
+  return state.user.data?.wallet?.full;
+}
+function selectUserShortWallet(state: RootState) {
+  return state.user.data?.wallet?.short;
 }
 
 function selectUserBalance(state: RootState) {
@@ -23,6 +26,7 @@ export {
   selectInithUserRequestState,
   selectUserNetwork,
   selectIsUserNetworkRinkeby,
-  selectUserWallet,
+  selectUserFullWallet,
+  selectUserShortWallet,
   selectUserBalance,
 };

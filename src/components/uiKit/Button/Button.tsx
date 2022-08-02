@@ -7,6 +7,7 @@ import styles from './Button.module.scss';
 function Button({
   theme = 'default',
   type = 'button',
+  disabled,
   children,
   onClick,
 }: PropsWithChildren<IProps>) {
@@ -14,6 +15,7 @@ function Button({
     <button
       className={cn(styles.container, styles[`container_theme_${theme}`])}
       type={type}
+      disabled={disabled}
       onClick={onClick}
     >
       {children}

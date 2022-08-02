@@ -6,11 +6,12 @@ import { IProps } from './types';
 import styles from './List.module.scss';
 
 function List({
-  items,
   display,
   direction,
   justify,
   columnGap,
+  rowGap,
+  items,
   itemFontSize,
   itemLineHeight,
   itemTextAlign,
@@ -23,6 +24,7 @@ function List({
         [styles[`container_justify_${justify}`]]: justify,
         [styles[`container_columnGap_${columnGap}`]]:
           checkIfValueNumber(columnGap),
+        [styles[`container_rowGap_${rowGap}`]]: checkIfValueNumber(rowGap),
       })}
     >
       {items.map((item) => (

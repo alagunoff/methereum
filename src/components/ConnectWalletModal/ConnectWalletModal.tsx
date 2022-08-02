@@ -25,7 +25,7 @@ function ConnectWalletModal({ onClose }: IProps) {
           <h2 className={styles.title}>Choose your wallet</h2>
           <List
             items={[
-              <Button key='metaMask' onClick={handleMetaMaskWalletConnect}>
+              <Button key='metamask' onClick={handleMetaMaskWalletConnect}>
                 Metamask
               </Button>,
             ]}
@@ -34,7 +34,7 @@ function ConnectWalletModal({ onClose }: IProps) {
         </>
       ) : (
         <Error>
-          Your wallet is not connected to the right chain. Please connect to
+          Your wallet is not connected to the right network. Please connect to
           Rinkeby test network.
         </Error>
       )}

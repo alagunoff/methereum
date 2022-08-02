@@ -1,17 +1,17 @@
 import { useSelector } from 'react-redux';
 
-import { selectUserWallet } from 'store/user';
+import { selectUserShortWallet } from 'store/user';
 import { List, Link } from 'components/uiKit';
 
 import { LINKS } from './constants';
 import styles from './Header.module.scss';
 
 function Header() {
-  const userWallet = useSelector(selectUserWallet);
+  const userShortWallet = useSelector(selectUserShortWallet);
 
   return (
     <header className={styles.container}>
-      <div className={styles.wallet}>{userWallet}</div>
+      <div className={styles.wallet}>{userShortWallet}</div>
       <nav className={styles.navigation}>
         <List
           items={LINKS.map(({ text, to }) => (

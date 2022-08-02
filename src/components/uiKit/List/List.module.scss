@@ -30,6 +30,12 @@
       column-gap: 20px;
     }
   }
+
+  &_rowGap {
+    &_10 {
+      row-gap: 10px;
+    }
+  }
 }
 
 .item {

@@ -19,7 +19,12 @@ const initUser = createAsyncThunk<IUser, ethers.providers.Web3Provider>(
     if (wallet) {
       const balance = await provider.getBalance(wallet);
 
-      user.wallet = wallet;
+      user.wallet = {
+        full: wallet,
+        short: `${wallet.substring(0, 6)}...${wallet.substring(
+          wallet.length - 2,
+        )}`,
+      };
       user.balance = Number(
         Number(ethers.utils.formatEther(balance)).toFixed(4),
       );

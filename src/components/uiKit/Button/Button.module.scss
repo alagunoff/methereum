@@ -6,6 +6,10 @@
   font: inherit;
   color: inherit;
 
+  &:disabled {
+    cursor: default;
+  }
+
   &_theme {
     &_default {
       padding: 3px 10px;

@@ -1,3 +1,3 @@
-const isUserAllowedToClaim = true;
+const isUserApprovedToClaim = true;
 
-export { isUserAllowedToClaim };
+export { isUserApprovedToClaim };

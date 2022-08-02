@@ -18,7 +18,10 @@ interface IUser {
   network: {
     isRinkeby: boolean;
   };
-  wallet?: string;
+  wallet?: {
+    full: string;
+    short: string;
+  };
   balance?: number;
 }
 
