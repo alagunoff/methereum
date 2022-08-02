@@ -13,7 +13,7 @@ function WithWallet({ children }: { children: JSX.Element }) {
 function WithoutWallet({ children }: { children: JSX.Element }) {
   const userWallet = useSelector(selectUserWallet);
 
-  return userWallet ? <Navigate to={routes.mint} replace /> : children;
+  return userWallet ? <Navigate to={`${routes.tokens}/1`} replace /> : children;
 }
 
 export { WithWallet, WithoutWallet };

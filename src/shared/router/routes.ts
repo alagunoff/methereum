@@ -1,4 +1,6 @@
 const root = '/';
-const mint = 'mint';
 
-export { root, mint };
+const tokens = '/tokens';
+const token = `${tokens}/:tokenId`;
+
+export { root, tokens, token };

@@ -1,2 +1,2 @@
 export { default as ConnectWallet } from './ConnectWallet';
-export { default as Mint } from './Mint';
+export { default as Token } from './Token';

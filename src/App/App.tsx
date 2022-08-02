@@ -1,30 +1,19 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
-import { fetchProvider, selectFetchProviderRequestState } from 'store/provider';
-import {
-  fetchNetwork,
-  fetchWallet,
-  selectFetchNetworkRequestState,
-  selectFetchWalletRequestState,
-} from 'store/user';
+import { fetchProvider } from 'store/provider';
+import { fetchNetwork, fetchWallet } from 'store/user';
 import * as routes from 'shared/router/routes';
 import { WithWallet, WithoutWallet } from 'shared/router/hofs';
 import { useAppDispatch } from 'shared/hooks';
 import { checkIfRequestFulfilled } from 'shared/utils';
-import { ConnectWallet, Mint } from 'pages';
+import { ConnectWallet, Token } from 'pages';
 import { Loader } from 'components/uiKit';
 
 function App() {
   const dispatch = useAppDispatch();
 
-  const fetchProviderRequestState = useSelector(
-    selectFetchProviderRequestState,
-  );
-
-  const fetchNetworkRequestState = useSelector(selectFetchNetworkRequestState);
-  const fetchWalletRequestState = useSelector(selectFetchWalletRequestState);
+  const [appInitialized, setAppInitialized] = useState(false);
 
   useEffect(() => {
     async function initializeApp() {
@@ -35,17 +24,17 @@ function App() {
       if (checkIfRequestFulfilled(requestStatus)) {
         await dispatch(fetchNetwork());
         await dispatch(fetchWallet());
+
+        setAppInitialized(true);
+      } else {
+        setAppInitialized(true);
       }
     }
 
     initializeApp();
   }, [dispatch]);
 
-  return fetchProviderRequestState.loading ||
-    fetchNetworkRequestState.loading ||
-    fetchWalletRequestState.loading ? (
-    <Loader />
-  ) : (
+  return appInitialized ? (
     <Routes>
       <Route
         path={routes.root}
@@ -56,15 +45,17 @@ function App() {
         }
       />
       <Route
-        path={routes.mint}
+        path={routes.token}
         element={
           <WithWallet>
-            <Mint />
+            <Token />
           </WithWallet>
         }
       />
       <Route path='*' element={<Navigate to={routes.root} replace />} />
     </Routes>
+  ) : (
+    <Loader />
   );
 }
 
