@@ -1,7 +1,13 @@
 import { useParams } from 'react-router-dom';
 
 import tokenImage from 'assets/icons/token-1.gif';
+import { ColorValues } from 'shared/types/Color';
 
+import {
+  tokensMintedNumber,
+  tokensNumber,
+  tokensMintedPercent,
+} from './mockData';
 import styles from './MintingProgress.module.scss';
 
 function MintingProgress() {
@@ -21,11 +27,15 @@ function MintingProgress() {
       <h2 className={styles.title}>Already minted</h2>
       <div
         className={styles.progressBar}
-        style={{ backgroundImage: 'linear-gradient(to right, red, yellow)' }}
+        style={{
+          backgroundImage: `linear-gradient(to right, ${ColorValues.silver} ${tokensMintedPercent}%, ${ColorValues.white} ${tokensMintedPercent}%)`,
+        }}
       />
       <div className={styles.progressWrapper}>
-        <div className={styles.percentageProgress}>50%</div>
-        <div className={styles.progress}>5000/10000</div>
+        <div className={styles.percentageProgress}>{tokensMintedPercent}%</div>
+        <div className={styles.progress}>
+          {tokensMintedNumber}/{tokensNumber}
+        </div>
       </div>
     </section>
   );

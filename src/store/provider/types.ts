@@ -1,6 +1,6 @@
 interface IState {
   api: {
-    fetchProvider: {
+    initProvider: {
       loading: boolean;
       loaded: boolean;
       error?: string;

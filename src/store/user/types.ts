@@ -1,11 +1,6 @@
 interface IState {
   api: {
-    fetchNetwork: {
-      loading: boolean;
-      loaded: boolean;
-      error?: string;
-    };
-    fetchWallet: {
+    initUser: {
       loading: boolean;
       loaded: boolean;
       error?: string;
@@ -16,12 +11,15 @@ interface IState {
       error?: string;
     };
   };
-  data: {
-    network?: {
-      isRinkeby: boolean;
-    };
-    wallet?: string;
-  };
+  data?: IUser;
 }
 
-export type { IState };
+interface IUser {
+  network: {
+    isRinkeby: boolean;
+  };
+  wallet?: string;
+  balance?: number;
+}
+
+export type { IState, IUser };

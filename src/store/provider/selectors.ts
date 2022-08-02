@@ -1,7 +1,7 @@
 import { RootState } from 'store';
 
-function selectFetchProviderRequestState(state: RootState) {
-  return state.provider.api.fetchProvider;
+function selectInitProviderRequestState(state: RootState) {
+  return state.provider.api.initProvider;
 }
 
-export { selectFetchProviderRequestState };
+export { selectInitProviderRequestState };

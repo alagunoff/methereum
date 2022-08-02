@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { fetchProvider } from 'store/provider';
-import { fetchNetwork, fetchWallet } from 'store/user';
+import { initProvider } from 'store/provider';
+import { initUser } from 'store/user';
 import * as routes from 'shared/router/routes';
 import { WithWallet, WithoutWallet } from 'shared/router/hofs';
 import { useAppDispatch } from 'shared/hooks';
-import { checkIfRequestFulfilled } from 'shared/utils';
 import { ConnectWallet, Token } from 'pages';
 import { Loader } from 'components/uiKit';
 
@@ -17,18 +16,13 @@ function App() {
 
   useEffect(() => {
     async function initializeApp() {
-      const {
-        meta: { requestStatus },
-      } = await dispatch(fetchProvider());
+      await dispatch(initProvider());
 
-      if (checkIfRequestFulfilled(requestStatus)) {
-        await dispatch(fetchNetwork());
-        await dispatch(fetchWallet());
-
-        setAppInitialized(true);
-      } else {
-        setAppInitialized(true);
+      if (window.ethersProvider) {
+        await dispatch(initUser(window.ethersProvider));
       }
+
+      setAppInitialized(true);
     }
 
     initializeApp();

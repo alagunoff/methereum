@@ -2,7 +2,7 @@ import { IState } from './types';
 
 const initialState: IState = {
   api: {
-    fetchProvider: { loading: false, loaded: false },
+    initProvider: { loading: false, loaded: false },
   },
 };
 

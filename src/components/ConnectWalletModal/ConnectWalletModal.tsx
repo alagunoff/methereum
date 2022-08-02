@@ -13,7 +13,9 @@ function ConnectWalletModal({ onClose }: IProps) {
   const isUserNetworkRinkeby = useSelector(selectIsUserNetworkRinkeby);
 
   function handleMetaMaskWalletConnect() {
-    dispatch(logIn());
+    if (window.ethersProvider) {
+      dispatch(logIn(window.ethersProvider));
+    }
   }
 
   return (

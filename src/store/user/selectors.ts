@@ -1,28 +1,28 @@
 import { RootState } from 'store';
 
-function selectFetchNetworkRequestState(state: RootState) {
-  return state.user.api.fetchNetwork;
-}
-
-function selectFetchWalletRequestState(state: RootState) {
-  return state.user.api.fetchWallet;
+function selectInithUserRequestState(state: RootState) {
+  return state.user.api.initUser;
 }
 
 function selectUserNetwork(state: RootState) {
-  return state.user.data.network;
+  return state.user.data?.network;
 }
 function selectIsUserNetworkRinkeby(state: RootState) {
-  return state.user.data.network?.isRinkeby;
+  return state.user.data?.network?.isRinkeby;
 }
 
 function selectUserWallet(state: RootState) {
-  return state.user.data.wallet;
+  return state.user.data?.wallet;
+}
+
+function selectUserBalance(state: RootState) {
+  return state.user.data?.balance;
 }
 
 export {
-  selectFetchNetworkRequestState,
-  selectFetchWalletRequestState,
+  selectInithUserRequestState,
   selectUserNetwork,
   selectIsUserNetworkRinkeby,
   selectUserWallet,
+  selectUserBalance,
 };

@@ -4,6 +4,6 @@ import { ethers } from 'ethers';
 
 declare global {
   interface Window {
-    ethers: ethers.providers.Web3Provider;
+    ethersProvider?: ethers.providers.Web3Provider;
   }
 }

@@ -1,21 +1,41 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { ethers } from 'ethers';
 
-const fetchNetwork = createAsyncThunk('user/fetchNetwork', async () => {
-  const network = await window.ethers.getNetwork();
+import { RINKEBY_CHAIN_ID } from 'shared/constants';
 
-  return network;
-});
+import { IUser } from './types';
 
-const fetchWallet = createAsyncThunk('user/fetchWallet', async () => {
-  const [wallet] = await window.ethers.listAccounts();
+const initUser = createAsyncThunk<IUser, ethers.providers.Web3Provider>(
+  'user/initUser',
+  async (provider) => {
+    const network = await provider.getNetwork();
+    const user: IUser = {
+      network: {
+        isRinkeby: network.chainId === RINKEBY_CHAIN_ID,
+      },
+    };
+    const [wallet] = await provider.listAccounts();
 
-  return wallet;
-});
+    if (wallet) {
+      const balance = await provider.getBalance(wallet);
 
-const logIn = createAsyncThunk('user/logIn', async () => {
-  const [wallet] = await window.ethers.send('eth_requestAccounts', []);
+      user.wallet = wallet;
+      user.balance = Number(
+        Number(ethers.utils.formatEther(balance)).toFixed(4),
+      );
+    }
 
-  return wallet;
-});
+    return user;
+  },
+);
 
-export { fetchNetwork, fetchWallet, logIn };
+const logIn = createAsyncThunk<string, ethers.providers.Web3Provider>(
+  'user/logIn',
+  async (provider) => {
+    const [wallet] = await provider.send('eth_requestAccounts', []);
+
+    return wallet;
+  },
+);
+
+export { initUser, logIn };

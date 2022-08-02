@@ -1,0 +1,30 @@
+@import 'shared/colors';
+
+.container {
+  width: 536px;
+  padding: 10px;
+
+  border: 1px solid $black;
+}
+
+.title {
+  margin-bottom: 5px;
+
+  text-align: center;
+}
+
+.timer {
+  margin-bottom: 20px;
+
+  text-align: center;
+}
+
+.balanceWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+
+  border-bottom: 1px solid $black;
+}

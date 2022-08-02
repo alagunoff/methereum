@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchProvider } from './requests';
+import { initProvider } from './requests';
 import initialState from './initialState';
 
 const slice = createSlice({
@@ -9,18 +9,18 @@ const slice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchProvider.pending, (state) => {
-        state.api.fetchProvider.loading = true;
-        state.api.fetchProvider.loaded = false;
-        delete state.api.fetchProvider.error;
+      .addCase(initProvider.pending, (state) => {
+        state.api.initProvider.loading = true;
+        state.api.initProvider.loaded = false;
+        delete state.api.initProvider.error;
       })
-      .addCase(fetchProvider.fulfilled, (state) => {
-        state.api.fetchProvider.loading = false;
-        state.api.fetchProvider.loaded = true;
+      .addCase(initProvider.fulfilled, (state) => {
+        state.api.initProvider.loading = false;
+        state.api.initProvider.loaded = true;
       })
-      .addCase(fetchProvider.rejected, (state) => {
-        state.api.fetchProvider.loading = false;
-        state.api.fetchProvider.error =
+      .addCase(initProvider.rejected, (state) => {
+        state.api.initProvider.loading = false;
+        state.api.initProvider.error =
           'Не удалось обнаружить ни одного провайдера';
       });
   },
