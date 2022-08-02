@@ -2,24 +2,24 @@ import { METALAMP_SITE_LINK } from 'shared/constants';
 
 const LINKS = [
   {
-    href: METALAMP_SITE_LINK,
-    text: 'Логотип «Metalamp»',
+    to: METALAMP_SITE_LINK,
+    imageAlt: 'Логотип «MetaMask»',
   },
   {
-    href: METALAMP_SITE_LINK,
-    text: 'Логотип «Metalamp»',
+    to: METALAMP_SITE_LINK,
+    imageAlt: 'Логотип «MetaMask»',
   },
   {
-    href: METALAMP_SITE_LINK,
-    text: 'Логотип «Metalamp»',
+    to: METALAMP_SITE_LINK,
+    imageAlt: 'Логотип «MetaMask»',
   },
   {
-    href: METALAMP_SITE_LINK,
-    text: 'Логотип «Metalamp»',
+    to: METALAMP_SITE_LINK,
+    imageAlt: 'Логотип «MetaMask»',
   },
   {
-    href: METALAMP_SITE_LINK,
-    text: 'Логотип «Metalamp»',
+    to: METALAMP_SITE_LINK,
+    imageAlt: 'Логотип «MetaMask»',
   },
 ];
 

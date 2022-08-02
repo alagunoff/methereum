@@ -1,0 +1,9 @@
+.container {
+  color: inherit;
+
+  &_theme {
+    &_default {
+      text-decoration-line: none;
+    }
+  }
+}
