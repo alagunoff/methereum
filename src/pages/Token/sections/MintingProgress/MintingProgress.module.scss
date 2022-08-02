@@ -1,0 +1,32 @@
+@import 'shared/colors';
+
+.container {
+  width: 680px;
+  margin: 0 auto;
+}
+
+.imageWrapper {
+  margin-bottom: 10px;
+
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 20px;
+
+  text-align: center;
+}
+
+.progressBar {
+  height: 50px;
+  margin-bottom: 5px;
+
+  border: 1px solid $black;
+}
+
+.progressWrapper {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0 10px;
+}

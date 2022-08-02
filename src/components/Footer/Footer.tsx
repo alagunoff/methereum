@@ -1,6 +1,6 @@
 import { List, Link } from 'components/uiKit';
 
-import metaMaskFoxIcon from 'assets/icons/metamask-fox.svg';
+import metalampEIcon from 'assets/icons/metalamp-e.svg';
 
 import { LINKS } from './constants';
 import styles from './Footer.module.scss';
@@ -13,11 +13,10 @@ function Footer() {
           <Link key={`${to}-${id}`} to={to} isExternal>
             <img
               className={styles.image}
-              src={metaMaskFoxIcon}
+              src={metalampEIcon}
               alt={imageAlt}
               loading='lazy'
-              width={30}
-              height={30}
+              width={40}
             />
           </Link>
         ))}
