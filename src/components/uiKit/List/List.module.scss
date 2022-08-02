@@ -1,3 +1,5 @@
+@import 'shared/colors';
+
 .container {
   display: block;
 
@@ -39,6 +41,12 @@
 }
 
 .item {
+  &_theme {
+    &_bordered {
+      border: 1px solid $black;
+    }
+  }
+
   &_fontSize {
     &_0 {
       font-size: 0;

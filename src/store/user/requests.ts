@@ -25,9 +25,7 @@ const initUser = createAsyncThunk<IUser, ethers.providers.Web3Provider>(
           wallet.length - 2,
         )}`,
       };
-      user.balance = Number(
-        Number(ethers.utils.formatEther(balance)).toFixed(4),
-      );
+      user.balance = Number(ethers.utils.formatEther(balance));
     }
 
     return user;

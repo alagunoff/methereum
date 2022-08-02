@@ -5,6 +5,7 @@ interface IProps {
   columnGap?: number;
   rowGap?: number;
   items: JSX.Element[];
+  itemTheme?: 'bordered';
   itemFontSize?: number;
   itemLineHeight?: number;
   itemTextAlign?: 'center';

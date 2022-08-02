@@ -12,6 +12,7 @@ function List({
   columnGap,
   rowGap,
   items,
+  itemTheme,
   itemFontSize,
   itemLineHeight,
   itemTextAlign,
@@ -31,6 +32,7 @@ function List({
         <li
           key={item.key}
           className={cn(styles.item, {
+            [styles[`item_theme_${itemTheme}`]]: itemTheme,
             [styles[`item_fontSize_${itemFontSize}`]]:
               checkIfValueNumber(itemFontSize),
             [styles[`item_lineHeight_${itemLineHeight}`]]:

@@ -4,16 +4,20 @@ import cn from 'classnames';
 import { selectUserBalance, selectUserShortWallet } from 'store/user';
 import { List, Button } from 'components/uiKit';
 
-import { gasPrice, isUserApprovedToClaim } from './mockData';
-import styles from './Airdrop.module.scss';
+import { gasPrice, tokenPrice, isUserApprovedToMint } from './mockData';
+import styles from './Presale.module.scss';
 
-function Airdrop() {
+function Presale() {
   const userBalance = useSelector(selectUserBalance);
   const userShortWallet = useSelector(selectUserShortWallet);
 
+  const price = 5 * tokenPrice;
+  const totalPrice = price + gasPrice;
+  const hasUserEnoughMoneyToMint = (userBalance || 0) >= totalPrice;
+  console.log(hasUserEnoughMoneyToMint);
   return (
     <section className={styles.container}>
-      <h2 className={styles.title}>Airdrop</h2>
+      <h2 className={styles.title}>Presale mint</h2>
       <div className={styles.timer}>Time left: 00:48:00</div>
       <div className={styles.list}>
         <List
@@ -27,9 +31,13 @@ function Airdrop() {
                 {userBalance?.toFixed(2)} RinkebyETH
               </div>
             </div>,
+            <div className={styles.itemWrapper} key='amount'>
+              <div className={styles.itemLabel}>Amount</div>
+              <div className={styles.itemValue}>- 5/5 +</div>
+            </div>,
             <div className={styles.itemWrapper} key='price'>
               <div className={styles.itemLabel}>Price</div>
-              <div className={styles.itemValue}>Free</div>
+              <div className={styles.itemValue}>{price} RinkebyETH</div>
             </div>,
             <div className={styles.itemWrapper} key='gas'>
               <div className={styles.itemLabel}>GAS</div>
@@ -37,28 +45,28 @@ function Airdrop() {
             </div>,
             <div className={styles.itemWrapper} key='total'>
               <div className={styles.itemLabel}>Total</div>
-              <div className={styles.itemValue}>{gasPrice} RinkebyETH</div>
+              <div className={styles.itemValue}>{totalPrice} RinkebyETH</div>
             </div>,
           ]}
         />
       </div>
-      {isUserApprovedToClaim && (
+      {isUserApprovedToMint && hasUserEnoughMoneyToMint && (
         <div className={styles.button}>
-          <Button>Claim airdrop</Button>
+          <Button>Mint 5 NFT</Button>
         </div>
       )}
       <div
         className={cn(styles.status, {
-          [styles.status_type_approved]: isUserApprovedToClaim,
-          [styles.status_type_refused]: !isUserApprovedToClaim,
+          [styles.status_type_approved]: isUserApprovedToMint,
+          [styles.status_type_refused]: !isUserApprovedToMint,
         })}
       >
-        {isUserApprovedToClaim
-          ? `${userShortWallet} approved for claim!`
-          : `${userShortWallet} is not allowed for airdrop claim.`}
+        {isUserApprovedToMint
+          ? `${userShortWallet} approved for presale mint!`
+          : `${userShortWallet} is not in presale whitelist.`}
       </div>
     </section>
   );
 }
 
-export default Airdrop;
+export default Presale;

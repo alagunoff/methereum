@@ -15,7 +15,7 @@ function App() {
   const [appInitialized, setAppInitialized] = useState(false);
 
   useEffect(() => {
-    async function initializeApp() {
+    async function initApp() {
       await dispatch(initProvider());
 
       if (window.ethersProvider) {
@@ -25,7 +25,7 @@ function App() {
       setAppInitialized(true);
     }
 
-    initializeApp();
+    initApp();
   }, [dispatch]);
 
   return appInitialized ? (
