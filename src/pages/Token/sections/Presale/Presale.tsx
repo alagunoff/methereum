@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectUserBalance, selectUserShortWallet } from 'store/user';
+import { ConvertCurrencyModal } from 'components';
 import { List, Button, Status } from 'components/uiKit';
 
 import { gasPrice, tokenPrice, isUserApprovedToMint } from './mockData';
@@ -10,9 +12,20 @@ function Presale() {
   const userBalance = useSelector(selectUserBalance);
   const userShortWallet = useSelector(selectUserShortWallet);
 
+  const [convertCurrencyModalOpened, setCconvertCurrencyModalOpened] =
+    useState(false);
+
   const price = 5 * tokenPrice;
   const totalPrice = price + gasPrice;
   const hasUserEnoughMoneyToMint = (userBalance || 0) >= totalPrice;
+
+  function handleConvertCurrencyModalOpen() {
+    setCconvertCurrencyModalOpened(true);
+  }
+
+  function handleConvertCurrencyModalClose() {
+    setCconvertCurrencyModalOpened(false);
+  }
 
   return (
     <section className={styles.container}>
@@ -68,9 +81,14 @@ function Presale() {
             </Status>
           </div>
           <div className={styles.exchangeButton}>
-            <Button>Exchange RinkebyETH</Button>
+            <Button onClick={handleConvertCurrencyModalOpen}>
+              Exchange RinkebyETH
+            </Button>
           </div>
         </>
+      )}
+      {convertCurrencyModalOpened && (
+        <ConvertCurrencyModal onClose={handleConvertCurrencyModalClose} />
       )}
     </section>
   );
