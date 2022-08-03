@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 import styles from './Error.module.scss';
 
 function Error({ children }: PropsWithChildren) {
-  return <span className={styles.container}>{children}</span>;
+  return <div className={styles.container}>{children}</div>;
 }
 
 export default Error;

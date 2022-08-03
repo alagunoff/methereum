@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux';
-import cn from 'classnames';
 
 import { selectUserBalance, selectUserShortWallet } from 'store/user';
-import { List, Button } from 'components/uiKit';
+import { List, Button, Status } from 'components/uiKit';
 
 import { gasPrice, tokenPrice, isUserApprovedToMint } from './mockData';
 import styles from './Presale.module.scss';
@@ -14,7 +13,7 @@ function Presale() {
   const price = 5 * tokenPrice;
   const totalPrice = price + gasPrice;
   const hasUserEnoughMoneyToMint = (userBalance || 0) >= totalPrice;
-  console.log(hasUserEnoughMoneyToMint);
+
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Presale mint</h2>
@@ -51,20 +50,28 @@ function Presale() {
         />
       </div>
       {isUserApprovedToMint && hasUserEnoughMoneyToMint && (
-        <div className={styles.button}>
+        <div className={styles.mintButton}>
           <Button>Mint 5 NFT</Button>
         </div>
       )}
-      <div
-        className={cn(styles.status, {
-          [styles.status_type_approved]: isUserApprovedToMint,
-          [styles.status_type_refused]: !isUserApprovedToMint,
-        })}
-      >
-        {isUserApprovedToMint
-          ? `${userShortWallet} approved for presale mint!`
-          : `${userShortWallet} is not in presale whitelist.`}
-      </div>
+      {hasUserEnoughMoneyToMint ? (
+        <Status type={isUserApprovedToMint ? 'approved' : 'refused'}>
+          {isUserApprovedToMint
+            ? `${userShortWallet} approved for presale mint!`
+            : `${userShortWallet} is not in presale whitelist.`}
+        </Status>
+      ) : (
+        <>
+          <div className={styles.moneyLackStatus}>
+            <Status type='refused'>
+              You don&apos;t have enough RinkebyETH for minting NFT
+            </Status>
+          </div>
+          <div className={styles.exchangeButton}>
+            <Button>Exchange RinkebyETH</Button>
+          </div>
+        </>
+      )}
     </section>
   );
 }

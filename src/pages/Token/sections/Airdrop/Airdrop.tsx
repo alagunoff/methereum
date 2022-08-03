@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux';
-import cn from 'classnames';
 
 import { selectUserBalance, selectUserShortWallet } from 'store/user';
-import { List, Button } from 'components/uiKit';
+import { List, Button, Status } from 'components/uiKit';
 
 import { gasPrice, isUserApprovedToClaim } from './mockData';
 import styles from './Airdrop.module.scss';
@@ -43,20 +42,15 @@ function Airdrop() {
         />
       </div>
       {isUserApprovedToClaim && (
-        <div className={styles.button}>
+        <div className={styles.claimButton}>
           <Button>Claim airdrop</Button>
         </div>
       )}
-      <div
-        className={cn(styles.status, {
-          [styles.status_type_approved]: isUserApprovedToClaim,
-          [styles.status_type_refused]: !isUserApprovedToClaim,
-        })}
-      >
+      <Status type={isUserApprovedToClaim ? 'approved' : 'refused'}>
         {isUserApprovedToClaim
           ? `${userShortWallet} approved for claim!`
           : `${userShortWallet} is not allowed for airdrop claim.`}
-      </div>
+      </Status>
     </section>
   );
 }

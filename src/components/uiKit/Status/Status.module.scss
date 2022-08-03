@@ -1,0 +1,35 @@
+@import 'shared/colors';
+
+.container {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    width: 20px;
+    height: 20px;
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 17px;
+    text-align: center;
+
+    border: 2px solid $black;
+    border-radius: 50%;
+  }
+
+  &_type {
+    &_approved {
+      &::before {
+        content: '✓';
+      }
+    }
+
+    &_refused {
+      &::before {
+        content: '!';
+      }
+    }
+  }
+}

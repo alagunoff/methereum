@@ -29,42 +29,16 @@
   border-bottom: 1px solid $black;
 }
 
-.button {
+.mintButton {
   margin-bottom: 20px;
 
   text-align: center;
 }
 
-.status {
-  display: flex;
-  column-gap: 10px;
-  align-items: center;
-  justify-content: center;
+.moneyLackStatus {
+  margin-bottom: 10px;
+}
 
-  &::before {
-    width: 20px;
-    height: 20px;
-
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 17px;
-    text-align: center;
-
-    border: 2px solid $black;
-    border-radius: 50%;
-  }
-
-  &_type {
-    &_approved {
-      &::before {
-        content: '✓';
-      }
-    }
-
-    &_refused {
-      &::before {
-        content: '!';
-      }
-    }
-  }
+.exchangeButton {
+  text-align: center;
 }
