@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectUserBalance, selectUserShortWallet } from 'store/user';
+import { selectUserBalance, selectUserWallet } from 'store/user';
 import { ConvertCurrencyModal } from 'components';
 import { List, Counter, Button, Status } from 'components/uiKit';
 
@@ -9,8 +9,8 @@ import { gasPrice, tokenPrice, isUserApprovedToMint } from './mockData';
 import styles from './Presale.module.scss';
 
 function Presale() {
-  const userBalance = useSelector(selectUserBalance);
-  const userShortWallet = useSelector(selectUserShortWallet);
+  const balance = useSelector(selectUserBalance);
+  const wallet = useSelector(selectUserWallet);
 
   const [tokensNumber, setTokensNumber] = useState(1);
   const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] =
@@ -18,7 +18,7 @@ function Presale() {
 
   const price = tokensNumber * tokenPrice;
   const totalPrice = price + gasPrice;
-  const hasUserEnoughMoneyToMint = (userBalance || 0) >= totalPrice;
+  const hasUserEnoughMoneyToMint = (balance || 0) >= totalPrice;
 
   function handleTokensNumberChange(newCount: number) {
     setTokensNumber(newCount);
@@ -43,7 +43,7 @@ function Presale() {
             <div key='balance' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Your balance</div>
               <div className={styles.itemValue}>
-                {userBalance?.toFixed(2)} RinkebyETH
+                {balance?.toFixed(4)} RinkebyETH
               </div>
             </div>,
             <div key='amount' className={styles.itemWrapper}>
@@ -82,8 +82,8 @@ function Presale() {
       {hasUserEnoughMoneyToMint ? (
         <Status type={isUserApprovedToMint ? 'approved' : 'refused'}>
           {isUserApprovedToMint
-            ? `${userShortWallet} approved for presale mint!`
-            : `${userShortWallet} is not in presale whitelist.`}
+            ? `${wallet?.short} approved for presale mint!`
+            : `${wallet?.short} is not in presale whitelist.`}
         </Status>
       ) : (
         <>

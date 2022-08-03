@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { initProvider } from 'store/provider';
 import { initUser } from 'store/user';
 import * as routes from 'shared/router/routes';
-import { WithWallet, WithoutWallet } from 'shared/router/hofs';
 import { useAppDispatch } from 'shared/hooks';
 import { ConnectWallet, Token } from 'pages';
 import { Loader } from 'components/uiKit';
@@ -16,11 +14,7 @@ function App() {
 
   useEffect(() => {
     async function initApp() {
-      await dispatch(initProvider());
-
-      if (window.ethersProvider) {
-        await dispatch(initUser(window.ethersProvider));
-      }
+      await dispatch(initUser());
 
       setAppInitialized(true);
     }
@@ -30,22 +24,8 @@ function App() {
 
   return appInitialized ? (
     <Routes>
-      <Route
-        path={routes.root}
-        element={
-          <WithoutWallet>
-            <ConnectWallet />
-          </WithoutWallet>
-        }
-      />
-      <Route
-        path={routes.token}
-        element={
-          <WithWallet>
-            <Token />
-          </WithWallet>
-        }
-      />
+      <Route path={routes.root} element={<ConnectWallet />} />
+      <Route path={routes.token} element={<Token />} />
       <Route path='*' element={<Navigate to={routes.root} replace />} />
     </Routes>
   ) : (

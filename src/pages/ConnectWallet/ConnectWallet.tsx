@@ -1,15 +1,11 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 
-import { selectInitProviderRequestState } from 'store/provider';
 import { Page, ConnectWalletModal } from 'components';
-import { Button, Error } from 'components/uiKit';
+import { Button } from 'components/uiKit';
 
 import styles from './ConnectWallet.module.scss';
 
 function ConnectWallet() {
-  const initProviderRequestState = useSelector(selectInitProviderRequestState);
-
   const [connectWalletModalOpened, setConnectWalletModalOpened] =
     useState(false);
 
@@ -31,13 +27,9 @@ function ConnectWallet() {
             you would like to purchase, and click Mint. Questions? Issues? Get
             the Mint Guide.
           </p>
-          {initProviderRequestState.error ? (
-            <Error>{initProviderRequestState.error}</Error>
-          ) : (
-            <Button onClick={handleConnectWalletModalOpen}>
-              Connect my wallet
-            </Button>
-          )}
+          <Button onClick={handleConnectWalletModalOpen}>
+            Connect my wallet
+          </Button>
         </div>
       </div>
       {connectWalletModalOpened && (

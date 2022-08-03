@@ -2,7 +2,6 @@
   "name": "eth",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://alagunoff.github.io/eth",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

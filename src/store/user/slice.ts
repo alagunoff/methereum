@@ -22,7 +22,6 @@ const slice = createSlice({
       })
       .addCase(initUser.rejected, (state) => {
         state.api.initUser.loading = false;
-        state.api.initUser.error = 'Не удалось получить сеть';
       });
 
     builder
@@ -37,7 +36,6 @@ const slice = createSlice({
       })
       .addCase(logIn.rejected, (state) => {
         state.api.logIn.loading = false;
-        state.api.logIn.error = 'Не удалось войти';
       });
   },
 });

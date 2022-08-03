@@ -1,14 +1,14 @@
 import { useSelector } from 'react-redux';
 
-import { selectUserBalance, selectUserShortWallet } from 'store/user';
+import { selectUserBalance, selectUserWallet } from 'store/user';
 import { List, Button, Status } from 'components/uiKit';
 
 import { gasPrice, isUserApprovedToClaim } from './mockData';
 import styles from './Airdrop.module.scss';
 
 function Airdrop() {
-  const userBalance = useSelector(selectUserBalance);
-  const userShortWallet = useSelector(selectUserShortWallet);
+  const balance = useSelector(selectUserBalance);
+  const wallet = useSelector(selectUserWallet);
 
   return (
     <section className={styles.container}>
@@ -21,7 +21,7 @@ function Airdrop() {
             <div key='balance' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Your balance</div>
               <div className={styles.itemValue}>
-                {userBalance?.toFixed(2)} RinkebyETH
+                {balance?.toFixed(4)} RinkebyETH
               </div>
             </div>,
             <div key='price' className={styles.itemWrapper}>
@@ -46,8 +46,8 @@ function Airdrop() {
       )}
       <Status type={isUserApprovedToClaim ? 'approved' : 'refused'}>
         {isUserApprovedToClaim
-          ? `${userShortWallet} approved for claim!`
-          : `${userShortWallet} is not allowed for airdrop claim.`}
+          ? `${wallet?.short} approved for claim!`
+          : `${wallet?.short} is not allowed for airdrop claim.`}
       </Status>
     </section>
   );

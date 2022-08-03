@@ -15,7 +15,12 @@ interface IState {
 }
 
 interface IUser {
-  network: {
+  providers?: {
+    metaMask?: {
+      connected: boolean;
+    };
+  };
+  network?: {
     isRinkeby: boolean;
   };
   wallet?: {

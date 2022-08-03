@@ -4,18 +4,16 @@ function selectInithUserRequestState(state: RootState) {
   return state.user.api.initUser;
 }
 
+function selectMetaMaskProvider(state: RootState) {
+  return state.user.data?.providers?.metaMask;
+}
+
 function selectUserNetwork(state: RootState) {
   return state.user.data?.network;
 }
-function selectIsUserNetworkRinkeby(state: RootState) {
-  return state.user.data?.network?.isRinkeby;
-}
 
-function selectUserFullWallet(state: RootState) {
-  return state.user.data?.wallet?.full;
-}
-function selectUserShortWallet(state: RootState) {
-  return state.user.data?.wallet?.short;
+function selectUserWallet(state: RootState) {
+  return state.user.data?.wallet;
 }
 
 function selectUserBalance(state: RootState) {
@@ -24,9 +22,8 @@ function selectUserBalance(state: RootState) {
 
 export {
   selectInithUserRequestState,
+  selectMetaMaskProvider,
   selectUserNetwork,
-  selectIsUserNetworkRinkeby,
-  selectUserFullWallet,
-  selectUserShortWallet,
+  selectUserWallet,
   selectUserBalance,
 };
