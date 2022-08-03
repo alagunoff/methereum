@@ -1,17 +1,15 @@
 @import 'shared/colors';
+@import 'shared/mixins';
 
 .container {
-  cursor: pointer;
-
-  font: inherit;
-  color: inherit;
+  @include reset-button;
 
   &:disabled {
     cursor: default;
   }
 
   &_theme {
-    &_default {
+    &_bordered {
       padding: 3px 10px;
 
       background-color: $white;

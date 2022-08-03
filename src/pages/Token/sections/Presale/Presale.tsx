@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { selectUserBalance, selectUserShortWallet } from 'store/user';
 import { ConvertCurrencyModal } from 'components';
-import { List, Button, Status } from 'components/uiKit';
+import { List, Counter, Button, Status } from 'components/uiKit';
 
 import { gasPrice, tokenPrice, isUserApprovedToMint } from './mockData';
 import styles from './Presale.module.scss';
@@ -12,19 +12,24 @@ function Presale() {
   const userBalance = useSelector(selectUserBalance);
   const userShortWallet = useSelector(selectUserShortWallet);
 
-  const [convertCurrencyModalOpened, setCconvertCurrencyModalOpened] =
+  const [tokensNumber, setTokensNumber] = useState(1);
+  const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] =
     useState(false);
 
-  const price = 5 * tokenPrice;
+  const price = tokensNumber * tokenPrice;
   const totalPrice = price + gasPrice;
   const hasUserEnoughMoneyToMint = (userBalance || 0) >= totalPrice;
 
+  function handleTokensNumberChange(newCount: number) {
+    setTokensNumber(newCount);
+  }
+
   function handleConvertCurrencyModalOpen() {
-    setCconvertCurrencyModalOpened(true);
+    setConvertCurrencyModalOpened(true);
   }
 
   function handleConvertCurrencyModalClose() {
-    setCconvertCurrencyModalOpened(false);
+    setConvertCurrencyModalOpened(false);
   }
 
   return (
@@ -33,31 +38,38 @@ function Presale() {
       <div className={styles.timer}>Time left: 00:48:00</div>
       <div className={styles.list}>
         <List
-          display='flex'
-          direction='column'
           rowGap={10}
           items={[
-            <div className={styles.itemWrapper} key='balance'>
+            <div key='balance' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Your balance</div>
               <div className={styles.itemValue}>
                 {userBalance?.toFixed(2)} RinkebyETH
               </div>
             </div>,
-            <div className={styles.itemWrapper} key='amount'>
+            <div key='amount' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Amount</div>
-              <div className={styles.itemValue}>- 5/5 +</div>
+              <div className={styles.itemValue}>
+                <Counter
+                  defaultCount={tokensNumber}
+                  onChange={handleTokensNumberChange}
+                />
+              </div>
             </div>,
-            <div className={styles.itemWrapper} key='price'>
+            <div key='price' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Price</div>
-              <div className={styles.itemValue}>{price} RinkebyETH</div>
+              <div className={styles.itemValue}>
+                {price.toFixed(1)} RinkebyETH
+              </div>
             </div>,
-            <div className={styles.itemWrapper} key='gas'>
+            <div key='gas' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>GAS</div>
               <div className={styles.itemValue}>{gasPrice} RinkebyETH</div>
             </div>,
-            <div className={styles.itemWrapper} key='total'>
+            <div key='total' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Total</div>
-              <div className={styles.itemValue}>{totalPrice} RinkebyETH</div>
+              <div className={styles.itemValue}>
+                {totalPrice.toFixed(4)} RinkebyETH
+              </div>
             </div>,
           ]}
         />

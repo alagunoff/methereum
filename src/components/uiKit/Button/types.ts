@@ -1,5 +1,5 @@
 interface IProps {
-  theme?: 'default';
+  theme?: 'bordered';
   type?: JSX.IntrinsicElements['button']['type'];
   disabled?: boolean;
   onClick?: () => void;

@@ -1,6 +1,8 @@
 @import 'shared/colors';
 
 .container {
+  $root: &;
+
   display: block;
 
   list-style-type: none;
@@ -35,7 +37,15 @@
 
   &_rowGap {
     &_10 {
-      row-gap: 10px;
+      &#{$root}_display_flex {
+        row-gap: 10px;
+      }
+
+      &:not(#{$root}_display_flex) {
+        .item + .item {
+          margin-top: 10px;
+        }
+      }
     }
   }
 }

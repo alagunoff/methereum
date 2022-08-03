@@ -1,11 +1,10 @@
 import { PropsWithChildren } from 'react';
-import cn from 'classnames';
 
 import { IProps } from './types';
 import styles from './Button.module.scss';
 
 function Button({
-  theme = 'default',
+  theme = 'bordered',
   type = 'button',
   disabled,
   children,
@@ -13,7 +12,7 @@ function Button({
 }: PropsWithChildren<IProps>) {
   return (
     <button
-      className={cn(styles.container, styles[`container_theme_${theme}`])}
+      className={`${styles.container} ${styles[`container_theme_${theme}`]}`}
       type={type}
       disabled={disabled}
       onClick={onClick}
