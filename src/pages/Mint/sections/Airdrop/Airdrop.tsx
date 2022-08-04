@@ -1,5 +1,5 @@
 import { RINKEBY_SIGN } from 'shared/constants';
-import { useBalance } from 'shared/hooks';
+import { useBalance, useClaimAirdrop } from 'shared/hooks';
 import { List, Button, Status } from 'components/uiKit';
 
 import { gasPrice, isUserApprovedToClaim } from './mockData';
@@ -7,6 +7,7 @@ import styles from './Airdrop.module.scss';
 
 function Airdrop() {
   const balance = useBalance();
+  useClaimAirdrop();
 
   return (
     <section className={styles.container}>

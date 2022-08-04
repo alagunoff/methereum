@@ -1,4 +1,4 @@
-const contract = {
+const bimkonEyesContract = {
   address: '0x48607AA5cb7E3a7d42906F8B47B27015DeC47FD2',
   abi: JSON.stringify([
     {
@@ -758,7 +758,8 @@ const contract = {
   methods: {
     getTokensMinted: 'totalSupply',
     getTokensNumber: 'MAX_SUPPLY',
+    claimAirdrop: 'claimAirdrop',
   },
 };
 
-export default contract;
+export default bimkonEyesContract;
