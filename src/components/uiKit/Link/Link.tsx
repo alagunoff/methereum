@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import cn from 'classnames';
 
 import { IProps } from './types';
 import styles from './Link.module.scss';
@@ -13,7 +12,7 @@ function Link({
 }: PropsWithChildren<IProps>) {
   return isExternal ? (
     <a
-      className={cn(styles.container, styles[`container_theme_${theme}`])}
+      className={`${styles.container} ${styles[`container_theme_${theme}`]}`}
       href={to}
       target='_blank'
       rel='noopener noreferrer'
@@ -22,7 +21,7 @@ function Link({
     </a>
   ) : (
     <RouterLink
-      className={cn(styles.container, styles[`container_theme_${theme}`])}
+      className={`${styles.container} ${styles[`container_theme_${theme}`]}`}
       to={to}
     >
       {children}

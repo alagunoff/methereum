@@ -1,16 +1,11 @@
 import tokenImage from 'assets/icons/token-1.gif';
 import { ColorValues } from 'shared/types/Color';
-import { getNumberPercentageBetweenTwoNumbers } from 'shared/utils/numbers';
+import { useTokensMinted } from 'shared/hooks';
 
 import styles from './MintingProgress.module.scss';
 
 function MintingProgress() {
-  const tokensMintedNumber = 0;
-  const tokensNumber = 2000;
-  const tokensMintedPercent = getNumberPercentageBetweenTwoNumbers(
-    tokensMintedNumber,
-    tokensNumber,
-  );
+  const { tokensMinted, tokensNumber, tokensMintedPercent } = useTokensMinted();
 
   return (
     <section className={styles.container}>
@@ -33,7 +28,7 @@ function MintingProgress() {
       <div className={styles.progressWrapper}>
         <div className={styles.percentageProgress}>{tokensMintedPercent}%</div>
         <div className={styles.progress}>
-          {tokensMintedNumber}/{tokensNumber}
+          {tokensMinted}/{tokensNumber}
         </div>
       </div>
     </section>

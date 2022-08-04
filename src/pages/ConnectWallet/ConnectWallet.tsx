@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Page, ConnectWalletModal } from 'components';
+import { Footer, ConnectWalletModal } from 'components';
 import { Button } from 'components/uiKit';
 
 import styles from './ConnectWallet.module.scss';
@@ -18,8 +18,8 @@ function ConnectWallet() {
   }
 
   return (
-    <Page>
-      <div className={styles.container}>
+    <main className={styles.container}>
+      <div className={styles.content}>
         <div className={styles.introduction}>
           <h1 className={styles.title}>Metalamp NFT Project</h1>
           <p className={styles.text}>
@@ -32,10 +32,11 @@ function ConnectWallet() {
           </Button>
         </div>
       </div>
+      <Footer />
       {connectWalletModalOpened && (
         <ConnectWalletModal onClose={handleConnectWalletModalClose} />
       )}
-    </Page>
+    </main>
   );
 }
 
