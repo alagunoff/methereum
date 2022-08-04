@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { WithoutWallet } from 'router/hofs';
+import { RequireDisconnection } from 'router/hofs';
 import * as routes from 'router/routes';
 import { ConnectWallet, Mint } from 'pages';
 
@@ -11,9 +11,9 @@ function App() {
         <Route
           index
           element={
-            <WithoutWallet>
+            <RequireDisconnection>
               <ConnectWallet />
-            </WithoutWallet>
+            </RequireDisconnection>
           }
         />
         <Route path={routes.mint.relative} element={<Mint />} />

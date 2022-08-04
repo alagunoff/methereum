@@ -3,10 +3,10 @@ import { useAccount } from 'wagmi';
 
 import * as routes from 'router/routes';
 
-function WithoutWallet({ children }: { children: JSX.Element }) {
-  const { address } = useAccount();
+function RequireDisconnection({ children }: { children: JSX.Element }) {
+  const { isConnected } = useAccount();
 
-  return address ? <Navigate to={routes.mint.root} /> : children;
+  return isConnected ? <Navigate to={routes.mint.root} /> : children;
 }
 
-export { WithoutWallet };
+export { RequireDisconnection };
