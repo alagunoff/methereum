@@ -1,5 +1,5 @@
-const RINKEBY_CHAIN_ID = 4;
+const RINKEBY_SIGN = 'RinkebyETH';
 
 const METALAMP_SITE_LINK = 'https://www.metalamp.io/';
 
-export { RINKEBY_CHAIN_ID, METALAMP_SITE_LINK };
+export { RINKEBY_SIGN, METALAMP_SITE_LINK };

@@ -23,8 +23,8 @@ function ConnectWalletModal({ onClose }: IProps) {
             </Button>
             {!connector.ready && (
               <div className={styles.info}>
-                Oops, it seems you do not have {connector.name} wallet, please
-                install it first
+                Oops, it seems {connector.name} wallet unsupported on your
+                device
               </div>
             )}
           </div>

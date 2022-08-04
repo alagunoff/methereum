@@ -1,10 +1,12 @@
+import { RINKEBY_SIGN } from 'shared/constants';
+import { useBalance } from 'shared/hooks';
 import { List, Button, Status } from 'components/uiKit';
 
 import { gasPrice, isUserApprovedToClaim } from './mockData';
 import styles from './Airdrop.module.scss';
 
 function Airdrop() {
-  const balance = 1.2;
+  const balance = useBalance();
 
   return (
     <section className={styles.container}>
@@ -17,7 +19,7 @@ function Airdrop() {
             <div key='balance' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Your balance</div>
               <div className={styles.itemValue}>
-                {balance?.toFixed(4)} RinkebyETH
+                {balance?.toFixed(4) ?? '-'} {RINKEBY_SIGN}
               </div>
             </div>,
             <div key='price' className={styles.itemWrapper}>
@@ -26,11 +28,15 @@ function Airdrop() {
             </div>,
             <div key='gas' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>GAS</div>
-              <div className={styles.itemValue}>{gasPrice} RinkebyETH</div>
+              <div className={styles.itemValue}>
+                {gasPrice} {RINKEBY_SIGN}
+              </div>
             </div>,
             <div key='total' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Total</div>
-              <div className={styles.itemValue}>{gasPrice} RinkebyETH</div>
+              <div className={styles.itemValue}>
+                {gasPrice} {RINKEBY_SIGN}
+              </div>
             </div>,
           ]}
         />
