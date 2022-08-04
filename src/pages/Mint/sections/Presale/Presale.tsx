@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 
-import { selectUserBalance, selectUserWallet } from 'store/user';
 import { ConvertCurrencyModal } from 'components';
 import { List, Counter, Button, Status } from 'components/uiKit';
 
@@ -9,16 +7,15 @@ import { gasPrice, tokenPrice, isUserApprovedToMint } from './mockData';
 import styles from './Presale.module.scss';
 
 function Presale() {
-  const balance = useSelector(selectUserBalance);
-  const wallet = useSelector(selectUserWallet);
-
   const [tokensNumber, setTokensNumber] = useState(1);
   const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] =
     useState(false);
 
+  const balance = 1.2;
+
   const price = tokensNumber * tokenPrice;
   const totalPrice = price + gasPrice;
-  const hasUserEnoughMoneyToMint = (balance || 0) >= totalPrice;
+  const hasUserEnoughMoneyToMint = balance >= totalPrice;
 
   function handleTokensNumberChange(newCount: number) {
     setTokensNumber(newCount);
@@ -82,8 +79,8 @@ function Presale() {
       {hasUserEnoughMoneyToMint ? (
         <Status type={isUserApprovedToMint ? 'approved' : 'refused'}>
           {isUserApprovedToMint
-            ? `${wallet?.short} approved for presale mint!`
-            : `${wallet?.short} is not in presale whitelist.`}
+            ? `wallet approved for presale mint!`
+            : `wallet is not in presale whitelist.`}
         </Status>
       ) : (
         <>

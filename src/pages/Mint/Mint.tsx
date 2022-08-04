@@ -1,18 +1,14 @@
-import { useParams } from 'react-router-dom';
-
 import { Page } from 'components';
 import { List } from 'components/uiKit';
 
 import { MintingProgress, Airdrop, Presale } from './sections';
-import styles from './Token.module.scss';
+import styles from './Mint.module.scss';
 
-function Token() {
-  const { tokenId } = useParams();
-
+function Mint() {
   return (
     <Page>
       <div className={styles.container}>
-        <h1 className={styles.title}>Token {tokenId}</h1>
+        <h1 className={styles.title}>Mint token</h1>
         <div className={styles.mintingProgress}>
           <MintingProgress />
         </div>
@@ -28,4 +24,4 @@ function Token() {
   );
 }
 
-export default Token;
+export default Mint;

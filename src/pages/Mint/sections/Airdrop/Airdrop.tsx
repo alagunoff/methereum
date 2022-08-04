@@ -1,14 +1,10 @@
-import { useSelector } from 'react-redux';
-
-import { selectUserBalance, selectUserWallet } from 'store/user';
 import { List, Button, Status } from 'components/uiKit';
 
 import { gasPrice, isUserApprovedToClaim } from './mockData';
 import styles from './Airdrop.module.scss';
 
 function Airdrop() {
-  const balance = useSelector(selectUserBalance);
-  const wallet = useSelector(selectUserWallet);
+  const balance = 1.2;
 
   return (
     <section className={styles.container}>
@@ -46,8 +42,8 @@ function Airdrop() {
       )}
       <Status type={isUserApprovedToClaim ? 'approved' : 'refused'}>
         {isUserApprovedToClaim
-          ? `${wallet?.short} approved for claim!`
-          : `${wallet?.short} is not allowed for airdrop claim.`}
+          ? `wallet approved for claim!`
+          : `wallet is not allowed for airdrop claim.`}
       </Status>
     </section>
   );

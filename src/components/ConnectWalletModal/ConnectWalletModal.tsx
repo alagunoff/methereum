@@ -1,57 +1,34 @@
-import { useSelector } from 'react-redux';
+import { useConnect } from 'wagmi';
 
-import { logIn, selectMetaMaskProvider, selectUserNetwork } from 'store/user';
-import { Modal, List, Button, Error } from 'components/uiKit';
-import { useAppDispatch } from 'shared/hooks';
+import { Modal, List, Button } from 'components/uiKit';
 
 import { IProps } from './types';
 import styles from './ConnectWalletModal.module.scss';
 
 function ConnectWalletModal({ onClose }: IProps) {
-  const dispatch = useAppDispatch();
-
-  const metaMaskProvider = useSelector(selectMetaMaskProvider);
-  const network = useSelector(selectUserNetwork);
-
-  function handleMetaMaskWalletConnect() {
-    if (window.ethersProvider) {
-      dispatch(logIn(window.ethersProvider));
-    }
-  }
+  const { connectors, connect, isLoading } = useConnect();
 
   return (
     <Modal onClose={onClose}>
-      {network?.isRinkeby && (
-        <h2 className={styles.title}>Choose your wallet</h2>
-      )}
-      {network && !network.isRinkeby && (
-        <div className={styles.invalidNetworkError}>
-          <Error>
-            Your wallet is not connected to the right network. Please connect to
-            Rinkeby test network.
-          </Error>
-        </div>
-      )}
+      <h2 className={styles.title}>Choose your wallet</h2>
       <List
-        items={[
-          <div
-            key='metaMask'
-            className={styles.connectMetaMaskWalletButtonWrapper}
-          >
+        rowGap={10}
+        items={connectors.map((connector) => (
+          <div key={connector.id} className={styles.connectWalletButtonWrapper}>
             <Button
-              disabled={!metaMaskProvider || !network?.isRinkeby}
-              onClick={handleMetaMaskWalletConnect}
+              disabled={!connector.ready || isLoading}
+              onClick={() => connect({ connector })}
             >
-              Metamask
+              {connector.name}
             </Button>
-            {!metaMaskProvider && (
+            {!connector.ready && (
               <div className={styles.info}>
-                Oops, it seems you do not have MetaMask provider, please install
-                it first
+                Oops, it seems you do not have {connector.name} wallet, please
+                install it first
               </div>
             )}
-          </div>,
-        ]}
+          </div>
+        ))}
         itemTextAlign='center'
       />
     </Modal>

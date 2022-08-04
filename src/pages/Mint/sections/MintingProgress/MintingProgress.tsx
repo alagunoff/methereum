@@ -1,17 +1,16 @@
-import { useParams } from 'react-router-dom';
-
 import tokenImage from 'assets/icons/token-1.gif';
 import { ColorValues } from 'shared/types/Color';
+import { getNumberPercentageBetweenTwoNumbers } from 'shared/utils/numbers';
 
-import {
-  tokensMintedNumber,
-  tokensNumber,
-  tokensMintedPercent,
-} from './mockData';
 import styles from './MintingProgress.module.scss';
 
 function MintingProgress() {
-  const { tokenId } = useParams();
+  const tokensMintedNumber = 0;
+  const tokensNumber = 2000;
+  const tokensMintedPercent = getNumberPercentageBetweenTwoNumbers(
+    tokensMintedNumber,
+    tokensNumber,
+  );
 
   return (
     <section className={styles.container}>
@@ -19,7 +18,7 @@ function MintingProgress() {
         <img
           className={styles.image}
           src={tokenImage}
-          alt={`Token ${tokenId}`}
+          alt='Token'
           width={278}
           height={278}
         />

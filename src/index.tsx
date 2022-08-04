@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { WagmiConfig } from 'wagmi';
 
-import store from 'store';
+import client from 'etherium/client';
 import App from 'App';
 
 import reportWebVitals from './reportWebVitals';
@@ -15,9 +15,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
+      <WagmiConfig client={client}>
         <App />
-      </Provider>
+      </WagmiConfig>
     </BrowserRouter>
   </React.StrictMode>,
 );

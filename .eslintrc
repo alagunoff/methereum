@@ -17,7 +17,8 @@
     "react/jsx-no-bind": [
       2,
       {
-        "allowFunctions": true
+        "allowFunctions": true,
+        "allowArrowFunctions": true
       }
     ],
     "react/jsx-key": 2
