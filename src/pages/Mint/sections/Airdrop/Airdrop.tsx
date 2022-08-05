@@ -1,5 +1,6 @@
+import { useBalance } from 'etherium/hooks';
+import { useClaimAirdrop } from 'contract/hooks';
 import { RINKEBY_SIGN } from 'shared/constants';
-import { useBalance, useClaimAirdrop } from 'shared/hooks';
 import { List, Button, Status } from 'components/uiKit';
 
 import { gasPrice, isUserApprovedToClaim } from './mockData';

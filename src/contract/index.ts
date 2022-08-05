@@ -1,4 +1,4 @@
-const bimkonEyesContract = {
+const contract = {
   address: '0x48607AA5cb7E3a7d42906F8B47B27015DeC47FD2',
   abi: JSON.stringify([
     {
@@ -762,4 +762,4 @@ const bimkonEyesContract = {
   },
 };
 
-export default bimkonEyesContract;
+export default contract;

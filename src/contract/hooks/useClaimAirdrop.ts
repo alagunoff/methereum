@@ -1,8 +1,8 @@
-import bimkonEyesContract from 'etherium/contract';
 import { useContractWriteMethod } from 'etherium/hooks';
+import contract from 'contract';
 
 function useClaimAirdrop(): number {
-  useContractWriteMethod(bimkonEyesContract.methods.claimAirdrop);
+  useContractWriteMethod(contract.methods.claimAirdrop);
 
   return 1;
 }

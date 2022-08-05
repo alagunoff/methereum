@@ -1,12 +1,10 @@
 import { ethers } from 'ethers';
 
-import bimkonEyesContract from 'etherium/contract';
 import { useContractReadMethod } from 'etherium/hooks';
+import contract from 'contract';
 
 function useTokensMinted(): number | undefined {
-  const { data } = useContractReadMethod(
-    bimkonEyesContract.methods.getTokensMinted,
-  );
+  const { data } = useContractReadMethod(contract.methods.getTokensMinted);
 
   return data ? Number(ethers.utils.formatUnits(data, 0)) : undefined;
 }

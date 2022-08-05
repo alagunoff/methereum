@@ -1,6 +1,6 @@
 import tokenImage from 'assets/icons/token-1.gif';
+import { useTokensMinted, useTokensNumber } from 'contract/hooks';
 import { ColorValues } from 'shared/types/Color';
-import { useTokensMinted, useTokensNumber } from 'shared/hooks';
 import { getNumberPercentageBetweenTwoNumbers } from 'shared/utils/numbers';
 import { checkIfValueNumber } from 'shared/typeGuards';
 
