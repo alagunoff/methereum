@@ -1,12 +1,12 @@
-import { useAccount } from 'wagmi';
+import { useEthers } from '@usedapp/core';
 import { keccak256 } from 'ethers/lib/utils';
 
-import contract from 'contract';
+import contract from '../index';
 
 function useProof() {
-  const { address } = useAccount();
+  const { account } = useEthers();
 
-  return contract.airdropMerkleTree.getHexProof(keccak256(address || ''));
+  return contract.airdrop.merkleTree.getHexProof(keccak256(account || ''));
 }
 
 export default useProof;

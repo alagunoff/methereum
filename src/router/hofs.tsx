@@ -1,12 +1,12 @@
+import { useEthers } from '@usedapp/core';
 import { Navigate } from 'react-router-dom';
-import { useAccount } from 'wagmi';
 
 import * as routes from 'router/routes';
 
 function RequireDisconnection({ children }: { children: JSX.Element }) {
-  const { isConnected } = useAccount();
+  const { active } = useEthers();
 
-  return isConnected ? <Navigate to={routes.mint.root} /> : children;
+  return active ? <Navigate to={routes.mint.root} /> : children;
 }
 
 export { RequireDisconnection };

@@ -1,12 +1,11 @@
-import { useAccount, useBalance as useUserBalance } from 'wagmi';
+import { useEthers, useEtherBalance } from '@usedapp/core';
+import { ethers } from 'ethers';
 
 function useBalance(): number | undefined {
-  const { address } = useAccount();
-  const { data: balance } = useUserBalance({
-    addressOrName: address,
-  });
+  const { account } = useEthers();
+  const balance = useEtherBalance(account);
 
-  return balance ? Number(balance.formatted) : undefined;
+  return balance ? Number(ethers.utils.formatEther(balance)) : undefined;
 }
 
 export default useBalance;

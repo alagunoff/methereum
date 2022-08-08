@@ -1,12 +1,17 @@
+import { useCall } from '@usedapp/core';
 import { ethers } from 'ethers';
 
-import { useContractReadMethod } from 'etherium/hooks';
-import contract from 'contract';
+import contract from '../index';
 
 function useTokensMinted(): number | undefined {
-  const { data } = useContractReadMethod(contract.methods.read.getTokensMinted);
+  const { value } =
+    useCall({
+      contract: contract.instance,
+      method: contract.generalMethods.read.getTokensMinted,
+      args: [],
+    }) ?? {};
 
-  return data ? Number(ethers.utils.formatUnits(data, 0)) : undefined;
+  return value ? Number(ethers.utils.formatUnits(value[0], 0)) : undefined;
 }
 
 export default useTokensMinted;
