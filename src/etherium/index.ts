@@ -3,7 +3,7 @@ import { Config, Goerli } from '@usedapp/core';
 const config: Config = {
   readOnlyUrls: {
     [Goerli.chainId]:
-      'https://eth-goerli.g.alchemy.com/v2/4d2XSoVdZ3nsSA_LQimbsDWMMsZJTOan',
+      'https://goerli.infura.io/v3/ddd85c31303340c3bfefda8216c65ea7',
   },
 };
 
