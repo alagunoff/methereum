@@ -1,16 +1,17 @@
-import { usePrepareContractWrite } from 'wagmi';
+import { usePrepareContractWrite, useContractWrite } from 'wagmi';
 
 import contract from 'contract';
 
-function useContractWriteMethod(methodName: string, args?: unknown[]) {
-  const data = usePrepareContractWrite({
+function useContractWriteMethod(methodName: string, args?: any | any[]) {
+  const { config } = usePrepareContractWrite({
     addressOrName: contract.address,
     contractInterface: contract.abi,
     functionName: methodName,
     args,
   });
-  console.log(data);
-  return 1;
+  const { write } = useContractWrite(config);
+
+  return write;
 }
 
 export default useContractWriteMethod;

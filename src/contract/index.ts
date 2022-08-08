@@ -1,11 +1,19 @@
+import { MerkleTree } from 'merkletreejs';
+import { keccak256 } from 'ethers/lib/utils';
+
 const contract = {
-  address: '0x48607AA5cb7E3a7d42906F8B47B27015DeC47FD2',
+  address: '0x0ed2a3BE691C82D4Eb56a87F9fCC0Ea2923A1Be5',
   abi: JSON.stringify([
     {
       inputs: [
         { internalType: 'address', name: 'priceManager', type: 'address' },
         { internalType: 'address', name: 'sellManager', type: 'address' },
         { internalType: 'address', name: 'whiteListManager', type: 'address' },
+        {
+          internalType: 'address',
+          name: '_signatureCheckerContract',
+          type: 'address',
+        },
       ],
       stateMutability: 'nonpayable',
       type: 'constructor',
@@ -438,7 +446,10 @@ const contract = {
       type: 'function',
     },
     {
-      inputs: [{ internalType: 'uint256', name: '_quantity', type: 'uint256' }],
+      inputs: [
+        { internalType: 'uint256', name: '_quantity', type: 'uint256' },
+        { internalType: 'bytes', name: '_signature', type: 'bytes' },
+      ],
       name: 'mint',
       outputs: [],
       stateMutability: 'payable',
@@ -612,6 +623,19 @@ const contract = {
       type: 'function',
     },
     {
+      inputs: [],
+      name: 'signatureCheckerContract',
+      outputs: [
+        {
+          internalType: 'contract ISignatureChecker',
+          name: '',
+          type: 'address',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
       inputs: [{ internalType: 'bytes4', name: 'interfaceId', type: 'bytes4' }],
       name: 'supportsInterface',
       outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
@@ -756,10 +780,27 @@ const contract = {
     },
   ]),
   methods: {
-    getTokensMinted: 'totalSupply',
-    getTokensNumber: 'MAX_SUPPLY',
-    claimAirdrop: 'claimAirdrop',
+    read: {
+      getTokensMinted: 'totalSupply',
+      getTokensNumber: 'MAX_SUPPLY',
+      getTokensMaxNumberForAirdrop: 'MAX_AIRDROP_MINT',
+      checkIfUserCanClaimAirdrop: 'canClaimAirDrop',
+    },
+    write: {
+      claimAirdrop: 'claimAirdrop',
+      setMerkleRootAirDrop: 'setMerkleRootAirDrop',
+    },
   },
+  airdropMerkleTree: new MerkleTree(
+    [
+      '0xd8B92056223F39FbeDCf08BA05440397B6c68D59',
+      '0x62b35Eb73edcb96227F666A878201b2cF915c2B5',
+      '0x35B3B16AdA854639B171419e19256603dEe73bF9',
+      '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+    ],
+    keccak256,
+    { hashLeaves: true, sortPairs: true },
+  ),
 };
 
 export default contract;

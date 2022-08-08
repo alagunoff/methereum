@@ -1,14 +1,16 @@
 import { useBalance } from 'etherium/hooks';
-import { useClaimAirdrop } from 'contract/hooks';
+import { useCanUserClaimAirdrop } from 'contract/hooks';
 import { RINKEBY_SIGN } from 'shared/constants';
-import { List, Button, Status } from 'components/uiKit';
+import { List, Status } from 'components/uiKit';
 
-import { gasPrice, isUserApprovedToClaim } from './mockData';
+import { gasPrice } from './mockData';
 import styles from './Airdrop.module.scss';
 
 function Airdrop() {
   const balance = useBalance();
-  useClaimAirdrop();
+  const canUserClaimAirdrop = useCanUserClaimAirdrop();
+  // const write = useClaimAirdrop();
+  console.log(canUserClaimAirdrop);
 
   return (
     <section className={styles.container}>
@@ -43,13 +45,13 @@ function Airdrop() {
           ]}
         />
       </div>
-      {isUserApprovedToClaim && (
+      {canUserClaimAirdrop && (
         <div className={styles.claimButton}>
-          <Button>Claim airdrop</Button>
+          {/* <Button onClick={() => write?.()}>Claim airdrop</Button> */}
         </div>
       )}
-      <Status type={isUserApprovedToClaim ? 'approved' : 'refused'}>
-        {isUserApprovedToClaim
+      <Status type={canUserClaimAirdrop ? 'approved' : 'refused'}>
+        {canUserClaimAirdrop
           ? `wallet approved for claim!`
           : `wallet is not allowed for airdrop claim.`}
       </Status>

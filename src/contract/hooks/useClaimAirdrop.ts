@@ -1,10 +1,20 @@
-import { useContractWriteMethod } from 'etherium/hooks';
+import { useContractWriteMethod, useContractReadMethod } from 'etherium/hooks';
 import contract from 'contract';
 
-function useClaimAirdrop(): number {
-  useContractWriteMethod(contract.methods.claimAirdrop);
+import useProof from './useProof';
 
-  return 1;
+function useClaimAirdrop() {
+  const proof = useProof();
+  const { data } = useContractReadMethod(
+    contract.methods.read.getTokensMaxNumberForAirdrop,
+  );
+
+  const write = useContractWriteMethod(contract.methods.write.claimAirdrop, [
+    proof,
+    data || 1,
+  ]);
+
+  return write;
 }
 
 export default useClaimAirdrop;
