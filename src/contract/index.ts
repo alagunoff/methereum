@@ -836,6 +836,7 @@ const contract = {
     methods: {
       read: {
         getTokensMaxNumberToClaim: 'MAX_AIRDROP_MINT',
+        getTokensNumberAvailableToClaim: 'allowedToClaimDropAmount',
         checkIfUserCanClaim: 'canClaimAirDrop',
       },
       write: {

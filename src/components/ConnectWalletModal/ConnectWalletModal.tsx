@@ -14,15 +14,12 @@ function ConnectWalletModal({ onClose }: IProps) {
   }
 
   async function handleWalletConnect() {
-    try {
-      const provider = new WalletConnectProvider({
-        infuraId: 'ddd85c31303340c3bfefda8216c65ea7',
-      });
-      await provider.enable();
-      await activate(provider);
-    } catch (error) {
-      console.error(error);
-    }
+    const provider = new WalletConnectProvider({
+      infuraId: 'ddd85c31303340c3bfefda8216c65ea7',
+    });
+
+    await provider.enable();
+    await activate(provider);
   }
 
   return (
@@ -35,7 +32,7 @@ function ConnectWalletModal({ onClose }: IProps) {
             MetaMask
           </Button>,
           <Button key='walletConnect' onClick={handleWalletConnect}>
-            MetaMask
+            WalletConnect
           </Button>,
         ]}
         itemTextAlign='center'

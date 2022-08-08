@@ -10,7 +10,7 @@ function useClaimAirdrop() {
   const { value: tokensMaxNumberToClaim } =
     useCall({
       contract: contract.instance,
-      method: contract.airdrop.methods.read.getTokensMaxNumberToClaim,
+      method: contract.airdrop.methods.read.getTokensNumberAvailableToClaim,
       args: [],
     }) ?? {};
   const { send } = useContractFunction(
@@ -18,7 +18,7 @@ function useClaimAirdrop() {
     contract.airdrop.methods.write.claim,
   );
 
-  const claim = useCallback(
+  const claimAirdrop = useCallback(
     () =>
       proof && tokensMaxNumberToClaim
         ? send(
@@ -30,7 +30,7 @@ function useClaimAirdrop() {
   );
 
   return {
-    claim,
+    claimAirdrop,
   };
 }
 

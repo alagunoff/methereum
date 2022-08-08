@@ -11,7 +11,7 @@ function Airdrop() {
   const shortAddress = useShortAddress();
   const balance = useBalance();
   const canUserClaimAirdrop = useCanUserClaimAirdrop();
-  const { claim } = useClaimAirdrop();
+  const { claimAirdrop } = useClaimAirdrop();
 
   const [gasEstimationToClaim] = useState<number | undefined>(0);
 
@@ -50,7 +50,7 @@ function Airdrop() {
       </div>
       {canUserClaimAirdrop && (
         <div className={styles.claimButton}>
-          <Button onClick={claim}>Claim airdrop</Button>
+          <Button onClick={claimAirdrop}>Claim airdrop</Button>
         </div>
       )}
       <Status type={canUserClaimAirdrop ? 'approved' : 'refused'}>
