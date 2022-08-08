@@ -8,11 +8,13 @@ function useCanUserClaimAirdrop(): boolean {
   const { account } = useEthers();
   const proof = useProof();
 
-  return contract.airdrop.merkleTree.verify(
-    proof,
-    keccak256(account || ''),
-    contract.airdrop.merkleTree.getHexRoot(),
-  );
+  return account && proof
+    ? contract.airdrop.merkleTree.verify(
+        proof,
+        keccak256(account),
+        contract.airdrop.merkleTree.getHexRoot(),
+      )
+    : false;
 }
 
 export default useCanUserClaimAirdrop;

@@ -2,12 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { DAppProvider } from '@usedapp/core';
+import { Buffer } from 'buffer';
 
 import config from 'etherium';
 import App from 'App';
 
 import reportWebVitals from './reportWebVitals';
 import './index.scss';
+
+if (!window.Buffer) {
+  window.Buffer = Buffer;
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

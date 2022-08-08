@@ -3,10 +3,12 @@ import { keccak256 } from 'ethers/lib/utils';
 
 import contract from '../index';
 
-function useProof() {
+function useProof(): string[] | undefined {
   const { account } = useEthers();
 
-  return contract.airdrop.merkleTree.getHexProof(keccak256(account || ''));
+  return account
+    ? contract.airdrop.merkleTree.getHexProof(keccak256(account))
+    : undefined;
 }
 
 export default useProof;

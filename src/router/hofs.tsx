@@ -3,10 +3,10 @@ import { Navigate } from 'react-router-dom';
 
 import * as routes from 'router/routes';
 
-function RequireDisconnection({ children }: { children: JSX.Element }) {
-  const { active } = useEthers();
+function RequireAccountAbsence({ children }: { children: JSX.Element }) {
+  const { account } = useEthers();
 
-  return active ? <Navigate to={routes.mint.root} /> : children;
+  return account ? <Navigate to={routes.mint.root} /> : children;
 }
 
-export { RequireDisconnection };
+export { RequireAccountAbsence };

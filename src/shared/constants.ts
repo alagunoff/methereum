@@ -1,5 +1,4 @@
-const RINKEBY_SIGN = 'RinkebyETH';
-
+const GOERLI_SIGN = 'GoerliETH';
 const METALAMP_SITE_LINK = 'https://www.metalamp.io/';
 
-export { RINKEBY_SIGN, METALAMP_SITE_LINK };
+export { GOERLI_SIGN, METALAMP_SITE_LINK };

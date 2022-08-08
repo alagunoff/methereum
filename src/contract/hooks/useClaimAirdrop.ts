@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
 import { useCall, useContractFunction } from '@usedapp/core';
 import { ethers } from 'ethers';
+import { useCallback } from 'react';
 
 import contract from '../index';
 import useProof from './useProof';
@@ -20,16 +20,18 @@ function useClaimAirdrop() {
 
   const claim = useCallback(
     () =>
-      tokensMaxNumberToClaim[0]
-        ? send([
+      proof && tokensMaxNumberToClaim
+        ? send(
             proof,
             Number(ethers.utils.formatUnits(tokensMaxNumberToClaim[0], 0)),
-          ])
+          )
         : undefined,
-    [send, proof, tokensMaxNumberToClaim],
+    [proof, tokensMaxNumberToClaim, send],
   );
 
-  return { claim };
+  return {
+    claim,
+  };
 }
 
 export default useClaimAirdrop;

@@ -1,6 +1,6 @@
 import { Contract } from 'ethers';
-import { keccak256 } from 'ethers/lib/utils';
 import { MerkleTree } from 'merkletreejs';
+import { keccak256 } from 'ethers/lib/utils';
 
 const contract = {
   instance: new Contract(

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useShortAddress, useBalance } from 'etherium/hooks';
 import { useCanUserClaimAirdrop, useClaimAirdrop } from 'contract/hooks';
-import { RINKEBY_SIGN } from 'shared/constants';
+import { GOERLI_SIGN } from 'shared/constants';
 import { List, Button, Status } from 'components/uiKit';
 
 import styles from './Airdrop.module.scss';
@@ -26,7 +26,7 @@ function Airdrop() {
             <div key='balance' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Your balance</div>
               <div className={styles.itemValue}>
-                {balance?.toFixed(4) ?? '-'} {RINKEBY_SIGN}
+                {balance?.toFixed(4) ?? '-'} {GOERLI_SIGN}
               </div>
             </div>,
             <div key='price' className={styles.itemWrapper}>
@@ -36,13 +36,13 @@ function Airdrop() {
             <div key='gas' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>GAS</div>
               <div className={styles.itemValue}>
-                {gasEstimationToClaim} {RINKEBY_SIGN}
+                {gasEstimationToClaim} {GOERLI_SIGN}
               </div>
             </div>,
             <div key='total' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Total</div>
               <div className={styles.itemValue}>
-                {gasEstimationToClaim} {RINKEBY_SIGN}
+                {gasEstimationToClaim} {GOERLI_SIGN}
               </div>
             </div>,
           ]}
@@ -50,9 +50,7 @@ function Airdrop() {
       </div>
       {canUserClaimAirdrop && (
         <div className={styles.claimButton}>
-          <Button disabled={!claim} onClick={() => claim?.()}>
-            Claim airdrop
-          </Button>
+          <Button onClick={claim}>Claim airdrop</Button>
         </div>
       )}
       <Status type={canUserClaimAirdrop ? 'approved' : 'refused'}>
