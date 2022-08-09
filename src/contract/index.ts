@@ -4,7 +4,7 @@ import { keccak256 } from 'ethers/lib/utils';
 
 const contract = {
   instance: new Contract(
-    '0x0ed2a3BE691C82D4Eb56a87F9fCC0Ea2923A1Be5',
+    '0xa886280c779c772f2663C4b53C1601C481682259',
     JSON.stringify([
       {
         inputs: [
@@ -335,21 +335,27 @@ const contract = {
         type: 'function',
       },
       {
-        inputs: [],
+        inputs: [
+          { internalType: 'address', name: '_account', type: 'address' },
+        ],
         name: 'allowedToClaimDropAmount',
         outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
         stateMutability: 'view',
         type: 'function',
       },
       {
-        inputs: [],
+        inputs: [
+          { internalType: 'address', name: '_account', type: 'address' },
+        ],
         name: 'allowedToPublicMintAmount',
         outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
         stateMutability: 'view',
         type: 'function',
       },
       {
-        inputs: [],
+        inputs: [
+          { internalType: 'address', name: '_account', type: 'address' },
+        ],
         name: 'allowedToWhiteListMintAmount',
         outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
         stateMutability: 'view',
@@ -835,13 +841,31 @@ const contract = {
   airdrop: {
     methods: {
       read: {
-        getTokensMaxNumberToClaim: 'MAX_AIRDROP_MINT',
-        getTokensNumberAvailableToClaim: 'allowedToClaimDropAmount',
-        checkIfUserCanClaim: 'canClaimAirDrop',
+        getTokensNumberAvailable: 'allowedToClaimDropAmount',
       },
       write: {
         claim: 'claimAirdrop',
-        setMerkleRoot: 'setMerkleRootAirDrop',
+      },
+    },
+    merkleTree: new MerkleTree(
+      [
+        '0xd8B92056223F39FbeDCf08BA05440397B6c68D59',
+        '0x62b35Eb73edcb96227F666A878201b2cF915c2B5',
+        '0x35B3B16AdA854639B171419e19256603dEe73bF9',
+        '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+      ],
+      keccak256,
+      { hashLeaves: true, sortPairs: true },
+    ),
+  },
+  presale: {
+    methods: {
+      read: {
+        getTokensNumberAvailable: 'allowedToWhiteListMintAmount',
+        getTokenCost: 'whiteListSalePrice',
+      },
+      write: {
+        mint: 'whitelistMint',
       },
     },
     merkleTree: new MerkleTree(

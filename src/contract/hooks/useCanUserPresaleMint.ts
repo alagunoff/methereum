@@ -4,17 +4,17 @@ import { keccak256 } from 'ethers/lib/utils';
 import contract from '../index';
 import useProof from './useProof';
 
-function useCanUserClaimAirdrop(): boolean {
+function useCanUserPresaleMint(): boolean {
   const { account } = useEthers();
-  const proof = useProof('airdrop');
+  const proof = useProof('presale');
 
   return account && proof
-    ? contract.airdrop.merkleTree.verify(
+    ? contract.presale.merkleTree.verify(
         proof,
         keccak256(account),
-        contract.airdrop.merkleTree.getHexRoot(),
+        contract.presale.merkleTree.getHexRoot(),
       )
     : false;
 }
 
-export default useCanUserClaimAirdrop;
+export default useCanUserPresaleMint;

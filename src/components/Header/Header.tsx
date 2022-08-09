@@ -1,6 +1,6 @@
 import { useEthers } from '@usedapp/core';
 
-import { useShortAddress } from 'etherium/hooks';
+import { useShortAddress } from 'ethereum/hooks';
 import { List, Link, Button } from 'components/uiKit';
 
 import { LINKS } from './constants';

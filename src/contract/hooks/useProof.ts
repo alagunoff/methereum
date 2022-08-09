@@ -3,11 +3,11 @@ import { keccak256 } from 'ethers/lib/utils';
 
 import contract from '../index';
 
-function useProof(): string[] | undefined {
+function useProof(phase: 'airdrop' | 'presale'): string[] | undefined {
   const { account } = useEthers();
 
   return account
-    ? contract.airdrop.merkleTree.getHexProof(keccak256(account))
+    ? contract[phase].merkleTree.getHexProof(keccak256(account))
     : undefined;
 }
 
