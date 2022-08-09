@@ -1,6 +1,6 @@
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
-import { RootState } from '..';
+import { RootState } from '../types';
 
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 

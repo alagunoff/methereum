@@ -1,15 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
+import store from './store';
 
-import currenciesSlice from './currencies';
-
-const store = configureStore({
-  reducer: {
-    currencies: currenciesSlice,
-  },
-});
-
-type RootState = ReturnType<typeof store.getState>;
-type AppDispatch = typeof store.dispatch;
-
-export type { RootState, AppDispatch };
 export default store;
+export * from './hooks';
+export type { RootState, AppDispatch } from './types';

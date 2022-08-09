@@ -1,3 +1,3 @@
-const GOERLI_SIGN = 'GoerliETH';
+const ETHER_CURRENCY_SIGN = 'ETH';
 
-export { GOERLI_SIGN };
+export { ETHER_CURRENCY_SIGN };

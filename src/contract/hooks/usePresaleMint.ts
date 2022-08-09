@@ -11,10 +11,10 @@ function usePresaleMint() {
     contract.presale.methods.write.mint,
   );
 
-  function mint(tokensNumber: number, price: number) {
+  function mint(tokensNumber: number, cost: number) {
     if (proof && tokensNumber > 0) {
       return send(proof, tokensNumber, {
-        value: ethers.utils.parseEther(price.toString()),
+        value: ethers.utils.parseEther(cost.toString()),
       });
     }
 
