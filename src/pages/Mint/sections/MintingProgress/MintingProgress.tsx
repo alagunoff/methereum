@@ -1,5 +1,5 @@
 import tokenImage from 'assets/icons/token-1.gif';
-import { useTokensMinted, useTokensNumber } from 'contract/hooks';
+import { useTokensMinted, useTokensNumber } from 'contracts/bimkonEyes';
 import { ColorValues } from 'shared/types/Color';
 import { getNumberPercentageBetweenTwoNumbers } from 'shared/utils/numbers';
 import { checkIfValueNumber } from 'shared/typeGuards';

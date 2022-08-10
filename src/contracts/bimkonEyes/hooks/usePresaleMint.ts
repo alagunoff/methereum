@@ -1,7 +1,7 @@
 import { useContractFunction } from '@usedapp/core';
-import { ethers } from 'ethers';
+import { parseEther } from 'ethers/lib/utils';
 
-import contract from '../index';
+import contract from '../contract';
 import useProof from './useProof';
 
 function usePresaleMint() {
@@ -11,10 +11,10 @@ function usePresaleMint() {
     contract.presale.methods.write.mint,
   );
 
-  function mint(tokensNumber: number, cost: number) {
+  function mint(tokensNumber: number, tokensCost: number) {
     if (proof && tokensNumber > 0) {
       return send(proof, tokensNumber, {
-        value: ethers.utils.parseEther(cost.toString()),
+        value: parseEther(String(tokensCost)),
       });
     }
 

@@ -1,7 +1,7 @@
 import { useEthers, useCall, useContractFunction } from '@usedapp/core';
-import { ethers } from 'ethers';
+import { formatUnits } from 'ethers/lib/utils';
 
-import contract from '../index';
+import contract from '../contract';
 import useProof from './useProof';
 
 function useClaimAirdrop() {
@@ -23,7 +23,7 @@ function useClaimAirdrop() {
   function claim() {
     if (proof && getTokensNumberAvailableResponse) {
       const tokensNumberAvailable = Number(
-        ethers.utils.formatUnits(getTokensNumberAvailableResponse[0], 0),
+        formatUnits(getTokensNumberAvailableResponse[0], 0),
       );
 
       if (tokensNumberAvailable > 0) {

@@ -1,11 +1,9 @@
-import { useEthers } from '@usedapp/core';
+import { useEthers, shortenAddress } from '@usedapp/core';
 
-function useShortAddress() {
+function useShortAddress(): string | undefined {
   const { account } = useEthers();
 
-  return account
-    ? `${account.substring(0, 6)}...${account.substring(account.length - 2)}`
-    : undefined;
+  return account ? shortenAddress(account) : undefined;
 }
 
 export default useShortAddress;

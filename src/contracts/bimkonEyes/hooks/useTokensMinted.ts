@@ -1,17 +1,17 @@
 import { useCall } from '@usedapp/core';
-import { ethers } from 'ethers';
+import { formatUnits } from 'ethers/lib/utils';
 
-import contract from '../index';
+import contract from '../contract';
 
 function useTokensMinted(): number | undefined {
   const { value } =
     useCall({
       contract: contract.instance,
-      method: contract.generalMethods.read.getTokensNumber,
+      method: contract.generalMethods.read.getTokensMinted,
       args: [],
     }) ?? {};
 
-  return value ? Number(ethers.utils.formatUnits(value[0], 0)) : undefined;
+  return value ? Number(formatUnits(value[0], 0)) : undefined;
 }
 
 export default useTokensMinted;

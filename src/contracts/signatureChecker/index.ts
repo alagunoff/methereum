@@ -1,0 +1,4 @@
+import contract from './contract';
+
+export default contract;
+export * from './hooks';

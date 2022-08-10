@@ -1,7 +1,7 @@
 import { useEthers, useCall } from '@usedapp/core';
-import { ethers } from 'ethers';
+import { formatUnits } from 'ethers/lib/utils';
 
-import contract from '../index';
+import contract from '../contract';
 
 function useTokensNumberAvailableToPresaleMint(): number | undefined {
   const { account } = useEthers();
@@ -14,7 +14,7 @@ function useTokensNumberAvailableToPresaleMint(): number | undefined {
       },
     ) ?? {};
 
-  return value ? Number(ethers.utils.formatUnits(value[0], 0)) : undefined;
+  return value ? Number(formatUnits(value[0], 0)) : undefined;
 }
 
 export default useTokensNumberAvailableToPresaleMint;

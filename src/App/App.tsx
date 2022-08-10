@@ -1,19 +1,10 @@
-import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { useAppDispatch } from 'store/hooks';
-import { fetchCurrenciesCost } from 'store/currencies';
 import { RequireAccountAbsence } from 'router';
 import * as routes from 'router/routes';
 import { ConnectWallet, Mint } from 'pages';
 
 function App() {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCurrenciesCost());
-  }, [dispatch]);
-
   return (
     <Routes>
       <Route path={routes.root}>

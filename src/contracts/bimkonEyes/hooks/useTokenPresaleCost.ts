@@ -1,7 +1,7 @@
 import { useCall } from '@usedapp/core';
-import { ethers } from 'ethers';
+import { formatEther } from 'ethers/lib/utils';
 
-import contract from '../index';
+import contract from '../contract';
 
 function useTokenPresaleCost(): number | undefined {
   const { value } =
@@ -11,7 +11,7 @@ function useTokenPresaleCost(): number | undefined {
       args: [],
     }) ?? {};
 
-  return value ? Number(ethers.utils.formatEther(value[0])) : undefined;
+  return value ? Number(formatEther(value[0])) : undefined;
 }
 
 export default useTokenPresaleCost;

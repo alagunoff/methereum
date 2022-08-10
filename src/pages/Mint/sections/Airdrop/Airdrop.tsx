@@ -1,21 +1,26 @@
-import { useShortAddress, useBalance, ETHER_CURRENCY_SIGN } from 'ethereum';
-import { useCanUserClaimAirdrop, useClaimAirdrop } from 'contract/hooks';
-import { useAppSelector } from 'store';
-import { selectEtherUsdCost } from 'store/currencies';
-import { List, Button, Status } from 'components/uiKit';
+import { useCoingeckoPrice } from '@usedapp/coingecko';
+
+import { useShortAddress, useBalance } from 'ethereum';
+import { useCanUserClaimAirdrop, useClaimAirdrop } from 'contracts/bimkonEyes';
+import { transformCurrencyToDisplayedCurrency } from 'shared/utils/transforms';
+import { List, Button } from 'components/uiKit';
+import Status, { StatusTypes } from 'components/uiKit/Status';
 
 import styles from './Airdrop.module.scss';
 
 function Airdrop() {
+  const etherUsdCost = useCoingeckoPrice('ethereum', 'usd');
   const shortAddress = useShortAddress();
   const balance = useBalance();
   const canUserClaim = useCanUserClaimAirdrop();
   const { claim } = useClaimAirdrop();
 
-  const etherUsdCost = useAppSelector(selectEtherUsdCost);
-
   const estimatedGasCost = 0;
   const totalCost = estimatedGasCost;
+
+  function handleAirdropClaim() {
+    claim();
+  }
 
   return (
     <section className={styles.container}>
@@ -28,31 +33,26 @@ function Airdrop() {
             <div key='balance' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Your balance</div>
               <div className={styles.itemValue}>
-                {balance
-                  ? `${balance.eth.toFixed(4)}${ETHER_CURRENCY_SIGN} ($${
-                      balance.usd?.toFixed(0) ?? 0
-                    })`
-                  : 0}
+                {transformCurrencyToDisplayedCurrency(balance, etherUsdCost)}
               </div>
             </div>,
-            <div key='price' className={styles.itemWrapper}>
+            <div key='tokensCost' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Price</div>
               <div className={styles.itemValue}>Free</div>
             </div>,
             <div key='gas' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>GAS</div>
               <div className={styles.itemValue}>
-                {`${estimatedGasCost.toFixed(4)}${ETHER_CURRENCY_SIGN} ($${
-                  etherUsdCost ? (estimatedGasCost * etherUsdCost).toFixed() : 0
-                })`}
+                {transformCurrencyToDisplayedCurrency(
+                  estimatedGasCost,
+                  etherUsdCost,
+                )}
               </div>
             </div>,
             <div key='total' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Total</div>
               <div className={styles.itemValue}>
-                {`${totalCost.toFixed(4)}${ETHER_CURRENCY_SIGN} ($${
-                  etherUsdCost ? (totalCost * etherUsdCost).toFixed() : 0
-                })`}
+                {transformCurrencyToDisplayedCurrency(totalCost, etherUsdCost)}
               </div>
             </div>,
           ]}
@@ -60,10 +60,10 @@ function Airdrop() {
       </div>
       {canUserClaim && (
         <div className={styles.claimButton}>
-          <Button onClick={claim}>Claim airdrop</Button>
+          <Button onClick={handleAirdropClaim}>Claim airdrop</Button>
         </div>
       )}
-      <Status type={canUserClaim ? 'approved' : 'refused'}>
+      <Status type={canUserClaim ? StatusTypes.approved : StatusTypes.refused}>
         {`${shortAddress} ${
           canUserClaim
             ? 'approved for claim!'
