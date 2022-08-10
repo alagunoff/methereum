@@ -1,0 +1,38 @@
+@import 'shared/colors';
+
+.container {
+  width: 536px;
+  padding: 10px;
+}
+
+.title {
+  margin-bottom: 25px;
+
+  text-align: center;
+}
+
+.list {
+  margin-bottom: 20px;
+}
+
+.itemWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid $black;
+}
+
+.mintButton {
+  margin-bottom: 20px;
+
+  text-align: center;
+}
+
+.moneyLackStatus {
+  margin-bottom: 10px;
+}
+
+.exchangeButton {
+  text-align: center;
+}

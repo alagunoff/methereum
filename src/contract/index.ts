@@ -879,6 +879,18 @@ const contract = {
       { hashLeaves: true, sortPairs: true },
     ),
   },
+  publicSale: {
+    methods: {
+      read: {
+        getTokensNumberAvailable: 'allowedToPublicMintAmount',
+        getTokenCost: 'publicSalePrice',
+        getSignatureCheckerContractAddress: 'signatureCheckerContract',
+      },
+      write: {
+        mint: 'mint',
+      },
+    },
+  },
 };
 
 export default contract;

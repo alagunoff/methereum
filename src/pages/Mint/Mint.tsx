@@ -1,7 +1,7 @@
 import { Page } from 'components';
 import { List } from 'components/uiKit';
 
-import { MintingProgress, Airdrop, Presale } from './sections';
+import { MintingProgress, Airdrop, Presale, PublicSale } from './sections';
 import styles from './Mint.module.scss';
 
 function Mint() {
@@ -16,7 +16,11 @@ function Mint() {
           display='flex'
           justify='center'
           columnGap={20}
-          items={[<Airdrop key='airdrop' />, <Presale key='presale' />]}
+          items={[
+            <Airdrop key='airdrop' />,
+            <Presale key='presale' />,
+            <PublicSale key='publicSale' />,
+          ]}
           itemTheme='bordered'
         />
       </div>
