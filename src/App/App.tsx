@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { RequireAccountAbsence } from 'router';
-import * as routes from 'router/routes';
+import { RequireAccountAbsence, routes } from 'router';
 import { ConnectWallet, Mint } from 'pages';
 
 function App() {

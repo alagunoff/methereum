@@ -70,7 +70,7 @@ function PublicSale() {
                 />
               </div>
             </div>,
-            <div key='price' className={styles.itemWrapper}>
+            <div key='tokensCost' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Price</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(tokensCost, etherUsdCost)}

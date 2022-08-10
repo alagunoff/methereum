@@ -1,20 +1,19 @@
-import { useState } from 'react';
+import { useEthers } from '@usedapp/core';
 
-import { Footer, ConnectWalletModal } from 'components';
+import { useWeb3Modal } from 'ethereum';
+import { Footer } from 'components';
 import { Button } from 'components/uiKit';
 
 import styles from './ConnectWallet.module.scss';
 
 function ConnectWallet() {
-  const [connectWalletModalOpened, setConnectWalletModalOpened] =
-    useState(false);
+  const { activate } = useEthers();
+  const web3Modal = useWeb3Modal();
 
-  function handleConnectWalletModalOpen() {
-    setConnectWalletModalOpened(true);
-  }
+  async function handleWalletConnect() {
+    const provider = await web3Modal.connect();
 
-  function handleConnectWalletModalClose() {
-    setConnectWalletModalOpened(false);
+    await activate(provider);
   }
 
   return (
@@ -27,15 +26,10 @@ function ConnectWallet() {
             you would like to purchase, and click Mint. Questions? Issues? Get
             the Mint Guide.
           </p>
-          <Button onClick={handleConnectWalletModalOpen}>
-            Connect my wallet
-          </Button>
+          <Button onClick={handleWalletConnect}>Connect my wallet</Button>
         </div>
       </div>
       <Footer />
-      {connectWalletModalOpened && (
-        <ConnectWalletModal onClose={handleConnectWalletModalClose} />
-      )}
     </main>
   );
 }
