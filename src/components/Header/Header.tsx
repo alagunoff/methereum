@@ -1,6 +1,8 @@
 import { useEthers } from '@usedapp/core';
+import { useNavigate } from 'react-router-dom';
 
 import { useShortAddress } from 'ethereum/hooks';
+import { routes } from 'router';
 import { List, Link, Button } from 'components/uiKit';
 
 import { LINKS } from './constants';
@@ -10,8 +12,12 @@ function Header() {
   const { account, deactivate } = useEthers();
   const shortAddress = useShortAddress();
 
+  const navigate = useNavigate();
+
   function handleWalletDisconnect() {
     deactivate();
+
+    setTimeout(() => navigate(routes.root), 100);
   }
 
   return (

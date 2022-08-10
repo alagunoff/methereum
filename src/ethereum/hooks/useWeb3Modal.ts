@@ -10,6 +10,8 @@ function useWeb3Modal() {
     () =>
       new Web3Modal({
         network: 'goerli',
+        cacheProvider: false,
+        disableInjectedProvider: false,
         providerOptions: {
           injected: {
             display: {
