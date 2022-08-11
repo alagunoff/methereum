@@ -12,6 +12,7 @@
   "dependencies": {
     "@coinbase/wallet-sdk": "3.4.0",
     "@reduxjs/toolkit": "1.8.3",
+    "@uniswap/widgets": "2.0.0",
     "@usedapp/coingecko": "1.1.5",
     "@usedapp/core": "1.1.5",
     "@walletconnect/web3-provider": "1.8.0",
