@@ -1,11 +1,9 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { DAppProvider } from '@usedapp/core';
 
 import config from 'ethereum';
-import store from 'store';
 import App from 'App';
 
 import reportWebVitals from './reportWebVitals';
@@ -18,9 +16,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <DAppProvider config={config}>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <App />
       </DAppProvider>
     </BrowserRouter>
   </React.StrictMode>,
