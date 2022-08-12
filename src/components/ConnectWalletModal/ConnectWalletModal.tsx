@@ -1,6 +1,7 @@
 import { useEthers } from '@usedapp/core';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 
+import { INFURA_PROJECT_ID } from 'ethereum';
 import { Modal, List, Button } from 'components/uiKit';
 
 import { IProps } from './types';
@@ -15,7 +16,7 @@ function ConnectWalletModal({ onClose }: IProps) {
 
   async function handleWalletConnect() {
     const provider = new WalletConnectProvider({
-      infuraId: 'ddd85c31303340c3bfefda8216c65ea7',
+      infuraId: INFURA_PROJECT_ID,
     });
 
     await provider.enable();

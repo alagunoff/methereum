@@ -1,5 +1,3 @@
-import { useEthers } from '@usedapp/core';
-
 import { useWeb3Modal } from 'ethereum';
 import { Footer } from 'components';
 import { Button } from 'components/uiKit';
@@ -7,13 +5,10 @@ import { Button } from 'components/uiKit';
 import styles from './ConnectWallet.module.scss';
 
 function ConnectWallet() {
-  const { activate } = useEthers();
-  const web3Modal = useWeb3Modal();
+  const { connect } = useWeb3Modal();
 
-  async function handleWalletConnect() {
-    const provider = await web3Modal.connect();
-
-    await activate(provider);
+  function handleWalletConnect() {
+    connect();
   }
 
   return (

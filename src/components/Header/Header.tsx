@@ -1,23 +1,18 @@
 import { useEthers } from '@usedapp/core';
-import { useNavigate } from 'react-router-dom';
 
-import { useShortAddress } from 'ethereum/hooks';
-import { routes } from 'router';
+import { useWeb3Modal, useShortAddress } from 'ethereum/hooks';
 import { List, Link, Button } from 'components/uiKit';
 
 import { LINKS } from './constants';
 import styles from './Header.module.scss';
 
 function Header() {
-  const { account, deactivate } = useEthers();
+  const { account } = useEthers();
+  const { disconnect } = useWeb3Modal();
   const shortAddress = useShortAddress();
 
-  const navigate = useNavigate();
-
   function handleWalletDisconnect() {
-    deactivate();
-
-    setTimeout(() => navigate(routes.root), 100);
+    disconnect();
   }
 
   return (
