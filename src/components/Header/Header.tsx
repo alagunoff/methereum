@@ -1,12 +1,16 @@
-import { useWeb3Modal, useShortAddress } from 'ethereum/hooks';
+import { useWeb3Modal, useShortAddress } from 'ethereum';
 import { List, Link, Button } from 'components/uiKit';
 
 import { LINKS } from './constants';
 import styles from './Header.module.scss';
 
 function Header() {
-  const { disconnect } = useWeb3Modal();
+  const { connect, disconnect } = useWeb3Modal();
   const shortAddress = useShortAddress();
+
+  function handleWalletConnect() {
+    connect();
+  }
 
   function handleWalletDisconnect() {
     disconnect();
@@ -14,11 +18,13 @@ function Header() {
 
   return (
     <header className={styles.container}>
-      {shortAddress && (
+      {shortAddress ? (
         <div className={styles.walletWrapper}>
           <div className={styles.wallet}>{shortAddress}</div>
           <Button onClick={handleWalletDisconnect}>Disconnect</Button>
         </div>
+      ) : (
+        <Button onClick={handleWalletConnect}>Connect</Button>
       )}
       <nav className={styles.navigation}>
         <List

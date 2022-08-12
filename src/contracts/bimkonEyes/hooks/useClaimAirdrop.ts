@@ -1,42 +1,24 @@
-import { useEthers, useCall, useContractFunction } from '@usedapp/core';
-import { formatUnits } from 'ethers/lib/utils';
+import { useCallback } from 'react';
+import { useContractFunction } from '@usedapp/core';
 
 import contract from '../contract';
+import { SalePhases } from '../types';
 import useProof from './useProof';
+import useTokensNumberAvailable from './useTokensNumberAvailable';
 
 function useClaimAirdrop() {
-  const { account } = useEthers();
-  const proof = useProof('airdrop');
-  const { value: getTokensNumberAvailableResponse } =
-    useCall(
-      account && {
-        contract: contract.instance,
-        method: contract.airdrop.methods.read.getTokensNumberAvailable,
-        args: [account],
-      },
-    ) ?? {};
+  const proof = useProof(SalePhases.airdrop);
+  const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.airdrop);
   const { send } = useContractFunction(
-    contract.instance,
-    contract.airdrop.methods.write.claim,
+    contract.ethers,
+    contract[SalePhases.airdrop].methods.write.claim,
   );
 
-  function claim() {
-    if (proof && getTokensNumberAvailableResponse) {
-      const tokensNumberAvailable = Number(
-        formatUnits(getTokensNumberAvailableResponse[0], 0),
-      );
+  const claim = useCallback(() => {
+    send(proof, tokensNumberAvailable);
+  }, [send, proof, tokensNumberAvailable]);
 
-      if (tokensNumberAvailable > 0) {
-        return send(proof, tokensNumberAvailable);
-      }
-    }
-
-    return undefined;
-  }
-
-  return {
-    claim,
-  };
+  return claim;
 }
 
 export default useClaimAirdrop;

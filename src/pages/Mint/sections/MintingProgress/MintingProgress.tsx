@@ -2,7 +2,7 @@ import tokenImage from 'assets/icons/token-1.gif';
 import { useTokensMinted, useTokensNumber } from 'contracts/bimkonEyes';
 import { ColorValues } from 'shared/types/Color';
 import { getNumberPercentageBetweenTwoNumbers } from 'shared/utils/numbers';
-import { checkIfValueNumber } from 'shared/typeGuards';
+import { getLinearGradient } from 'shared/utils/styles';
 
 import styles from './MintingProgress.module.scss';
 
@@ -10,10 +10,10 @@ function MintingProgress() {
   const tokensMinted = useTokensMinted();
   const tokensNumber = useTokensNumber();
 
-  const tokensMintedPercent =
-    checkIfValueNumber(tokensMinted) && checkIfValueNumber(tokensNumber)
-      ? getNumberPercentageBetweenTwoNumbers(tokensMinted, tokensNumber)
-      : 0;
+  const tokensMintedPercent = getNumberPercentageBetweenTwoNumbers(
+    tokensMinted,
+    tokensNumber,
+  );
 
   return (
     <section className={styles.container}>
@@ -30,11 +30,19 @@ function MintingProgress() {
       <div
         className={styles.progressBar}
         style={{
-          backgroundImage: `linear-gradient(to right, ${ColorValues.silver} ${tokensMintedPercent}%, ${ColorValues.white} ${tokensMintedPercent}%)`,
+          backgroundImage: getLinearGradient({
+            direction: 'right',
+            startColor: ColorValues.silver,
+            startColorToPercent: tokensMintedPercent,
+            stopColor: ColorValues.white,
+            stopColorFromPercent: tokensMintedPercent,
+          }),
         }}
       />
       <div className={styles.progressWrapper}>
-        <div className={styles.percentageProgress}>{tokensMintedPercent}%</div>
+        <div className={styles.percentageProgress}>
+          {tokensMintedPercent?.toFixed(2) ?? '-'}%
+        </div>
         <div className={styles.progress}>
           {tokensMinted ?? '-'}/{tokensNumber ?? '-'}
         </div>

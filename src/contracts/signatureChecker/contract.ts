@@ -1,7 +1,7 @@
 import { Contract } from 'ethers';
 
 const contract = {
-  instance: new Contract(
+  ethers: new Contract(
     '0x92bDE003Ec04a593C57812Cc96070E0952823125',
     JSON.stringify([
       {

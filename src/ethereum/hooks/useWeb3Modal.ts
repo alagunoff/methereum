@@ -7,7 +7,7 @@ import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 
 import metalampEIcon from 'assets/icons/metalamp-e.svg';
 import { routes } from 'router';
-import { INFURA_PROJECT_ID } from 'ethereum/constants';
+import { INFURA_PROJECT_ID } from 'ethereum';
 
 function useWeb3Modal() {
   const { activate, deactivate } = useEthers();

@@ -3,10 +3,11 @@ import { useCoingeckoPrice } from '@usedapp/coingecko';
 
 import { useShortAddress, useBalance, CurrenciesCodes } from 'ethereum';
 import {
-  useCanUserPresaleMint,
-  useTokensNumberAvailableToPresaleMint,
-  useTokenPresaleCost,
+  useIsUserInWhiteList,
+  useTokensNumberAvailable,
+  useTokenCost,
   usePresaleMint,
+  SalePhases,
 } from 'contracts/bimkonEyes';
 import { transformCurrencyToDisplayedCurrency } from 'shared/utils/transforms';
 import { ConvertCurrencyModal } from 'components';
@@ -19,12 +20,12 @@ function Presale() {
   const etherUsdCost = useCoingeckoPrice('ethereum', 'usd');
   const shortAddress = useShortAddress();
   const balance = useBalance();
-  const canUserMint = useCanUserPresaleMint();
-  const tokensNumberAvailable = useTokensNumberAvailableToPresaleMint();
-  const tokenCost = useTokenPresaleCost();
-  const { mint } = usePresaleMint();
+  const isUserInWhiteList = useIsUserInWhiteList(SalePhases.presale);
+  const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.presale);
+  const tokenCost = useTokenCost(SalePhases.presale);
+  const mint = usePresaleMint();
 
-  const [tokensNumber, setTokensNumber] = useState(1);
+  const [tokensNumber, setTokensNumber] = useState(0);
   const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] =
     useState(false);
 
@@ -32,6 +33,11 @@ function Presale() {
   const tokensCost = tokenCost ? tokensNumber * tokenCost : 0;
   const totalCost = tokensCost + estimatedGasCost;
   const hasUserEnoughMoneyToMint = balance && balance >= totalCost;
+  const canUserMint = !!(
+    isUserInWhiteList &&
+    hasUserEnoughMoneyToMint &&
+    tokensNumberAvailable
+  );
 
   function handleTokensNumberChange(newTokensNumber: number) {
     setTokensNumber(newTokensNumber);
@@ -63,12 +69,12 @@ function Presale() {
                 {transformCurrencyToDisplayedCurrency(balance, etherUsdCost)}
               </div>
             </div>,
-            <div key='amount' className={styles.itemWrapper}>
+            <div key='tokensNumber' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Amount</div>
               <div className={styles.itemValue}>
                 <Counter
-                  min={1}
-                  defaultCount={1}
+                  min={0}
+                  defaultCount={tokensNumber}
                   max={tokensNumberAvailable}
                   onChange={handleTokensNumberChange}
                 />
@@ -80,7 +86,7 @@ function Presale() {
                 {transformCurrencyToDisplayedCurrency(tokensCost, etherUsdCost)}
               </div>
             </div>,
-            <div key='gas' className={styles.itemWrapper}>
+            <div key='gasCost' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>GAS</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(
@@ -89,7 +95,7 @@ function Presale() {
                 )}
               </div>
             </div>,
-            <div key='total' className={styles.itemWrapper}>
+            <div key='totalCost' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Total</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(totalCost, etherUsdCost)}
@@ -98,15 +104,17 @@ function Presale() {
           ]}
         />
       </div>
-      {canUserMint && hasUserEnoughMoneyToMint && (
+      {canUserMint && (
         <div className={styles.mintButton}>
           <Button onClick={handleTokensMint}>Mint {tokensNumber} NFT</Button>
         </div>
       )}
       {hasUserEnoughMoneyToMint ? (
-        <Status type={canUserMint ? StatusTypes.approved : StatusTypes.refused}>
+        <Status
+          type={isUserInWhiteList ? StatusTypes.approved : StatusTypes.refused}
+        >
           {`${shortAddress} ${
-            canUserMint
+            isUserInWhiteList
               ? 'approved for presale mint!'
               : 'is not in presale whitelist.'
           }`}

@@ -3,10 +3,11 @@ import { useCoingeckoPrice } from '@usedapp/coingecko';
 
 import { useBalance, CurrenciesCodes } from 'ethereum';
 import {
-  useTokensNumberAvailableToPublicSaleMint,
-  useTokenPublicSaleCost,
+  useTokensNumberAvailable,
+  useTokenCost,
   usePublicSaleMint,
-} from 'contracts/bimkonEyes/hooks';
+  SalePhases,
+} from 'contracts/bimkonEyes';
 import { transformCurrencyToDisplayedCurrency } from 'shared/utils/transforms';
 import { ConvertCurrencyModal } from 'components';
 import { List, Counter, Button } from 'components/uiKit';
@@ -17,8 +18,8 @@ import styles from './PublicSale.module.scss';
 function PublicSale() {
   const etherUsdCost = useCoingeckoPrice('ethereum', 'usd');
   const balance = useBalance();
-  const tokensNumberAvailable = useTokensNumberAvailableToPublicSaleMint();
-  const tokenCost = useTokenPublicSaleCost();
+  const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.publicSale);
+  const tokenCost = useTokenCost(SalePhases.publicSale);
   const { mint } = usePublicSaleMint();
 
   const [tokensNumber, setTokensNumber] = useState(1);
@@ -59,7 +60,7 @@ function PublicSale() {
                 {transformCurrencyToDisplayedCurrency(balance, etherUsdCost)}
               </div>
             </div>,
-            <div key='amount' className={styles.itemWrapper}>
+            <div key='tokensNumber' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Amount</div>
               <div className={styles.itemValue}>
                 <Counter
@@ -76,7 +77,7 @@ function PublicSale() {
                 {transformCurrencyToDisplayedCurrency(tokensCost, etherUsdCost)}
               </div>
             </div>,
-            <div key='gas' className={styles.itemWrapper}>
+            <div key='gasCost' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>GAS</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(
@@ -85,7 +86,7 @@ function PublicSale() {
                 )}
               </div>
             </div>,
-            <div key='total' className={styles.itemWrapper}>
+            <div key='totalCost' className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Total</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(totalCost, etherUsdCost)}

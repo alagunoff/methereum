@@ -1,29 +1,28 @@
+import { useCallback } from 'react';
 import { useContractFunction } from '@usedapp/core';
 import { parseEther } from 'ethers/lib/utils';
 
 import contract from '../contract';
+import { SalePhases } from '../types';
 import useProof from './useProof';
 
 function usePresaleMint() {
-  const proof = useProof('presale');
+  const proof = useProof(SalePhases.presale);
+
   const { send } = useContractFunction(
-    contract.instance,
-    contract.presale.methods.write.mint,
+    contract.ethers,
+    contract[SalePhases.presale].methods.write.mint,
   );
 
-  function mint(tokensNumber: number, tokensCost: number) {
-    if (proof && tokensNumber > 0) {
-      return send(proof, tokensNumber, {
+  const mint = useCallback(
+    (tokensNumber: number, tokensCost: number) =>
+      send(proof, tokensNumber, {
         value: parseEther(String(tokensCost)),
-      });
-    }
+      }),
+    [send, proof],
+  );
 
-    return undefined;
-  }
-
-  return {
-    mint,
-  };
+  return mint;
 }
 
 export default usePresaleMint;

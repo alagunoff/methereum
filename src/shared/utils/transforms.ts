@@ -9,9 +9,9 @@ function transformCurrencyToDisplayedCurrency(
     const normalizedCurrency = `${currency.toFixed(4)}${CurrenciesCodes.ether}`;
 
     return currencyUsdCost
-      ? `${normalizedCurrency} ($${(
-          currency * Number(currencyUsdCost)
-        ).toFixed()})`
+      ? `${normalizedCurrency} ($${Math.round(
+          currency * Number(currencyUsdCost),
+        )})`
       : normalizedCurrency;
   }
 

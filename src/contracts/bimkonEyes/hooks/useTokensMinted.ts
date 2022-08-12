@@ -1,17 +1,20 @@
 import { useCall } from '@usedapp/core';
-import { formatUnits } from 'ethers/lib/utils';
+
+import { parseBigNumberToNumber } from 'ethereum';
 
 import contract from '../contract';
 
 function useTokensMinted(): number | undefined {
-  const { value } =
+  const { value: getTokensMintedReponse } =
     useCall({
-      contract: contract.instance,
+      contract: contract.ethers,
       method: contract.generalMethods.read.getTokensMinted,
       args: [],
     }) ?? {};
 
-  return value ? Number(formatUnits(value[0], 0)) : undefined;
+  return getTokensMintedReponse
+    ? parseBigNumberToNumber(getTokensMintedReponse[0])
+    : undefined;
 }
 
 export default useTokensMinted;

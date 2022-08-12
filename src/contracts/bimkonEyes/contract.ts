@@ -3,7 +3,7 @@ import { Contract } from 'ethers';
 import { keccak256 } from 'ethers/lib/utils';
 
 const contract = {
-  instance: new Contract(
+  ethers: new Contract(
     '0xa886280c779c772f2663C4b53C1601C481682259',
     JSON.stringify([
       {

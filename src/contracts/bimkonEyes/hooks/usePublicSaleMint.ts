@@ -10,14 +10,13 @@ function usePublicSaleMint() {
   const signer = library?.getSigner(account);
 
   const { send } = useContractFunction(
-    contract.instance,
+    contract.ethers,
     contract.publicSale.methods.write.mint,
   );
-
   const hashedCat = useHashedCat();
 
   async function mint(tokensNumber: number, tokensCost: number) {
-    if (signer && hashedCat && tokensNumber > 0) {
+    if (signer && hashedCat) {
       const signedHashedCat = await signer.signMessage(arrayify(hashedCat));
 
       return send(tokensNumber, signedHashedCat, {
