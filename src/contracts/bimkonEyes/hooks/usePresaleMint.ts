@@ -8,7 +8,6 @@ import useProof from './useProof';
 
 function usePresaleMint() {
   const proof = useProof(SalePhases.presale);
-
   const { send } = useContractFunction(
     contract.ethers,
     contract[SalePhases.presale].methods.write.mint,

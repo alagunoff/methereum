@@ -20,16 +20,17 @@ function PublicSale() {
   const balance = useBalance();
   const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.publicSale);
   const tokenCost = useTokenCost(SalePhases.publicSale);
-  const { mint } = usePublicSaleMint();
+  const mint = usePublicSaleMint();
 
-  const [tokensNumber, setTokensNumber] = useState(1);
+  const [tokensNumber, setTokensNumber] = useState(0);
   const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] =
     useState(false);
 
   const estimatedGasCost = 0;
   const tokensCost = tokenCost ? tokensNumber * tokenCost : 0;
   const totalCost = tokensCost + estimatedGasCost;
-  const hasUserEnoughMoneyToMint = balance && balance >= totalCost;
+  const hasUserEnoughMoneyToMint = balance ? balance >= totalCost : false;
+  const canUserMint = !!(hasUserEnoughMoneyToMint && tokensNumberAvailable);
 
   function handleTokensNumberChange(newCount: number) {
     setTokensNumber(newCount);
@@ -64,9 +65,9 @@ function PublicSale() {
               <div className={styles.itemLabel}>Amount</div>
               <div className={styles.itemValue}>
                 <Counter
-                  min={1}
-                  defaultCount={1}
-                  max={tokensNumberAvailable}
+                  min={0}
+                  defaultCount={tokensNumber}
+                  max={tokensNumberAvailable || 0}
                   onChange={handleTokensNumberChange}
                 />
               </div>
@@ -95,12 +96,13 @@ function PublicSale() {
           ]}
         />
       </div>
-      {hasUserEnoughMoneyToMint ? (
+      {canUserMint && (
         <div className={styles.mintButton}>
           <Button onClick={handleTokensMint}>Mint {tokensNumber} NFT</Button>
         </div>
-      ) : (
-        <>
+      )}
+      {!hasUserEnoughMoneyToMint && (
+        <div className={styles.moneyLackStatusWrapper}>
           <div className={styles.moneyLackStatus}>
             <Status type={StatusTypes.refused}>
               You don&apos;t have enough {CurrenciesCodes.ether} for minting NFT
@@ -111,7 +113,14 @@ function PublicSale() {
               Exchange {CurrenciesCodes.ether}
             </Button>
           </div>
-        </>
+        </div>
+      )}
+      {!tokensNumberAvailable && (
+        <div className={styles.tokensLackStatus}>
+          <Status type={StatusTypes.refused}>
+            You don&apos;t have available tokens to mint
+          </Status>
+        </div>
       )}
       {convertCurrencyModalOpened && (
         <ConvertCurrencyModal onClose={handleConvertCurrencyModalClose} />

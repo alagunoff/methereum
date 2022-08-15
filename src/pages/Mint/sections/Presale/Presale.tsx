@@ -32,7 +32,7 @@ function Presale() {
   const estimatedGasCost = 0;
   const tokensCost = tokenCost ? tokensNumber * tokenCost : 0;
   const totalCost = tokensCost + estimatedGasCost;
-  const hasUserEnoughMoneyToMint = balance && balance >= totalCost;
+  const hasUserEnoughMoneyToMint = balance ? balance >= totalCost : false;
   const canUserMint = !!(
     isUserInWhiteList &&
     hasUserEnoughMoneyToMint &&
@@ -75,7 +75,7 @@ function Presale() {
                 <Counter
                   min={0}
                   defaultCount={tokensNumber}
-                  max={tokensNumberAvailable}
+                  max={tokensNumberAvailable || 0}
                   onChange={handleTokensNumberChange}
                 />
               </div>
@@ -110,15 +110,19 @@ function Presale() {
         </div>
       )}
       {hasUserEnoughMoneyToMint ? (
-        <Status
-          type={isUserInWhiteList ? StatusTypes.approved : StatusTypes.refused}
-        >
-          {`${shortAddress} ${
-            isUserInWhiteList
-              ? 'approved for presale mint!'
-              : 'is not in presale whitelist.'
-          }`}
-        </Status>
+        <div className={styles.whitelistStatus}>
+          <Status
+            type={
+              isUserInWhiteList ? StatusTypes.approved : StatusTypes.refused
+            }
+          >
+            {`${shortAddress} ${
+              isUserInWhiteList
+                ? 'approved for presale mint!'
+                : 'is not in presale whitelist.'
+            }`}
+          </Status>
+        </div>
       ) : (
         <>
           <div className={styles.moneyLackStatus}>
@@ -132,6 +136,13 @@ function Presale() {
             </Button>
           </div>
         </>
+      )}
+      {!tokensNumberAvailable && (
+        <div className={styles.tokensLackStatus}>
+          <Status type={StatusTypes.refused}>
+            You don&apos;t have available tokens to mint
+          </Status>
+        </div>
       )}
       {convertCurrencyModalOpened && (
         <ConvertCurrencyModal onClose={handleConvertCurrencyModalClose} />

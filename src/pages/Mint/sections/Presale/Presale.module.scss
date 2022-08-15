@@ -17,10 +17,6 @@
   text-align: center;
 }
 
-.list {
-  margin-bottom: 20px;
-}
-
 .itemWrapper {
   display: flex;
   align-items: center;
@@ -30,15 +26,29 @@
 }
 
 .mintButton {
-  margin-bottom: 20px;
+  margin-top: 20px;
+
+  text-align: center;
+}
+
+.whitelistStatus {
+  margin-top: 20px;
 
   text-align: center;
 }
 
 .moneyLackStatus {
   margin-bottom: 10px;
+
+  text-align: center;
 }
 
 .exchangeButton {
+  text-align: center;
+}
+
+.tokensLackStatus {
+  margin-top: 20px;
+
   text-align: center;
 }

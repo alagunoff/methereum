@@ -70,7 +70,7 @@ function Airdrop() {
           <Button onClick={handleAirdropClaim}>Claim airdrop</Button>
         </div>
       )}
-      <div className={styles.whiteListStatus}>
+      <div className={styles.whitelistStatus}>
         <Status
           type={isUserInWhiteList ? StatusTypes.approved : StatusTypes.refused}
         >
@@ -82,9 +82,11 @@ function Airdrop() {
         </Status>
       </div>
       {!tokensNumberAvailable && (
-        <Status type={StatusTypes.refused}>
-          You don&apos;t have available tokens to claim
-        </Status>
+        <div className={styles.tokensLackStatus}>
+          <Status type={StatusTypes.refused}>
+            You don&apos;t have available tokens to claim
+          </Status>
+        </div>
       )}
     </section>
   );

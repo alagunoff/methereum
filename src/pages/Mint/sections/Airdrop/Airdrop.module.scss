@@ -17,10 +17,6 @@
   text-align: center;
 }
 
-.list {
-  margin-bottom: 20px;
-}
-
 .itemWrapper {
   display: flex;
   align-items: center;
@@ -30,11 +26,19 @@
 }
 
 .claimButton {
-  margin-bottom: 20px;
+  margin-top: 20px;
 
   text-align: center;
 }
 
-.whiteListStatus {
-  margin-bottom: 10px;
+.whitelistStatus {
+  margin-top: 20px;
+
+  text-align: center;
+}
+
+.tokensLackStatus {
+  margin-top: 20px;
+
+  text-align: center;
 }
