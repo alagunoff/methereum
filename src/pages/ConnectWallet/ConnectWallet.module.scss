@@ -2,7 +2,6 @@
   display: grid;
   grid-template-rows: 1fr auto;
 
-  width: 1920px;
   min-height: 100vh;
 }
 
@@ -12,13 +11,13 @@
 
   padding: 10px 20px;
 
-  background: url('../../assets/icons/metamask-fox.svg') no-repeat 200px center /
-    400px auto;
+  background: url('../../assets/icons/metalamp.svg') no-repeat left 25% top
+    100px/ 35%;
 }
 
 .introduction {
-  width: 500px;
-  margin-left: 650px;
+  width: 26%;
+  margin-left: 55%;
 }
 
 .title {

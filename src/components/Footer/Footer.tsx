@@ -1,7 +1,5 @@
 import { List, Link } from 'components/uiKit';
 
-import metalampEIcon from 'assets/icons/metalamp-e.svg';
-
 import { LINKS } from './constants';
 import styles from './Footer.module.scss';
 
@@ -9,14 +7,15 @@ function Footer() {
   return (
     <footer className={styles.container}>
       <List
-        items={LINKS.map(({ to, imageAlt }, id) => (
-          <Link key={`${to}-${id}`} to={to} isExternal>
+        items={LINKS.map(({ to, imagePath, imageAlt }) => (
+          <Link key={imagePath} to={to} isExternal>
             <img
               className={styles.image}
-              src={metalampEIcon}
+              src={imagePath}
               alt={imageAlt}
               loading='lazy'
               width={40}
+              height={40}
             />
           </Link>
         ))}

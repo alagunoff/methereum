@@ -5,7 +5,7 @@ import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 
-import metalampEIcon from 'assets/icons/metalamp-e.svg';
+import metalampIcon from 'assets/icons/metalamp.svg';
 import { routes } from 'router';
 import { INFURA_PROJECT_ID } from 'ethereum';
 
@@ -26,7 +26,7 @@ function useWeb3Modal() {
         providerOptions: {
           injected: {
             display: {
-              logo: metalampEIcon,
+              logo: metalampIcon,
               name: 'Injected',
               description: 'Connect with the provider in your Browser',
             },

@@ -9,7 +9,6 @@
   ],
   "plugins": ["prettier"],
   "rules": {
-    "react/no-array-index-key": 0,
     "react/button-has-type": 0,
     "import/prefer-default-export": "off",
     "prettier/prettier": [2, { "semi": true }],
