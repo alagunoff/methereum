@@ -124,7 +124,7 @@ function Presale() {
           </Status>
         </div>
       ) : (
-        <>
+        <div className={styles.moneyLackStatusWrapper}>
           <div className={styles.moneyLackStatus}>
             <Status type={StatusTypes.refused}>
               You don&apos;t have enough {CurrenciesCodes.ether} for minting NFT
@@ -135,7 +135,7 @@ function Presale() {
               Exchange {CurrenciesCodes.ether}
             </Button>
           </div>
-        </>
+        </div>
       )}
       {!tokensNumberAvailable && (
         <div className={styles.tokensLackStatus}>

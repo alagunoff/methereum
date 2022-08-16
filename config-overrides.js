@@ -1,6 +1,13 @@
 const webpack = require('webpack');
 
 module.exports = function override(config) {
+  config.module.rules.push({
+    test: /\.m?js/,
+    resolve: {
+      fullySpecified: false,
+    },
+  });
+
   const fallback = config.resolve.fallback || {};
   Object.assign(fallback, {
     stream: require.resolve('stream-browserify'),
