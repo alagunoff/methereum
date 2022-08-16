@@ -1,4 +1,4 @@
-import { useEthers } from '@usedapp/core';
+import { useAccount } from 'wagmi';
 import { keccak256 } from 'ethers/lib/utils';
 
 import contract from '../contract';
@@ -8,13 +8,13 @@ import useProof from './useProof';
 function useIsUserInWhiteList(
   salePhase: Exclude<SalePhases, 'publicSale'>,
 ): boolean {
-  const { account } = useEthers();
+  const { address } = useAccount();
   const proof = useProof(salePhase);
 
-  return account && proof
+  return address && proof
     ? contract[salePhase].merkleTree.verify(
         proof,
-        keccak256(account),
+        keccak256(address),
         contract[salePhase].merkleTree.getHexRoot(),
       )
     : false;

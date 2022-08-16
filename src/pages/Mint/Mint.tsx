@@ -1,4 +1,4 @@
-import { useEthers } from '@usedapp/core';
+import { useAccount } from 'wagmi';
 
 import { Page } from 'components';
 import { List } from 'components/uiKit';
@@ -7,7 +7,7 @@ import { MintingProgress, Airdrop, Presale, PublicSale } from './sections';
 import styles from './Mint.module.scss';
 
 function Mint() {
-  const { account } = useEthers();
+  const { isConnected } = useAccount();
 
   return (
     <Page>
@@ -16,7 +16,7 @@ function Mint() {
         <div className={styles.mintingProgress}>
           <MintingProgress />
         </div>
-        {account && (
+        {isConnected && (
           <List
             display='flex'
             justify='center'
