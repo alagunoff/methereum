@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useSignMessage, useContractWrite } from 'wagmi';
+import { useSignMessage, useContractWrite, useWaitForTransaction } from 'wagmi';
 import { arrayify, parseEther } from 'ethers/lib/utils';
 
 import { useHashedCat } from 'contracts/signatureChecker';
@@ -9,14 +9,21 @@ import { SalePhases } from '../types';
 
 function usePublicSaleMint() {
   const hashedCat = useHashedCat();
-  const { signMessageAsync } = useSignMessage({
+  const { signMessageAsync, isLoading: isMessageSigning } = useSignMessage({
     message: hashedCat ? arrayify(hashedCat) : undefined,
   });
-  const { write } = useContractWrite({
+  const {
+    write,
+    data,
+    isLoading: isWriting,
+  } = useContractWrite({
     mode: 'recklesslyUnprepared',
     addressOrName: contract.address,
     contractInterface: contract.interface,
     functionName: contract[SalePhases.publicSale].methods.write.mint,
+  });
+  const { isLoading: isWaitingForTransaction } = useWaitForTransaction({
+    hash: data?.hash,
   });
 
   const mint = useCallback(
@@ -33,7 +40,7 @@ function usePublicSaleMint() {
     [signMessageAsync, write],
   );
 
-  return mint;
+  return { mint, isMessageSigning, isWriting, isWaitingForTransaction };
 }
 
 export default usePublicSaleMint;

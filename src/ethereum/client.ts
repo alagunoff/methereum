@@ -4,7 +4,7 @@ import { getDefaultClient } from 'connectkit';
 
 const client = createClient(
   getDefaultClient({
-    appName: 'Methereum',
+    appName: 'methereum',
     chains: [goerli],
   }),
 );

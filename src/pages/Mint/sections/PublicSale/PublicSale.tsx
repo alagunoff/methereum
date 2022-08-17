@@ -20,7 +20,8 @@ function PublicSale() {
   const balance = useBalance();
   const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.publicSale);
   const tokenCost = useTokenCost(SalePhases.publicSale);
-  const mint = usePublicSaleMint();
+  const { mint, isMessageSigning, isWriting, isWaitingForTransaction } =
+    usePublicSaleMint();
 
   const [tokensNumber, setTokensNumber] = useState(0);
   const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] =
@@ -31,7 +32,11 @@ function PublicSale() {
   const totalCost = tokensCost + estimatedGasCost;
   const hasUserEnoughMoneyToMint = balance ? balance >= totalCost : false;
   const canUserMint = !!(hasUserEnoughMoneyToMint && tokensNumberAvailable);
-  const mintButtonDisabled = tokensNumber === 0;
+  const mintButtonDisabled =
+    tokensNumber === 0 ||
+    isMessageSigning ||
+    isWriting ||
+    isWaitingForTransaction;
 
   function handleTokensNumberChange(newCount: number) {
     setTokensNumber(newCount);
