@@ -1,7 +1,6 @@
-import config from './config';
+import client from './client';
 
-export default config;
+export default client;
 export * from './hooks';
-export * from './constants';
 export * from './types';
 export * from './utils';

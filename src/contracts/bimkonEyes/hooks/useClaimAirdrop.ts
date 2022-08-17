@@ -1,24 +1,22 @@
-import { useCallback } from 'react';
-import { useContractFunction } from '@usedapp/core';
-
 import contract from '../contract';
 import { SalePhases } from '../types';
 import useProof from './useProof';
 import useTokensNumberAvailable from './useTokensNumberAvailable';
+import useWriteMethod from './useWriteMethod';
 
 function useClaimAirdrop() {
   const proof = useProof(SalePhases.airdrop);
   const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.airdrop);
-  const { send } = useContractFunction(
-    contract.ethers,
-    contract[SalePhases.airdrop].methods.write.claim,
-  );
+  const {
+    writingState: { write, isLoading: isWriting },
+    waitingForTransactionState: { isLoading: isWaitingForTransaction },
+  } = useWriteMethod({
+    methodName: contract[SalePhases.airdrop].methods.write.claim,
+    args: [proof, tokensNumberAvailable],
+    enabled: !!(proof && tokensNumberAvailable),
+  });
 
-  const claim = useCallback(() => {
-    send(proof, tokensNumberAvailable);
-  }, [send, proof, tokensNumberAvailable]);
-
-  return claim;
+  return { claim: write, isWriting, isWaitingForTransaction };
 }
 
 export default useClaimAirdrop;

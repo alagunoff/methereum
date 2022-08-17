@@ -14,6 +14,7 @@ import { ConvertCurrencyModal } from 'components';
 import { List, Counter, Button } from 'components/uiKit';
 import Status, { StatusTypes } from 'components/uiKit/Status';
 
+import { getWhitelistStatusText } from './utils';
 import styles from './Presale.module.scss';
 
 function Presale() {
@@ -23,7 +24,6 @@ function Presale() {
   const isUserInWhiteList = useIsUserInWhiteList(SalePhases.presale);
   const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.presale);
   const tokenCost = useTokenCost(SalePhases.presale);
-  const mint = usePresaleMint();
 
   const [tokensNumber, setTokensNumber] = useState(0);
   const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] =
@@ -32,12 +32,17 @@ function Presale() {
   const estimatedGasCost = 0;
   const tokensCost = tokenCost ? tokensNumber * tokenCost : 0;
   const totalCost = tokensCost + estimatedGasCost;
+  const { mint, isWriting, isWaitingForTransaction } = usePresaleMint(
+    tokensNumber,
+    totalCost,
+  );
   const hasUserEnoughMoneyToMint = balance ? balance >= totalCost : false;
   const canUserMint = !!(
     isUserInWhiteList &&
     hasUserEnoughMoneyToMint &&
     tokensNumberAvailable
   );
+  const mintButtonDisabled = !mint || isWriting || isWaitingForTransaction;
 
   function handleTokensNumberChange(newTokensNumber: number) {
     setTokensNumber(newTokensNumber);
@@ -52,7 +57,7 @@ function Presale() {
   }
 
   function handleTokensMint() {
-    mint(tokensNumber, totalCost);
+    mint?.();
   }
 
   return (
@@ -106,7 +111,9 @@ function Presale() {
       </div>
       {canUserMint && (
         <div className={styles.mintButton}>
-          <Button onClick={handleTokensMint}>Mint {tokensNumber} NFT</Button>
+          <Button disabled={mintButtonDisabled} onClick={handleTokensMint}>
+            Mint {tokensNumber} NFT
+          </Button>
         </div>
       )}
       {hasUserEnoughMoneyToMint ? (
@@ -116,11 +123,7 @@ function Presale() {
               isUserInWhiteList ? StatusTypes.approved : StatusTypes.refused
             }
           >
-            {`${shortAddress} ${
-              isUserInWhiteList
-                ? 'approved for presale mint!'
-                : 'is not in presale whitelist.'
-            }`}
+            {getWhitelistStatusText(isUserInWhiteList, shortAddress)}
           </Status>
         </div>
       ) : (

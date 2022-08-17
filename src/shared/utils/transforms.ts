@@ -4,7 +4,7 @@ import { checkIfValueNumber } from 'shared/typeGuards';
 function transformCurrencyToDisplayedCurrency(
   currency?: number,
   currencyUsdCost?: string,
-) {
+): string {
   if (checkIfValueNumber(currency)) {
     const normalizedCurrency = `${currency.toFixed(4)}${CurrenciesCodes.ether}`;
 

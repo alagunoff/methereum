@@ -1,24 +1,20 @@
-import { useEthers, useCall } from '@usedapp/core';
+import { useAccount } from 'wagmi';
 
 import { parseBigNumberToNumber } from 'ethereum';
 
 import contract from '../contract';
 import { SalePhases } from '../types';
+import useReadMethod from './useReadMethod';
 
 function useTokensNumberAvailable(salePhase: SalePhases): number | undefined {
-  const { account } = useEthers();
-  const { value: getTokensNumberAvailableReponse } =
-    useCall(
-      account && {
-        contract: contract.ethers,
-        method: contract[salePhase].methods.read.getTokensNumberAvailable,
-        args: [account],
-      },
-    ) ?? {};
+  const { address } = useAccount();
+  const { data: tokensNumberAvailable } = useReadMethod({
+    methodName: contract[salePhase].methods.read.getTokensNumberAvailable,
+    args: address,
+    enabled: !!address,
+  });
 
-  return getTokensNumberAvailableReponse
-    ? parseBigNumberToNumber(getTokensNumberAvailableReponse[0])
-    : undefined;
+  return tokensNumberAvailable && parseBigNumberToNumber(tokensNumberAvailable);
 }
 
 export default useTokensNumberAvailable;

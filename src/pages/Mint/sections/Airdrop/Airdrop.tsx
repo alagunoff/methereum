@@ -11,6 +11,7 @@ import { transformCurrencyToDisplayedCurrency } from 'shared/utils/transforms';
 import { List, Button } from 'components/uiKit';
 import Status, { StatusTypes } from 'components/uiKit/Status';
 
+import { getWhitelistStatusText } from './utils';
 import styles from './Airdrop.module.scss';
 
 function Airdrop() {
@@ -19,14 +20,15 @@ function Airdrop() {
   const balance = useBalance();
   const isUserInWhiteList = useIsUserInWhiteList(SalePhases.airdrop);
   const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.airdrop);
-  const claim = useClaimAirdrop();
+  const { claim, isWriting, isWaitingForTransaction } = useClaimAirdrop();
 
   const canUserClaim = !!(isUserInWhiteList && tokensNumberAvailable);
   const estimatedGasCost = 0;
   const totalCost = estimatedGasCost;
+  const claimButtonDisabled = !claim || isWriting || isWaitingForTransaction;
 
   function handleAirdropClaim() {
-    claim();
+    claim?.();
   }
 
   return (
@@ -67,18 +69,16 @@ function Airdrop() {
       </div>
       {canUserClaim && (
         <div className={styles.claimButton}>
-          <Button onClick={handleAirdropClaim}>Claim airdrop</Button>
+          <Button disabled={claimButtonDisabled} onClick={handleAirdropClaim}>
+            Claim airdrop
+          </Button>
         </div>
       )}
       <div className={styles.whitelistStatus}>
         <Status
           type={isUserInWhiteList ? StatusTypes.approved : StatusTypes.refused}
         >
-          {`${shortAddress} ${
-            isUserInWhiteList
-              ? 'approved for claim!'
-              : 'is not allowed for airdrop claim.'
-          }`}
+          {getWhitelistStatusText(isUserInWhiteList, shortAddress)}
         </Status>
       </div>
       {!tokensNumberAvailable && (

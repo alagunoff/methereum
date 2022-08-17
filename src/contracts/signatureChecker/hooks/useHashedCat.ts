@@ -1,16 +1,12 @@
-import { useCall } from '@usedapp/core';
-
 import contract from '../contract';
+import useReadMethod from './useReadMethod';
 
 function useHashedCat(): string | undefined {
-  const { value: getHashedCatResponse } =
-    useCall({
-      contract: contract.ethers,
-      method: contract.generalMethods.read.getHashedCat,
-      args: [],
-    }) ?? {};
+  const { data: hashedCat } = useReadMethod({
+    methodName: contract.generalMethods.read.getHashedCat,
+  });
 
-  return getHashedCatResponse?.[0];
+  return hashedCat && String(hashedCat);
 }
 
 export default useHashedCat;

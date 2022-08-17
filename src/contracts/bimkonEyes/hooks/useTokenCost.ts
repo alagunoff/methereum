@@ -1,23 +1,17 @@
-import { useCall } from '@usedapp/core';
-
 import { parseBigNumberToNumber } from 'ethereum';
 
 import contract from '../contract';
 import { SalePhases } from '../types';
+import useReadMethod from './useReadMethod';
 
 function useTokenCost(
   salePhase: Exclude<SalePhases, 'airdrop'>,
 ): number | undefined {
-  const { value: getTokenCostResponse } =
-    useCall({
-      contract: contract.ethers,
-      method: contract[salePhase].methods.read.getTokenCost,
-      args: [],
-    }) ?? {};
+  const { data: tokenCost } = useReadMethod({
+    methodName: contract[salePhase].methods.read.getTokenCost,
+  });
 
-  return getTokenCostResponse
-    ? parseBigNumberToNumber(getTokenCostResponse[0], true)
-    : undefined;
+  return tokenCost ? parseBigNumberToNumber(tokenCost, true) : undefined;
 }
 
 export default useTokenCost;

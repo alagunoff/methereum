@@ -1,20 +1,14 @@
-import { useCall } from '@usedapp/core';
-
 import { parseBigNumberToNumber } from 'ethereum';
 
 import contract from '../contract';
+import useReadMethod from './useReadMethod';
 
 function useTokensMinted(): number | undefined {
-  const { value: getTokensNumberResponse } =
-    useCall({
-      contract: contract.ethers,
-      method: contract.generalMethods.read.getTokensNumber,
-      args: [],
-    }) ?? {};
+  const { data: tokensNumber } = useReadMethod({
+    methodName: contract.generalMethods.read.getTokensNumber,
+  });
 
-  return getTokensNumberResponse
-    ? parseBigNumberToNumber(getTokensNumberResponse[0])
-    : undefined;
+  return tokensNumber && parseBigNumberToNumber(tokensNumber);
 }
 
 export default useTokensMinted;

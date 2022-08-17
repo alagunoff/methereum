@@ -1,9 +1,11 @@
-import { useEthers, shortenAddress } from '@usedapp/core';
+import { useAccount } from 'wagmi';
 
 function useShortAddress(): string | undefined {
-  const { account } = useEthers();
+  const { address } = useAccount();
 
-  return account ? shortenAddress(account) : undefined;
+  return address
+    ? `${address.substring(0, 6)}...${address.substring(address.length - 4)}`
+    : undefined;
 }
 
 export default useShortAddress;
