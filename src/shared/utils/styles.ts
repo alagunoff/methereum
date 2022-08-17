@@ -1,18 +1,20 @@
 import { ColorValues } from 'shared/types/Color';
 
+interface IParameters {
+  direction: 'right';
+  startColor: ColorValues;
+  startColorToPercent?: number;
+  stopColor: ColorValues;
+  stopColorFromPercent?: number;
+}
+
 function getLinearGradient({
   direction,
   startColor,
   startColorToPercent,
   stopColor,
   stopColorFromPercent,
-}: {
-  direction: 'right';
-  startColor: ColorValues;
-  startColorToPercent?: number;
-  stopColor: ColorValues;
-  stopColorFromPercent?: number;
-}): string {
+}: IParameters): string {
   return `linear-gradient(to ${direction}, ${startColor} ${startColorToPercent}%, ${stopColor} ${stopColorFromPercent}%)`;
 }
 

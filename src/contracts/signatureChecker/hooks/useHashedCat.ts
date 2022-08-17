@@ -6,7 +6,7 @@ function useHashedCat(): string | undefined {
     methodName: contract.generalMethods.read.getHashedCat,
   });
 
-  return hashedCat ? String(hashedCat) : undefined;
+  return hashedCat && String(hashedCat);
 }
 
 export default useHashedCat;

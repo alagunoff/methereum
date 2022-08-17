@@ -1,10 +1,11 @@
-import { createClient, chain } from 'wagmi';
+import { createClient } from 'wagmi';
+import { goerli } from 'wagmi/chains';
 import { getDefaultClient } from 'connectkit';
 
 const client = createClient(
   getDefaultClient({
     appName: 'Methereum',
-    chains: [chain.goerli],
+    chains: [goerli],
   }),
 );
 

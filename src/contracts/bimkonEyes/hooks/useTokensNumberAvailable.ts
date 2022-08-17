@@ -13,9 +13,7 @@ function useTokensNumberAvailable(salePhase: SalePhases): number | undefined {
     args: address,
   });
 
-  return tokensNumberAvailable
-    ? parseBigNumberToNumber(tokensNumberAvailable)
-    : undefined;
+  return tokensNumberAvailable && parseBigNumberToNumber(tokensNumberAvailable);
 }
 
 export default useTokensNumberAvailable;

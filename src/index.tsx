@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { DAppProvider } from '@usedapp/core';
 import { WagmiConfig } from 'wagmi';
 import { ConnectKitProvider } from 'connectkit';
 
-import config, { client } from 'ethereum';
+import client from 'ethereum';
 import App from 'App';
 
 import reportWebVitals from './reportWebVitals';
@@ -19,9 +18,7 @@ root.render(
     <BrowserRouter>
       <WagmiConfig client={client}>
         <ConnectKitProvider theme='retro'>
-          <DAppProvider config={config}>
-            <App />
-          </DAppProvider>
+          <App />
         </ConnectKitProvider>
       </WagmiConfig>
     </BrowserRouter>

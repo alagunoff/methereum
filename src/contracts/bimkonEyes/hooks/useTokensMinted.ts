@@ -8,7 +8,7 @@ function useTokensMinted(): number | undefined {
     methodName: contract.generalMethods.read.getTokensMinted,
   });
 
-  return tokensMinted ? parseBigNumberToNumber(tokensMinted) : undefined;
+  return tokensMinted && parseBigNumberToNumber(tokensMinted);
 }
 
 export default useTokensMinted;
