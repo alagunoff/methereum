@@ -8,13 +8,15 @@ function useClaimAirdrop() {
   const proof = useProof(SalePhases.airdrop);
   const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.airdrop);
   const {
-    writeRequestState: { write },
+    writingState: { write, isLoading: isWriting },
+    waitingForTransactionState: { isLoading: isWaitingForTransaction },
   } = useWriteMethod({
     methodName: contract[SalePhases.airdrop].methods.write.claim,
     args: [proof, tokensNumberAvailable],
+    enabled: !!(proof && tokensNumberAvailable),
   });
 
-  return write;
+  return { claim: write, isWriting, isWaitingForTransaction };
 }
 
 export default useClaimAirdrop;

@@ -5,15 +5,17 @@ import contract from '../contract';
 interface IParameters {
   methodName: string;
   args?: unknown;
+  watch?: boolean;
   enabled?: boolean;
 }
 
-function useReadMethod({ methodName, args, enabled }: IParameters) {
+function useReadMethod({ methodName, args, watch, enabled }: IParameters) {
   return useContractRead({
     addressOrName: contract.address,
     contractInterface: contract.interface,
     functionName: methodName,
     args,
+    watch,
     enabled,
   });
 }

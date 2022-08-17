@@ -15,7 +15,7 @@ interface IParameters {
 }
 
 function useWriteMethod({ methodName, args, enabled, value }: IParameters) {
-  const prepareDataRequestState = usePrepareContractWrite({
+  const preparingDataState = usePrepareContractWrite({
     addressOrName: contract.address,
     contractInterface: contract.interface,
     functionName: methodName,
@@ -25,15 +25,15 @@ function useWriteMethod({ methodName, args, enabled, value }: IParameters) {
       value,
     },
   });
-  const writeRequestState = useContractWrite(prepareDataRequestState.config);
-  const waitForTransactionRequestState = useWaitForTransaction({
-    hash: writeRequestState.data?.hash,
+  const writingState = useContractWrite(preparingDataState.config);
+  const waitingForTransactionState = useWaitForTransaction({
+    hash: writingState.data?.hash,
   });
 
   return {
-    prepareDataRequestState,
-    writeRequestState,
-    waitForTransactionRequestState,
+    preparingDataState,
+    writingState,
+    waitingForTransactionState,
   };
 }
 

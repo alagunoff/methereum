@@ -11,6 +11,7 @@ function useTokensNumberAvailable(salePhase: SalePhases): number | undefined {
   const { data: tokensNumberAvailable } = useReadMethod({
     methodName: contract[salePhase].methods.read.getTokensNumberAvailable,
     args: address,
+    enabled: !!address,
   });
 
   return tokensNumberAvailable && parseBigNumberToNumber(tokensNumberAvailable);

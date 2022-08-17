@@ -1,6 +1,7 @@
 import { ConnectKitButton } from 'connectkit';
 
 import { Footer } from 'components';
+import { Button } from 'components/uiKit';
 
 import styles from './ConnectWallet.module.scss';
 
@@ -15,7 +16,9 @@ function ConnectWallet() {
             you would like to purchase, and click Mint. Questions? Issues? Get
             the Mint Guide.
           </p>
-          <ConnectKitButton />
+          <ConnectKitButton.Custom>
+            {({ show }) => <Button onClick={show}>Connect my wallet</Button>}
+          </ConnectKitButton.Custom>
         </div>
       </div>
       <Footer />
