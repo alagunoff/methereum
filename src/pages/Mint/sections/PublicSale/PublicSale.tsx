@@ -31,6 +31,7 @@ function PublicSale() {
   const totalCost = tokensCost + estimatedGasCost;
   const hasUserEnoughMoneyToMint = balance ? balance >= totalCost : false;
   const canUserMint = !!(hasUserEnoughMoneyToMint && tokensNumberAvailable);
+  const mintButtonDisabled = tokensNumber === 0;
 
   function handleTokensNumberChange(newCount: number) {
     setTokensNumber(newCount);
@@ -98,7 +99,9 @@ function PublicSale() {
       </div>
       {canUserMint && (
         <div className={styles.mintButton}>
-          <Button onClick={handleTokensMint}>Mint {tokensNumber} NFT</Button>
+          <Button disabled={mintButtonDisabled} onClick={handleTokensMint}>
+            Mint {tokensNumber} NFT
+          </Button>
         </div>
       )}
       {!hasUserEnoughMoneyToMint && (

@@ -8,10 +8,10 @@ import useReadMethod from './useReadMethod';
 
 function useTokensNumberAvailable(salePhase: SalePhases): number | undefined {
   const { address } = useAccount();
-  const { data: tokensNumberAvailable } = useReadMethod(
-    contract[salePhase].methods.read.getTokensNumberAvailable,
-    address,
-  );
+  const { data: tokensNumberAvailable } = useReadMethod({
+    methodName: contract[salePhase].methods.read.getTokensNumberAvailable,
+    args: address,
+  });
 
   return tokensNumberAvailable
     ? parseBigNumberToNumber(tokensNumberAvailable)

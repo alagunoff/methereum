@@ -7,12 +7,14 @@ import useWriteMethod from './useWriteMethod';
 function useClaimAirdrop() {
   const proof = useProof(SalePhases.airdrop);
   const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.airdrop);
-  const { write, isLoading } = useWriteMethod(
-    contract[SalePhases.airdrop].methods.write.claim,
-    [proof, tokensNumberAvailable],
-  );
+  const {
+    writeRequestState: { write },
+  } = useWriteMethod({
+    methodName: contract[SalePhases.airdrop].methods.write.claim,
+    args: [proof, tokensNumberAvailable],
+  });
 
-  return { claim: write, isLoading };
+  return write;
 }
 
 export default useClaimAirdrop;

@@ -19,7 +19,7 @@ function Airdrop() {
   const balance = useBalance();
   const isUserInWhiteList = useIsUserInWhiteList(SalePhases.airdrop);
   const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.airdrop);
-  const { claim, isLoading } = useClaimAirdrop();
+  const claim = useClaimAirdrop();
 
   const canUserClaim = !!(isUserInWhiteList && tokensNumberAvailable);
   const estimatedGasCost = 0;
@@ -67,7 +67,7 @@ function Airdrop() {
       </div>
       {canUserClaim && (
         <div className={styles.claimButton}>
-          <Button disabled={!claim || isLoading} onClick={handleAirdropClaim}>
+          <Button disabled={!claim} onClick={handleAirdropClaim}>
             Claim airdrop
           </Button>
         </div>

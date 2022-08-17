@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useEthers, useContractFunction } from '@usedapp/core';
+import { useSignMessage, useContractWrite } from 'wagmi';
 import { arrayify, parseEther } from 'ethers/lib/utils';
 
 import { useHashedCat } from 'contracts/signatureChecker';
@@ -8,28 +8,29 @@ import contract from '../contract';
 import { SalePhases } from '../types';
 
 function usePublicSaleMint() {
-  const { account, library } = useEthers();
-  const signer = library?.getSigner(account);
-
-  const { send } = useContractFunction(
-    contract.ethers,
-    contract[SalePhases.publicSale].methods.write.mint,
-  );
   const hashedCat = useHashedCat();
+  const { signMessageAsync } = useSignMessage({
+    message: hashedCat ? arrayify(hashedCat) : undefined,
+  });
+  const { write } = useContractWrite({
+    mode: 'recklesslyUnprepared',
+    addressOrName: contract.address,
+    contractInterface: contract.interface,
+    functionName: contract[SalePhases.publicSale].methods.write.mint,
+  });
 
   const mint = useCallback(
-    async (tokensNumber: number, tokensCost: number) => {
-      if (signer && hashedCat) {
-        const signedHashedCat = await signer.signMessage(arrayify(hashedCat));
+    async (tokensNumber: number, totalCost: number) => {
+      const signedHashedCat = await signMessageAsync();
 
-        return send(tokensNumber, signedHashedCat, {
-          value: parseEther(String(tokensCost)),
-        });
-      }
-
-      return undefined;
+      return write({
+        recklesslySetUnpreparedArgs: [tokensNumber, signedHashedCat],
+        recklesslySetUnpreparedOverrides: {
+          value: parseEther(String(totalCost)),
+        },
+      });
     },
-    [send, signer, hashedCat],
+    [signMessageAsync, write],
   );
 
   return mint;

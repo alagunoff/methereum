@@ -38,6 +38,7 @@ function Presale() {
     hasUserEnoughMoneyToMint &&
     tokensNumberAvailable
   );
+  const mintButtonDisabled = tokensNumber === 0;
 
   function handleTokensNumberChange(newTokensNumber: number) {
     setTokensNumber(newTokensNumber);
@@ -106,7 +107,9 @@ function Presale() {
       </div>
       {canUserMint && (
         <div className={styles.mintButton}>
-          <Button onClick={handleTokensMint}>Mint {tokensNumber} NFT</Button>
+          <Button disabled={mintButtonDisabled} onClick={handleTokensMint}>
+            Mint {tokensNumber} NFT
+          </Button>
         </div>
       )}
       {hasUserEnoughMoneyToMint ? (
