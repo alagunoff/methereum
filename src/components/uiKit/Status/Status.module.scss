@@ -1,34 +1,32 @@
-@import 'shared/colors';
+@import "shared/colors";
 
 .container {
   display: inline-flex;
-  column-gap: 10px;
   align-items: center;
   justify-content: center;
+  column-gap: 10px;
 
   &::before {
     width: 20px;
     height: 20px;
-
+    border: 2px solid $black;
+    border-radius: 50%;
     font-size: 16px;
     font-weight: 700;
     line-height: 17px;
     text-align: center;
-
-    border: 2px solid $black;
-    border-radius: 50%;
   }
 
   &_type {
     &_approved {
       &::before {
-        content: '✓';
+        content: "✓";
       }
     }
 
     &_refused {
       &::before {
-        content: '!';
+        content: "!";
       }
     }
   }

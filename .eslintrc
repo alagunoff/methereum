@@ -4,15 +4,17 @@
     "airbnb",
     "airbnb-typescript",
     "airbnb/hooks",
-    "prettier",
     "plugin:react/jsx-runtime"
   ],
-  "plugins": ["prettier"],
   "rules": {
     "react/button-has-type": 0,
     "import/prefer-default-export": "off",
-    "prettier/prettier": [2, { "semi": true }],
-    "no-param-reassign": ["error", { "props": false }],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
     "react/jsx-no-bind": [
       2,
       {

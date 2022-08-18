@@ -1,10 +1,11 @@
 {
   "extends": [
     "stylelint-config-standard-scss",
-    "stylelint-config-clean-order",
-    "stylelint-config-prettier-scss"
+    "stylelint-config-idiomatic-order"
   ],
   "rules": {
-    "selector-class-pattern": null
+    "selector-class-pattern": null,
+    "no-missing-end-of-source-newline": true,
+    "linebreaks": "unix"
   }
 }

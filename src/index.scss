@@ -1,17 +1,17 @@
-@import 'shared/colors';
+@import "shared/colors";
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  background-color: transparent;
 }
 
 html {
+  background-color: $white;
+  color: $black;
   font-family: Arial, sans-serif;
   font-size: 16px;
-  color: $black;
-
-  background-color: $white;
 }

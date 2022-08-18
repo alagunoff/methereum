@@ -1,4 +1,4 @@
-@import 'shared/colors';
+@import "shared/colors";
 
 .container {
   width: 536px;
@@ -7,13 +7,11 @@
 
 .title {
   margin-bottom: 5px;
-
   text-align: center;
 }
 
 .timer {
   margin-bottom: 20px;
-
   text-align: center;
 }
 
@@ -21,19 +19,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   border-bottom: 1px solid $black;
 }
 
 .mintButton {
   margin-top: 20px;
-
   text-align: center;
 }
 
 .whitelistStatus {
   margin-top: 20px;
-
   text-align: center;
 }
 
@@ -43,7 +38,6 @@
 
 .moneyLackStatus {
   margin-bottom: 10px;
-
   text-align: center;
 }
 
@@ -53,6 +47,5 @@
 
 .tokensLackStatus {
   margin-top: 20px;
-
   text-align: center;
 }

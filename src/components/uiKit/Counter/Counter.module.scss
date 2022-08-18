@@ -1,25 +1,23 @@
-@import 'shared/colors';
-@import 'shared/mixins';
+@import "shared/colors";
+@import "shared/mixins";
 
 @mixin control-button {
   display: flex;
+  width: 18px;
+  height: 18px;
   align-items: center;
   justify-content: center;
 
-  width: 18px;
-  height: 18px;
-
   &:disabled {
-    cursor: default;
-
     color: $black-30;
+    cursor: default;
   }
 }
 
 .container {
   display: flex;
-  column-gap: 5px;
   align-items: center;
+  column-gap: 5px;
 }
 
 .decrementButton {
