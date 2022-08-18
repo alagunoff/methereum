@@ -13,10 +13,10 @@ function useIsUserInWhiteList(
 
   return address && proof
     ? contract[salePhase].merkleTree.verify(
-        proof,
-        keccak256(address),
-        contract[salePhase].merkleTree.getHexRoot(),
-      )
+      proof,
+      keccak256(address),
+      contract[salePhase].merkleTree.getHexRoot(),
+    )
     : false;
 }
 

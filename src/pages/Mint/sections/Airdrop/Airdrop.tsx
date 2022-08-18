@@ -39,17 +39,17 @@ function Airdrop() {
         <List
           rowGap={10}
           items={[
-            <div key='balance' className={styles.itemWrapper}>
+            <div key="balance" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Your balance</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(balance, etherUsdCost)}
               </div>
             </div>,
-            <div key='tokensCost' className={styles.itemWrapper}>
+            <div key="tokensCost" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Price</div>
               <div className={styles.itemValue}>Free</div>
             </div>,
-            <div key='gasCost' className={styles.itemWrapper}>
+            <div key="gasCost" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>GAS</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(
@@ -58,7 +58,7 @@ function Airdrop() {
                 )}
               </div>
             </div>,
-            <div key='totalCost' className={styles.itemWrapper}>
+            <div key="totalCost" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Total</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(totalCost, etherUsdCost)}

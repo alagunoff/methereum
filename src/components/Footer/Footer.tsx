@@ -13,14 +13,14 @@ function Footer() {
               className={styles.image}
               src={imagePath}
               alt={imageAlt}
-              loading='lazy'
+              loading="lazy"
               width={40}
               height={40}
             />
           </Link>
         ))}
-        display='flex'
-        justify='center'
+        display="flex"
+        justify="center"
         columnGap={10}
         itemLineHeight={0}
       />

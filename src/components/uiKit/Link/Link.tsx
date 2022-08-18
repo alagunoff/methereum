@@ -14,8 +14,8 @@ function Link({
     <a
       className={`${styles.container} ${styles[`container_theme_${theme}`]}`}
       href={to}
-      target='_blank'
-      rel='noopener noreferrer'
+      target="_blank"
+      rel="noopener noreferrer"
     >
       {children}
     </a>

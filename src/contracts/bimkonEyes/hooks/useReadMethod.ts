@@ -9,7 +9,9 @@ interface IParameters {
   enabled?: boolean;
 }
 
-function useReadMethod({ methodName, args, watch, enabled }: IParameters) {
+function useReadMethod({
+  methodName, args, watch, enabled,
+}: IParameters) {
   return useContractRead({
     addressOrName: contract.address,
     contractInterface: contract.interface,

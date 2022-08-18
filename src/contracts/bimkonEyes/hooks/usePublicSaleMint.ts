@@ -40,7 +40,9 @@ function usePublicSaleMint() {
     [signMessageAsync, write],
   );
 
-  return { mint, isMessageSigning, isWriting, isWaitingForTransaction };
+  return {
+    mint, isMessageSigning, isWriting, isWaitingForTransaction,
+  };
 }
 
 export default usePublicSaleMint;

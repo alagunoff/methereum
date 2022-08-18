@@ -8,7 +8,9 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "stylelint": "stylelint '**/*.scss'",
-    "stylelint:fix": "stylelint '**/*.scss' --fix"
+    "stylelint:fix": "stylelint '**/*.scss' --fix",
+    "eslint": "eslint --ext .tsx --ext .ts src/",
+    "eslint:fix": "eslint --ext .tsx --ext .ts src/ --fix"
   },
   "dependencies": {
     "@uniswap/widgets": "2.1.1",

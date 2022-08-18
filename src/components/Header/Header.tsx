@@ -10,7 +10,7 @@ function Header() {
       <ConnectKitButton />
       <nav className={styles.navigation}>
         <List
-          display='flex'
+          display="flex"
           columnGap={10}
           items={LINKS.map(({ text, to }) => (
             <Link key={`${text}-${to}`} to={to} isExternal>

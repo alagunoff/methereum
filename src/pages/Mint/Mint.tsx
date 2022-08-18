@@ -3,7 +3,9 @@ import { useAccount } from 'wagmi';
 import { Page } from 'components';
 import { List } from 'components/uiKit';
 
-import { MintingProgress, Airdrop, Presale, PublicSale } from './sections';
+import {
+  MintingProgress, Airdrop, Presale, PublicSale,
+} from './sections';
 import styles from './Mint.module.scss';
 
 function Mint() {
@@ -18,15 +20,15 @@ function Mint() {
         </div>
         {isConnected && (
           <List
-            display='flex'
-            justify='center'
+            display="flex"
+            justify="center"
             columnGap={20}
             items={[
-              <Airdrop key='airdrop' />,
-              <Presale key='presale' />,
-              <PublicSale key='publicSale' />,
+              <Airdrop key="airdrop" />,
+              <Presale key="presale" />,
+              <PublicSale key="publicSale" />,
             ]}
-            itemTheme='bordered'
+            itemTheme="bordered"
           />
         )}
       </div>

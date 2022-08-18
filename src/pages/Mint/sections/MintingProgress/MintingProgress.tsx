@@ -21,7 +21,7 @@ function MintingProgress() {
         <img
           className={styles.image}
           src={tokenImage}
-          alt='Token'
+          alt="Token"
           width={278}
           height={278}
         />
@@ -41,10 +41,13 @@ function MintingProgress() {
       />
       <div className={styles.progressWrapper}>
         <div className={styles.percentageProgress}>
-          {tokensMintedPercent?.toFixed(2) ?? '-'}%
+          {tokensMintedPercent?.toFixed(2) ?? '-'}
+          %
         </div>
         <div className={styles.progress}>
-          {tokensMinted ?? '-'}/{tokensNumber ?? '-'}
+          {tokensMinted ?? '-'}
+          /
+          {tokensNumber ?? '-'}
         </div>
       </div>
     </section>

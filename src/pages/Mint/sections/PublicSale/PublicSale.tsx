@@ -20,23 +20,22 @@ function PublicSale() {
   const balance = useBalance();
   const tokensNumberAvailable = useTokensNumberAvailable(SalePhases.publicSale);
   const tokenCost = useTokenCost(SalePhases.publicSale);
-  const { mint, isMessageSigning, isWriting, isWaitingForTransaction } =
-    usePublicSaleMint();
+  const {
+    mint, isMessageSigning, isWriting, isWaitingForTransaction,
+  } = usePublicSaleMint();
 
   const [tokensNumber, setTokensNumber] = useState(0);
-  const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] =
-    useState(false);
+  const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] = useState(false);
 
   const estimatedGasCost = 0;
   const tokensCost = tokenCost ? tokensNumber * tokenCost : 0;
   const totalCost = tokensCost + estimatedGasCost;
   const hasUserEnoughMoneyToMint = balance ? balance >= totalCost : false;
   const canUserMint = !!(hasUserEnoughMoneyToMint && tokensNumberAvailable);
-  const mintButtonDisabled =
-    tokensNumber === 0 ||
-    isMessageSigning ||
-    isWriting ||
-    isWaitingForTransaction;
+  const mintButtonDisabled = tokensNumber === 0
+    || isMessageSigning
+    || isWriting
+    || isWaitingForTransaction;
 
   function handleTokensNumberChange(newCount: number) {
     setTokensNumber(newCount);
@@ -61,13 +60,13 @@ function PublicSale() {
         <List
           rowGap={10}
           items={[
-            <div key='balance' className={styles.itemWrapper}>
+            <div key="balance" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Your balance</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(balance, etherUsdCost)}
               </div>
             </div>,
-            <div key='tokensNumber' className={styles.itemWrapper}>
+            <div key="tokensNumber" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Amount</div>
               <div className={styles.itemValue}>
                 <Counter
@@ -78,13 +77,13 @@ function PublicSale() {
                 />
               </div>
             </div>,
-            <div key='tokensCost' className={styles.itemWrapper}>
+            <div key="tokensCost" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Price</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(tokensCost, etherUsdCost)}
               </div>
             </div>,
-            <div key='gasCost' className={styles.itemWrapper}>
+            <div key="gasCost" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>GAS</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(
@@ -93,7 +92,7 @@ function PublicSale() {
                 )}
               </div>
             </div>,
-            <div key='totalCost' className={styles.itemWrapper}>
+            <div key="totalCost" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Total</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(totalCost, etherUsdCost)}
@@ -105,7 +104,11 @@ function PublicSale() {
       {canUserMint && (
         <div className={styles.mintButton}>
           <Button disabled={mintButtonDisabled} onClick={handleTokensMint}>
-            Mint {tokensNumber} NFT
+            Mint
+            {' '}
+            {tokensNumber}
+            {' '}
+            NFT
           </Button>
         </div>
       )}
@@ -113,12 +116,18 @@ function PublicSale() {
         <div className={styles.moneyLackStatusWrapper}>
           <div className={styles.moneyLackStatus}>
             <Status type={StatusTypes.refused}>
-              You don&apos;t have enough {CurrenciesCodes.ether} for minting NFT
+              You don&apos;t have enough
+              {' '}
+              {CurrenciesCodes.ether}
+              {' '}
+              for minting NFT
             </Status>
           </div>
           <div className={styles.exchangeButton}>
             <Button onClick={handleConvertCurrencyModalOpen}>
-              Exchange {CurrenciesCodes.ether}
+              Exchange
+              {' '}
+              {CurrenciesCodes.ether}
             </Button>
           </div>
         </div>

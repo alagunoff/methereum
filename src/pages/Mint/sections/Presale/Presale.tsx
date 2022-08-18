@@ -26,8 +26,7 @@ function Presale() {
   const tokenCost = useTokenCost(SalePhases.presale);
 
   const [tokensNumber, setTokensNumber] = useState(0);
-  const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] =
-    useState(false);
+  const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] = useState(false);
 
   const estimatedGasCost = 0;
   const tokensCost = tokenCost ? tokensNumber * tokenCost : 0;
@@ -38,9 +37,9 @@ function Presale() {
   );
   const hasUserEnoughMoneyToMint = balance ? balance >= totalCost : false;
   const canUserMint = !!(
-    isUserInWhiteList &&
-    hasUserEnoughMoneyToMint &&
-    tokensNumberAvailable
+    isUserInWhiteList
+    && hasUserEnoughMoneyToMint
+    && tokensNumberAvailable
   );
   const mintButtonDisabled = !mint || isWriting || isWaitingForTransaction;
 
@@ -68,13 +67,13 @@ function Presale() {
         <List
           rowGap={10}
           items={[
-            <div key='balance' className={styles.itemWrapper}>
+            <div key="balance" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Your balance</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(balance, etherUsdCost)}
               </div>
             </div>,
-            <div key='tokensNumber' className={styles.itemWrapper}>
+            <div key="tokensNumber" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Amount</div>
               <div className={styles.itemValue}>
                 <Counter
@@ -85,13 +84,13 @@ function Presale() {
                 />
               </div>
             </div>,
-            <div key='tokensCost' className={styles.itemWrapper}>
+            <div key="tokensCost" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Price</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(tokensCost, etherUsdCost)}
               </div>
             </div>,
-            <div key='gasCost' className={styles.itemWrapper}>
+            <div key="gasCost" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>GAS</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(
@@ -100,7 +99,7 @@ function Presale() {
                 )}
               </div>
             </div>,
-            <div key='totalCost' className={styles.itemWrapper}>
+            <div key="totalCost" className={styles.itemWrapper}>
               <div className={styles.itemLabel}>Total</div>
               <div className={styles.itemValue}>
                 {transformCurrencyToDisplayedCurrency(totalCost, etherUsdCost)}
@@ -112,7 +111,11 @@ function Presale() {
       {canUserMint && (
         <div className={styles.mintButton}>
           <Button disabled={mintButtonDisabled} onClick={handleTokensMint}>
-            Mint {tokensNumber} NFT
+            Mint
+            {' '}
+            {tokensNumber}
+            {' '}
+            NFT
           </Button>
         </div>
       )}
@@ -130,12 +133,18 @@ function Presale() {
         <div className={styles.moneyLackStatusWrapper}>
           <div className={styles.moneyLackStatus}>
             <Status type={StatusTypes.refused}>
-              You don&apos;t have enough {CurrenciesCodes.ether} for minting NFT
+              You don&apos;t have enough
+              {' '}
+              {CurrenciesCodes.ether}
+              {' '}
+              for minting NFT
             </Status>
           </div>
           <div className={styles.exchangeButton}>
             <Button onClick={handleConvertCurrencyModalOpen}>
-              Exchange {CurrenciesCodes.ether}
+              Exchange
+              {' '}
+              {CurrenciesCodes.ether}
             </Button>
           </div>
         </div>

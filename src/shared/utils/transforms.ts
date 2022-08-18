@@ -10,8 +10,8 @@ function transformCurrencyToDisplayedCurrency(
 
     return currencyUsdCost
       ? `${normalizedCurrency} ($${Math.round(
-          currency * Number(currencyUsdCost),
-        )})`
+        currency * Number(currencyUsdCost),
+      )})`
       : normalizedCurrency;
   }
 

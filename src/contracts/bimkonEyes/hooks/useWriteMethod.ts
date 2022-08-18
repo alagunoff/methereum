@@ -14,7 +14,9 @@ interface IParameters {
   value?: BigNumber;
 }
 
-function useWriteMethod({ methodName, args, enabled, value }: IParameters) {
+function useWriteMethod({
+  methodName, args, enabled, value,
+}: IParameters) {
   const preparingDataState = usePrepareContractWrite({
     addressOrName: contract.address,
     contractInterface: contract.interface,
