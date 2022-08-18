@@ -4,8 +4,8 @@
     "stylelint-config-idiomatic-order"
   ],
   "rules": {
-    "selector-class-pattern": null,
     "no-missing-end-of-source-newline": true,
-    "linebreaks": "unix"
+    "linebreaks": "unix",
+    "selector-class-pattern": null
   }
 }
