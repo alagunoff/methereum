@@ -23,8 +23,6 @@ function Airdrop() {
   const { claim, isWriting, isWaitingForTransaction } = useClaimAirdrop();
 
   const canUserClaim = !!(isUserInWhiteList && tokensNumberAvailable);
-  const estimatedGasCost = 0;
-  const totalCost = estimatedGasCost;
   const claimButtonDisabled = !claim || isWriting || isWaitingForTransaction;
 
   function handleAirdropClaim() {
@@ -34,7 +32,6 @@ function Airdrop() {
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Airdrop</h2>
-      <div className={styles.timer}>Time left: 00:48:00</div>
       <div className={styles.list}>
         <List
           rowGap={10}
@@ -45,24 +42,9 @@ function Airdrop() {
                 {transformCurrencyToDisplayedCurrency(balance, etherUsdCost)}
               </div>
             </div>,
-            <div key="tokensCost" className={styles.itemWrapper}>
-              <div className={styles.itemLabel}>Price</div>
+            <div key="tokenCost" className={styles.itemWrapper}>
+              <div className={styles.itemLabel}>Token cost</div>
               <div className={styles.itemValue}>Free</div>
-            </div>,
-            <div key="gasCost" className={styles.itemWrapper}>
-              <div className={styles.itemLabel}>GAS</div>
-              <div className={styles.itemValue}>
-                {transformCurrencyToDisplayedCurrency(
-                  estimatedGasCost,
-                  etherUsdCost,
-                )}
-              </div>
-            </div>,
-            <div key="totalCost" className={styles.itemWrapper}>
-              <div className={styles.itemLabel}>Total</div>
-              <div className={styles.itemValue}>
-                {transformCurrencyToDisplayedCurrency(totalCost, etherUsdCost)}
-              </div>
             </div>,
           ]}
         />

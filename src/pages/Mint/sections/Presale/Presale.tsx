@@ -7,6 +7,7 @@ import {
   useTokensNumberAvailable,
   useTokenCost,
   usePresaleMint,
+  useEvent,
   SalePhases,
 } from 'contracts/bimkonEyes';
 import { transformCurrencyToDisplayedCurrency } from 'shared/utils/transforms';
@@ -28,20 +29,21 @@ function Presale() {
   const [tokensNumber, setTokensNumber] = useState(0);
   const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] = useState(false);
 
-  const estimatedGasCost = 0;
-  const tokensCost = tokenCost ? tokensNumber * tokenCost : 0;
-  const totalCost = tokensCost + estimatedGasCost;
-  const { mint, isWriting, isWaitingForTransaction } = usePresaleMint(
-    tokensNumber,
-    totalCost,
-  );
+  const totalCost = tokenCost ? tokensNumber * tokenCost : 0;
   const hasUserEnoughMoneyToMint = balance ? balance >= totalCost : false;
   const canUserMint = !!(
     isUserInWhiteList
     && hasUserEnoughMoneyToMint
     && tokensNumberAvailable
   );
+
+  const { mint, isWriting, isWaitingForTransaction } = usePresaleMint(
+    tokensNumber,
+    totalCost,
+  );
   const mintButtonDisabled = !mint || isWriting || isWaitingForTransaction;
+
+  useEvent('Transfer', handleMintTransactionMine);
 
   function handleTokensNumberChange(newTokensNumber: number) {
     setTokensNumber(newTokensNumber);
@@ -59,10 +61,13 @@ function Presale() {
     mint?.();
   }
 
+  function handleMintTransactionMine() {
+    setTokensNumber(0);
+  }
+
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Presale mint</h2>
-      <div className={styles.timer}>Time left: 00:48:00</div>
       <div className={styles.list}>
         <List
           rowGap={10}
@@ -74,29 +79,20 @@ function Presale() {
               </div>
             </div>,
             <div key="tokensNumber" className={styles.itemWrapper}>
-              <div className={styles.itemLabel}>Amount</div>
+              <div className={styles.itemLabel}>Tokens number</div>
               <div className={styles.itemValue}>
                 <Counter
                   min={0}
-                  defaultCount={tokensNumber}
+                  count={tokensNumber}
                   max={tokensNumberAvailable || 0}
                   onChange={handleTokensNumberChange}
                 />
               </div>
             </div>,
-            <div key="tokensCost" className={styles.itemWrapper}>
-              <div className={styles.itemLabel}>Price</div>
+            <div key="tokenCost" className={styles.itemWrapper}>
+              <div className={styles.itemLabel}>Token cost</div>
               <div className={styles.itemValue}>
-                {transformCurrencyToDisplayedCurrency(tokensCost, etherUsdCost)}
-              </div>
-            </div>,
-            <div key="gasCost" className={styles.itemWrapper}>
-              <div className={styles.itemLabel}>GAS</div>
-              <div className={styles.itemValue}>
-                {transformCurrencyToDisplayedCurrency(
-                  estimatedGasCost,
-                  etherUsdCost,
-                )}
+                {transformCurrencyToDisplayedCurrency(tokenCost, etherUsdCost)}
               </div>
             </div>,
             <div key="totalCost" className={styles.itemWrapper}>

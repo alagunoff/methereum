@@ -1,31 +1,15 @@
-import { useState } from 'react';
-
 import { IProps } from './types';
 import styles from './Counter.module.scss';
 
 function Counter({
-  defaultCount = 1, min = 1, max = 5, onChange,
+  min, count, max, onChange,
 }: IProps) {
-  const [count, setCount] = useState(defaultCount);
-
   function handleCountDecrement() {
-    const newCount = count - 1;
-
-    setCount(newCount);
-
-    if (onChange) {
-      onChange(newCount);
-    }
+    onChange?.(count - 1);
   }
 
   function handleCountIncrement() {
-    const newCount = count + 1;
-
-    setCount(newCount);
-
-    if (onChange) {
-      onChange(newCount);
-    }
+    onChange?.(count + 1);
   }
 
   return (

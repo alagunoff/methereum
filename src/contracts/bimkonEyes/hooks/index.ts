@@ -1,4 +1,5 @@
 export { default as useClaimAirdrop } from './useClaimAirdrop';
+export { default as useEvent } from './useEvent';
 export { default as useIsUserInWhiteList } from './useIsUserInWhiteList';
 export { default as usePresaleMint } from './usePresaleMint';
 export { default as useProof } from './useProof';

@@ -1,7 +1,7 @@
 interface IProps {
-  defaultCount?: number;
-  min?: number;
-  max?: number;
+  min: number;
+  count: number;
+  max: number;
   onChange?: (newCount: number) => void;
 }
 

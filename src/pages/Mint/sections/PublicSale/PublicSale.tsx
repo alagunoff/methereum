@@ -6,6 +6,7 @@ import {
   useTokensNumberAvailable,
   useTokenCost,
   usePublicSaleMint,
+  useEvent,
   SalePhases,
 } from 'contracts/bimkonEyes';
 import { transformCurrencyToDisplayedCurrency } from 'shared/utils/transforms';
@@ -27,15 +28,15 @@ function PublicSale() {
   const [tokensNumber, setTokensNumber] = useState(0);
   const [convertCurrencyModalOpened, setConvertCurrencyModalOpened] = useState(false);
 
-  const estimatedGasCost = 0;
-  const tokensCost = tokenCost ? tokensNumber * tokenCost : 0;
-  const totalCost = tokensCost + estimatedGasCost;
+  const totalCost = tokenCost ? tokensNumber * tokenCost : 0;
   const hasUserEnoughMoneyToMint = balance ? balance >= totalCost : false;
   const canUserMint = !!(hasUserEnoughMoneyToMint && tokensNumberAvailable);
   const mintButtonDisabled = tokensNumber === 0
     || isMessageSigning
     || isWriting
     || isWaitingForTransaction;
+
+  useEvent('Transfer', handleMintTransactionMine);
 
   function handleTokensNumberChange(newCount: number) {
     setTokensNumber(newCount);
@@ -53,6 +54,10 @@ function PublicSale() {
     mint(tokensNumber, totalCost);
   }
 
+  function handleMintTransactionMine() {
+    setTokensNumber(0);
+  }
+
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Public sale</h2>
@@ -67,29 +72,20 @@ function PublicSale() {
               </div>
             </div>,
             <div key="tokensNumber" className={styles.itemWrapper}>
-              <div className={styles.itemLabel}>Amount</div>
+              <div className={styles.itemLabel}>Tokens number</div>
               <div className={styles.itemValue}>
                 <Counter
                   min={0}
-                  defaultCount={tokensNumber}
+                  count={tokensNumber}
                   max={tokensNumberAvailable || 0}
                   onChange={handleTokensNumberChange}
                 />
               </div>
             </div>,
-            <div key="tokensCost" className={styles.itemWrapper}>
-              <div className={styles.itemLabel}>Price</div>
+            <div key="tokenCost" className={styles.itemWrapper}>
+              <div className={styles.itemLabel}>Token cost</div>
               <div className={styles.itemValue}>
-                {transformCurrencyToDisplayedCurrency(tokensCost, etherUsdCost)}
-              </div>
-            </div>,
-            <div key="gasCost" className={styles.itemWrapper}>
-              <div className={styles.itemLabel}>GAS</div>
-              <div className={styles.itemValue}>
-                {transformCurrencyToDisplayedCurrency(
-                  estimatedGasCost,
-                  etherUsdCost,
-                )}
+                {transformCurrencyToDisplayedCurrency(tokenCost, etherUsdCost)}
               </div>
             </div>,
             <div key="totalCost" className={styles.itemWrapper}>
